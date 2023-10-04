@@ -11,7 +11,7 @@ import java.time.*;
  */
 public class citaVacunacion {
     private int codigoCita;
-    private ciudadano ciudadano;
+    private Ciudadano ciudadano;
     private int codRefuerzo;
     private String fechaHoraCita;
     private String centroVacunacion;
@@ -21,7 +21,7 @@ public class citaVacunacion {
     public citaVacunacion() {
     }
 
-    public citaVacunacion(int codigoCita, ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
+    public citaVacunacion(int codigoCita, Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
         this.codigoCita = codigoCita;
         this.ciudadano = ciudadano;
         this.codRefuerzo = codRefuerzo;
@@ -31,7 +31,7 @@ public class citaVacunacion {
         this.vacuna = vacuna;
     }
 
-    public citaVacunacion(ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
+    public citaVacunacion(Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
         this.ciudadano = ciudadano;
         this.codRefuerzo = codRefuerzo;
         this.fechaHoraCita = fechaHoraCita;
@@ -48,11 +48,11 @@ public class citaVacunacion {
         this.codigoCita = codigoCita;
     }
 
-    public ciudadano getCiudadano() {
+    public Ciudadano getCiudadano() {
         return ciudadano;
     }
 
-    public void setCiudadano(ciudadano ciudadano) {
+    public void setCiudadano(Ciudadano ciudadano) {
         this.ciudadano = ciudadano;
     }
 

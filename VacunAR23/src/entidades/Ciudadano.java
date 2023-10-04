@@ -5,7 +5,7 @@
  */
 package entidades;
 
-public class ciudadano {
+public class Ciudadano {
    
     public int dni;
     private String nombreCompleto;
@@ -14,9 +14,9 @@ public class ciudadano {
     private String patologia;
     private String ambitoTrabajo;
     
-    public ciudadano(){}
+    public Ciudadano(){}
     
-    public ciudadano(int dni, String nombreCompleto, String email, String celular, String patologia, String ambitoTrabajo){
+    public Ciudadano(int dni, String nombreCompleto, String email, String celular, String patologia, String ambitoTrabajo){
         
         this.dni= dni;
         this.nombreCompleto=nombreCompleto;
@@ -27,7 +27,7 @@ public class ciudadano {
         
     }    
                 
-    public ciudadano( String nombreCompleto, String email, String celular, String patologia, String ambitoTrabajo){
+    public Ciudadano( String nombreCompleto, String email, String celular, String patologia, String ambitoTrabajo){
        
         this.nombreCompleto=nombreCompleto;
         this.email=email;
@@ -90,6 +90,10 @@ public class ciudadano {
     public String toString(){
      return "DNI= " + dni + " Nombte Completo= " + nombreCompleto + ", Email= " + email + ", Celular= " + celular + ", Patologia= " + patologia + ", Ambito de Trabajo= " + ambitoTrabajo;
      
+    }
+
+    public String setAmbitoTrabajo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
