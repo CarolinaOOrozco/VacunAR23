@@ -9,7 +9,7 @@ import java.time.*;
  *
  * @author carol
  */
-public class citaVacunacion {
+public class CitaVacunacion {
     private int codigoCita;
     private Ciudadano ciudadano;
     private int codRefuerzo;
@@ -18,10 +18,10 @@ public class citaVacunacion {
     private LocalDateTime fechaHoraColoca;
     private Vacuna vacuna;
 
-    public citaVacunacion() {
+    public CitaVacunacion() {
     }
 
-    public citaVacunacion(int codigoCita, Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
+    public CitaVacunacion(int codigoCita, Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
         this.codigoCita = codigoCita;
         this.ciudadano = ciudadano;
         this.codRefuerzo = codRefuerzo;
@@ -31,7 +31,7 @@ public class citaVacunacion {
         this.vacuna = vacuna;
     }
 
-    public citaVacunacion(Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
+    public CitaVacunacion(Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
         this.ciudadano = ciudadano;
         this.codRefuerzo = codRefuerzo;
         this.fechaHoraCita = fechaHoraCita;

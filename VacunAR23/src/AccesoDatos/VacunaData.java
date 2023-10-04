@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.*;
 import javax.swing.*;
 
@@ -81,9 +82,10 @@ public class VacunaData {
     
     public ArrayList vacunasDisponibles(){
         ArrayList <Vacuna> vacunasDisponibles=new ArrayList();
-        String sql="SELECT * FROM vacuna WHERE colocada=false";
+        String sql="SELECT * FROM vacuna WHERE colocada=false AND fechaCaduca > ?";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 Vacuna v=new Vacuna();
@@ -122,5 +124,30 @@ public class VacunaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a base de datos 'vacuna' "+ex.getMessage());
         }
         return vacunasAplicadas;
+    }
+    
+    public ArrayList vacunasVencidas(){
+        ArrayList <Vacuna> vacunasVencidas=new ArrayList();
+        String sql="SELECT * FROM vacuna WHERE fechaCaduca < ? ";
+        try{
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setDate(1,Date.valueOf(LocalDate.now()));
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                Vacuna v=new Vacuna();
+                v.setNroSerieDosis(rs.getInt("nroSerieDosis"));
+                v.setMarca(rs.getString("marca"));
+                v.setMedida(rs.getDouble("medida"));
+                v.setFechacaduca(rs.getDate("fechaCaduca").toLocalDate());
+                v.setColocada(rs.getBoolean("colocada"));
+                vacunasVencidas.add(v);
+            }
+            if(vacunasVencidas.isEmpty()){
+                JOptionPane.showMessageDialog(null, "No hay vacunas vencidas");
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a base de datos 'vacuna' "+ex.getMessage());
+        }
+        return vacunasVencidas;
     }
 }
