@@ -26,9 +26,9 @@ public class CiudadanoData {
     con = Conexion.getConexion();
   
     }
-    public void guardarAlumno(Ciudadano ciudadano){
+    public void guardarCiudadano(Ciudadano ciudadano){
         
-    String insert = "INSERT INTO alumno(dni,nombreCompleto,email,celular,patologia,ambitoTrabajo) "
+    String insert = "INSERT INTO Ciudadano(dni,nombreCompleto,email,celular,patologia,ambitoTrabajo) "
                               + "Values(?,?,?,?,?,?) ";
                               
         try {
@@ -105,6 +105,32 @@ public class CiudadanoData {
           return ciudadano;
       }
     
+    
+      public List listarCiudadano(){
+          
+           String sql="SELECT * FROM Ciudadano WHERE dni=?"; 
+         
+    try{
+        PreparedStatement ps=con.prepareStatement(sql);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            Ciudadano ciudadano = new Ciudadano();
+            ciudadano.setDni(rs.getInt("dni"));
+            ciudadano.setNombreCompleto(rs.getString("nombreCompleto"));
+            ciudadano.setEmail(rs.getString("email"));
+            ciudadano.setCelular(rs.getString("celular"));
+            ciudadano.setPatologia(rs.getString("patologia"));
+            ciudadano.setAmbitoTrabajo(rs.getString("ambitoTrabajo"));
+            
+        }
+        ps.close();
+    }catch(SQLException ex){
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudadano"+ex.getMessage());
+    }
+  
+    return ciud;
+}
+      
      
      
     
