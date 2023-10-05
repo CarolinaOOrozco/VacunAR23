@@ -32,10 +32,9 @@ public class VacunaData {
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Vacuna agragada con éxito");
-            }else{
-                 JOptionPane.showMessageDialog(null, "No se pudo añadir vacuna al sistema");
+                 JOptionPane.showMessageDialog(null,"Vacuna agragada con éxito" );
             }
+            ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a base de datos 'vacuna' "+ex.getMessage());
         }

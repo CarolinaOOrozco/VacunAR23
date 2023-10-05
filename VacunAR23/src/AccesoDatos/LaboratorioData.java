@@ -21,6 +21,7 @@ private ArrayList<Laboratorio> labo;
     
 public LaboratorioData(){
 labo = new ArrayList<>();
+con=Conexion.getConexion();
 }
 
 
@@ -34,7 +35,7 @@ String sql = "INSERT INTO laboratorio(CUIT,nomLaboratorio, pais, domComercial,ma
        ps.setString(3, laboratorio.getPais());
        ps.setString(4,laboratorio.getDomComercial());
        ps.setString(5,laboratorio.marca());
-      
+       ps.executeUpdate();
        ResultSet rs = ps.getGeneratedKeys();
        
        if(rs.next()){laboratorio.setCuit(rs.getInt(1));}
