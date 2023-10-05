@@ -21,7 +21,7 @@ public class VacunaData {
     }
     
     public void nuevaVacuna(Vacuna vacuna){
-        String sql="INSERT INTO vacuna (nroSerieDosis,marca,medida,fechaCaduca,colocada) VALUES (?,?,?,?,?)";
+        String sql="INSERT INTO Vacuna (nroSerieDosis,marca,medida,fechaCaduca,colocada) VALUES (?,?,?,?,?)";
         try{
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, vacuna.getNroSerieDosis());
@@ -42,7 +42,7 @@ public class VacunaData {
     }
     
     public Vacuna buscarVacuna(int nroSerieDosis){
-        String sql="SELET * FROM vacuna WHERE nroSerieDosis=?";
+        String sql="SELET * FROM Vacuna WHERE nroSerieDosis=?";
         Vacuna v =new Vacuna();
         try{
             PreparedStatement ps=con.prepareStatement(sql);
@@ -65,7 +65,7 @@ public class VacunaData {
     }
     
     public void marcarComoAplicada(int nroSerieDosis){
-        String sql="UPDATE vacuna SET colocada=true WHERE vacuna.nroSerieDosis=?";
+        String sql="UPDATE Vacuna SET colocada=true WHERE vacuna.nroSerieDosis=?";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, nroSerieDosis);
@@ -82,7 +82,7 @@ public class VacunaData {
     
     public ArrayList vacunasDisponibles(){
         ArrayList <Vacuna> vacunasDisponibles=new ArrayList();
-        String sql="SELECT * FROM vacuna WHERE colocada=false AND fechaCaduca > ?";
+        String sql="SELECT * FROM Vacuna WHERE colocada=false AND fechaCaduca > ?";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(LocalDate.now()));
@@ -107,7 +107,7 @@ public class VacunaData {
     
     public ArrayList vacunasAplicadas(){
         ArrayList <Vacuna> vacunasAplicadas=new ArrayList();
-        String sql="SELECT * FROM vacuna WHERE colocada=true";
+        String sql="SELECT * FROM Vacuna WHERE colocada=true";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -128,7 +128,7 @@ public class VacunaData {
     
     public ArrayList vacunasVencidas(){
         ArrayList <Vacuna> vacunasVencidas=new ArrayList();
-        String sql="SELECT * FROM vacuna WHERE fechaCaduca < ? ";
+        String sql="SELECT * FROM Vacuna WHERE fechaCaduca < ? ";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setDate(1,Date.valueOf(LocalDate.now()));

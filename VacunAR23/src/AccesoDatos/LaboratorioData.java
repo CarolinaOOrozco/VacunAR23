@@ -26,14 +26,14 @@ labo = new ArrayList<>();
 
 public void nuevoLaboratorio(Laboratorio laboratorio){
 
-String sql = "INSERT INTO laboratorio(CUIT,nomLaboratorio, pais, domComercial,marca) VALUES(?,?,?,?)";
+String sql = "INSERT INTO laboratorio(CUIT,nomLaboratorio, pais, domComercial,marca) VALUES(?,?,?,?,?)";
     try {
        PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-       ps.setInt(0, laboratorio.getCuit());
-       ps.setString(1, laboratorio.getNomLaboratorio());
-       ps.setString(2, laboratorio.getPais());
-       ps.setString(3,laboratorio.getDomComercial());
-       ps.setString(4,laboratorio.marca());
+       ps.setInt(1, laboratorio.getCuit());
+       ps.setString(2, laboratorio.getNomLaboratorio());
+       ps.setString(3, laboratorio.getPais());
+       ps.setString(4,laboratorio.getDomComercial());
+       ps.setString(5,laboratorio.marca());
       
        ResultSet rs = ps.getGeneratedKeys();
        

@@ -17,11 +17,12 @@ public class CitaVacunacion {
     private String centroVacunacion;
     private LocalDateTime fechaHoraColoca;
     private Vacuna vacuna;
-
+    private Boolean cancelar;
+    
     public CitaVacunacion() {
     }
 
-    public CitaVacunacion(int codigoCita, Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
+    public CitaVacunacion(int codigoCita, Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna, Boolean cancelar) {
         this.codigoCita = codigoCita;
         this.ciudadano = ciudadano;
         this.codRefuerzo = codRefuerzo;
@@ -29,15 +30,18 @@ public class CitaVacunacion {
         this.centroVacunacion = centroVacunacion;
         this.fechaHoraColoca = fechaHoraColoca;
         this.vacuna = vacuna;
+        this.cancelar=cancelar;
     }
 
-    public CitaVacunacion(Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna) {
+    public CitaVacunacion(Ciudadano ciudadano, int codRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna,Boolean cancelar) {
         this.ciudadano = ciudadano;
         this.codRefuerzo = codRefuerzo;
         this.fechaHoraCita = fechaHoraCita;
         this.centroVacunacion = centroVacunacion;
         this.fechaHoraColoca = fechaHoraColoca;
         this.vacuna = vacuna;
+        this.cancelar=cancelar;
+                
     }
 
     public int getCodigoCita() {
@@ -96,6 +100,10 @@ public class CitaVacunacion {
         this.vacuna = vacuna;
     }
 
+    public boolean getCancelar(){return cancelar;}
+    public void setCancelar(boolean cancelar){this.cancelar = cancelar;}
+    
+    
     @Override
     public String toString() {
         return "citaVacunacion{" + "codigoCita=" + codigoCita + ", ciudadano=" + ciudadano + ", codRefuerzo=" + codRefuerzo + ", fechaHoraCita=" + fechaHoraCita + ", centroVacunacion=" + centroVacunacion + ", fechaHoraColoca=" + fechaHoraColoca + ", vacuna=" + vacuna + '}';

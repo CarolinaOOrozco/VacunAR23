@@ -29,7 +29,7 @@ public class CiudadanoData {
     public void guardarCiudadano(Ciudadano ciudadano){
         
     String insert = "INSERT INTO Ciudadano(dni,nombreCompleto,email,celular,patologia,ambitoTrabajo) "
-                              + "Values(?,?,?,?,?,?) ";
+                              + "VALUES(?,?,?,?,?,?) ";
                               
         try {
             
@@ -39,7 +39,7 @@ public class CiudadanoData {
             ps.setString(3,ciudadano.getEmail());
             ps.setString(4,ciudadano.getCelular());
             ps.setString(5,ciudadano.getPatologia());
-            ps.setString(6,ciudadano.setAmbitoTrabajo());
+            ps.setString(6,ciudadano.getAmbitoTrabajo());
             
             ps.executeUpdate();
             
