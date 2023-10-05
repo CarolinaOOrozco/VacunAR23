@@ -54,7 +54,25 @@ public class CitaVacunacionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al acceder a la base de datos");
         }
+     }
    
+        public void cancelarCitaPorDni(int dni){
+        
+            String sql = "UPDATE citaVacunacion set estado = 1 Where dni = ?";
+            
+        try {
+            PreparedStatement ps =con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            int resultado  =ps.executeUpdate();
+            if(resultado == 1){
+            JOptionPane.showMessageDialog(null, "Cita cancelada exitosamente");
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos");
+        }
+            
+        
+        }
      
      }
-}
