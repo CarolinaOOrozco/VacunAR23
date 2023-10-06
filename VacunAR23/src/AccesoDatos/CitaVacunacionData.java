@@ -59,7 +59,7 @@ public class CitaVacunacionData {
    
         public void cancelarCitaPorDni(int dni){
         
-            String sql = "UPDATE citaVacunacion set estado = 1 Where dni = ?";
+            String sql = "UPDATE citaVacunacion set cancelar = 1 Where dni = ?";
             
         try {
             PreparedStatement ps =con.prepareStatement(sql);
@@ -75,5 +75,63 @@ public class CitaVacunacionData {
             
         
         }
-     
+        
+        public void citaVacunacionConcretada(int codCita){
+           Timestamp fechaHoy=Timestamp.valueOf(LocalDateTime.now());
+           String sql="UPDATE citaVacunacion SET fechaHoraColoca=? WHERE codCita=?";
+           try{
+               PreparedStatement ps=con.prepareStatement(sql);
+               ps.setTimestamp(1, fechaHoy);
+               ps.setInt(2, codCita);
+               int filas=ps.executeUpdate();
+               if(filas==1){
+                   JOptionPane.showMessageDialog(null, "Cita acutalizada exitosamente");
+               }else{
+                   JOptionPane.showMessageDialog(null,"No se puedo actualizar cita");
+               }
+           }catch(SQLException ex){
+               JOptionPane.showMessageDialog(null, "Error al acceder a base de datos citaVacunacion "+ex.getMessage());
+           }
+        }
+        
+        public void vacunaAplicada(int nroSerieDosis){
+            
+            String sql="UPDATE vacuna SET colocada = true WHERE nroSerieDosis=?";
+            try{
+                PreparedStatement ps=con.prepareStatement(sql);
+                
+                ps.setInt(1, nroSerieDosis);
+                int filas=ps.executeUpdate();
+                if(filas==1){
+                    JOptionPane.showMessageDialog(null, "Vacuna actualizada exitosamente");
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar vacuna");
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error al acceder a base de datos vacuna "+ex.getMessage());
+            }
+        }
+        
+        public int vacunacionesDiarias(String centroDeVacunacion){
+            LocalDate fecha=LocalDate.now();
+            LocalDateTime fComienzo=LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 00, 00, 00);
+            LocalDateTime fFinal=LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 23, 59, 59);
+            Timestamp inicioDia=Timestamp.valueOf(fComienzo);
+            Timestamp finalDia=Timestamp.valueOf(fFinal);
+            int vacunaciones=0;
+            String sql="SELECT cantroVacunacion,COUNT(codCita) AS vacunasDiarias FROM citaVacunacion WHERE fechaHoraColoca BETWEEN ? AND ?";
+            try{
+                PreparedStatement ps=con.prepareStatement(sql);
+                ps.setString(1,centroDeVacunacion);
+                ps.setTimestamp(2,inicioDia);
+                ps.setTimestamp(3,finalDia);
+                ResultSet rs=ps.executeQuery();
+                 vacunaciones=rs.getInt("vacunasDiarias");
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Error al acceder a base de datos citaVacunacion "+ex.getMessage());
+            }
+            return vacunaciones;
+        }
+        
+        int mes=LocalDate.now().getMonthValue();
      }
