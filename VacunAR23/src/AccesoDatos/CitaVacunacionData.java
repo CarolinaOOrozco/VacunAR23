@@ -8,8 +8,7 @@ package AccesoDatos;
 import entidades.*;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import java.time.*;
 import java.time.temporal.*;
@@ -23,9 +22,13 @@ public class CitaVacunacionData {
     
     private Connection con;
     private CitaVacunacion cita;
-    
-  public CitaVacunacionData(){
+    private int mes;
+    private ArrayList<CitaVacunacion>lista;
+  
+    public CitaVacunacionData(){
   con= Conexion.getConexion();
+  mes=LocalDate.now().getMonthValue();
+  lista = new ArrayList<>();
   }
   
      public void nuevaCita(CitaVacunacion c){  
@@ -37,7 +40,7 @@ public class CitaVacunacionData {
             
             ps.setInt(1,c.getCiudadano().getDni());
             ps.setInt(2,c.getCodRefuerzo());
-            ps.setString(3,c.getFechaHoraCita());
+            ps.setTimestamp(3,Timestamp.valueOf(c.getFechaHoraCita()));
             ps.setString(4, c.getCentroVacunacion());
             ps.setDate(5,null);
             ps.setInt(6, c.getVacuna().getNroSerieDosis());
@@ -119,19 +122,127 @@ public class CitaVacunacionData {
             Timestamp inicioDia=Timestamp.valueOf(fComienzo);
             Timestamp finalDia=Timestamp.valueOf(fFinal);
             int vacunaciones=0;
-            String sql="SELECT cantroVacunacion,COUNT(codCita) AS vacunasDiarias FROM citaVacunacion WHERE fechaHoraColoca BETWEEN ? AND ?";
+            String sql="SELECT centroVacunacion,COUNT(codCita) AS vacunasDiarias FROM citaVacunacion WHERE fechaHoraColoca BETWEEN ? AND ?";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ps.setString(1,centroDeVacunacion);
                 ps.setTimestamp(2,inicioDia);
                 ps.setTimestamp(3,finalDia);
                 ResultSet rs=ps.executeQuery();
-                 vacunaciones=rs.getInt("vacunasDiarias");
+                vacunaciones=rs.getInt("vacunasDiarias");
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Error al acceder a base de datos citaVacunacion "+ex.getMessage());
             }
             return vacunaciones;
         }
         
-        int mes=LocalDate.now().getMonthValue();
-     }
+
+
+        public List citasVencidasPorMes(String centroVacunacion){
+        String sql = "SELECT * FROM citaVacunacion WHEREcentroVacunacion = ? AND fechaHoraColoca = null";
+        PreparedStatement ps;
+            try {
+                ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                CitaVacunacion cita = new CitaVacunacion();
+                Ciudadano ciudadano = new Ciudadano();
+                Vacuna vac = new Vacuna();
+                ps.setString(1,centroVacunacion);
+                while(rs.next()){               
+                cita.setCodigoCita(rs.getInt("codCita"));
+                cita.setCodRefuerzo(rs.getInt("codRefuerzo"));
+                cita.setFechaHoraCita(rs.getTimestamp("fechaHoraCita").toLocalDateTime());
+                cita.setCentroVacunacion(rs.getString("centroVacunacion"));
+                cita.setFechaHoraColoca(rs.getTimestamp("fechaHoraColoca").toLocalDateTime());
+                //cita.setVacuna(vac.getNroSerieDosis(rs.getInt("dosis")));
+                cita.setVacuna(vac);
+                
+                //cita.setCiudadano(ciudadano.getDni(rs.getInt("dni"))); 
+                cita.setCiudadano(ciudadano);
+                lista.add(cita);
+                
+                if(ChronoUnit.MONTHS.equals(mes)){     
+                    
+                lista.forEach((b)->{b.toString();});
+                }
+                }
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos");       
+        }
+            
+            return lista;
+        }
+     
+        
+    
+        
+        public List citasCumplidasPorMes(String centroVacunacion){
+        String sql = "SELECT * FROM citaVacunacion WHERE centroVacunacion =? AND cancelar = 0";
+        try {
+            CitaVacunacion cv= new CitaVacunacion();  
+            Vacuna vac = new Vacuna();
+            Ciudadano ciudadano = new Ciudadano();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ps.setString(1,centroVacunacion);
+            while(rs.next()){
+                cv.setCodigoCita(rs.getInt("codCita"));
+                cv.setCodRefuerzo(rs.getInt("codRefuerzo"));
+                cv.setFechaHoraCita(rs.getTimestamp("fechaHoraCita").toLocalDateTime());
+                cv.setCentroVacunacion(rs.getString("centroVacunacion"));
+                cv.setFechaHoraColoca(rs.getTimestamp("fechaHoraColoca").toLocalDateTime());
+                //cv.setVacuna(vac.setNroSerieDosis(rs.getInt("dosis")));
+                cv.setVacuna(vac);
+                //cv.setCiudadano(ciudadano.setDni(rs.getInt("dni")));
+                cv.setCiudadano(ciudadano);
+                lista.add(cv);
+                 if(ChronoUnit.MONTHS.equals(mes)){ 
+                lista.forEach((b)->{b.toString();});}
+            }
+        } catch (SQLException ex) {
+          JOptionPane.showMessageDialog(null, "Error al acceder a la tabla citaVacunacion"); 
+        
+           
+        }
+     
+         return lista;
+        }
+        
+        
+public List citasCanceladasPorMes(String centroVacunacion){            
+           String sql ="SELECT * FROM citaVacunacion WHERE centroVacunacion = ? AND cancelar = 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            CitaVacunacion c = new CitaVacunacion();
+            Ciudadano ciudadano = new Ciudadano();
+            Vacuna v = new Vacuna();
+            ps.setString(1, centroVacunacion);
+            while(rs.next()){
+                c.setCodigoCita(rs.getInt("codCita"));
+                c.setCodRefuerzo(rs.getInt("codRefuerzo"));
+                c.setFechaHoraCita(rs.getTimestamp("fechaHoraCita").toLocalDateTime());
+                c.setCentroVacunacion(rs.getString("centroVacunacion"));
+                c.setFechaHoraColoca(rs.getTimestamp("fechaHoraColoca").toLocalDateTime());
+//                c.setVacuna(v.setNroSerieDosis());
+//                c.setCiudadano(ciudadano.setDni(rs.getInt("dni")));
+                c.setVacuna(v);
+                c.setCiudadano(ciudadano);
+                lista.add(c);
+                
+                
+                lista.forEach((elem)->{elem.toString();});}
+           
+            
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al acceder a la VacunAR23"); 
+        }
+         
+         return lista;   
+}
+        
+        
+        
+      
+}
