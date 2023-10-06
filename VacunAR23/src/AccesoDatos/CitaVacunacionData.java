@@ -33,7 +33,7 @@ public class CitaVacunacionData {
   
      public void nuevaCita(CitaVacunacion c){  
     
-         String sql = "INSERT INTO citaVacunacion(dni, codRefuerzo, FechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES = ?,?,?,?,?,?,?";
+         String sql = "INSERT INTO citaVacunacion(dni, codRefuerzo, FechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES  (?,?,?,?,?,?,?)";
          
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
