@@ -19,7 +19,7 @@ data.guardarCiudadano(c);
         
 //Laboratorio lab = new Laboratorio(123, "lab","Argentina","pharma lab","Astra Zeneca");
 
-//Vacuna v = new Vacuna(35,"Astra Zeneca",0.3, LocalDate.now(), false);
+Vacuna v = new Vacuna(35,"Astra Zeneca",0.3, LocalDate.now(), false);
 //
 //LaboratorioData data =new LaboratorioData();
 
