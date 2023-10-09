@@ -11,15 +11,15 @@ public class VacunAR23 {
    
     public static void main(String[] args) {
         
-       Ciudadano c = new Ciudadano("Juan Rodriguez","juanroodriguez@hotmail.com", "117438923", "-","soldador");
+      // Ciudadano c = new Ciudadano("Juan Rodriguez","juanroodriguez@hotmail.com", "117438923", "-","soldador");
        
-        CiudadanoData data = new CiudadanoData();
+      //  CiudadanoData data = new CiudadanoData();
 
-data.guardarCiudadano(c);
+//  data.guardarCiudadano(c);
         
 //Laboratorio lab = new Laboratorio(123, "lab","Argentina","pharma lab","Astra Zeneca");
 
-Vacuna v = new Vacuna(35,"Astra Zeneca",0.3, LocalDate.now(), false);
+//Vacuna v = new Vacuna(35,"Astra Zeneca",0.3, LocalDate.now(), false);
 //
 //LaboratorioData data =new LaboratorioData();
 

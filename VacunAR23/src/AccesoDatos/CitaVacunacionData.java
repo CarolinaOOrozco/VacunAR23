@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import java.time.*;
 import java.time.temporal.*;
 
+
 /**
  *
  * @author carol
@@ -138,7 +139,7 @@ public class CitaVacunacionData {
         
 
 
-        public List citasVencidasPorMes(String centroVacunacion){
+        public List citasVencidasPorMes(){
         String sql = "SELECT * FROM citaVacunacion WHEREcentroVacunacion = ? AND fechaHoraColoca = null";
         PreparedStatement ps;
             try {
@@ -147,7 +148,6 @@ public class CitaVacunacionData {
                 CitaVacunacion cita = new CitaVacunacion();
                 Ciudadano ciudadano = new Ciudadano();
                 Vacuna vac = new Vacuna();
-                ps.setString(1,centroVacunacion);
                 while(rs.next()){               
                 cita.setCodigoCita(rs.getInt("codCita"));
                 cita.setCodRefuerzo(rs.getInt("codRefuerzo"));
@@ -161,9 +161,8 @@ public class CitaVacunacionData {
                 cita.setCiudadano(ciudadano);
                 lista.add(cita);
                 
-                if(ChronoUnit.MONTHS.equals(mes)){     
-                    
-                lista.forEach((b)->{b.toString();});
+                if(ChronoUnit.MONTHS.equals(rs.getTimestamp("fechaHoraColoca").toLocalDateTime())){                     
+                            lista.forEach((b)->{b.toString();});
                 }
                 }
                 
