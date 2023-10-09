@@ -34,7 +34,7 @@ public class CitaVacunacionData {
   
      public void nuevaCita(CitaVacunacion c){  
     
-         String sql = "INSERT INTO citaVacunacion(dni, codRefuerzo, FechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES  (?,?,?,?,?,?,?)";
+         String sql = "INSERT INTO citaVacunacion(dni, codRefuerzo, fechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES  (?,?,?,?,?,?,?)";
          
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -43,7 +43,7 @@ public class CitaVacunacionData {
             ps.setInt(2,c.getCodRefuerzo());
             ps.setTimestamp(3,Timestamp.valueOf(c.getFechaHoraCita()));
             ps.setString(4, c.getCentroVacunacion());
-            ps.setDate(5,null);
+            ps.setTimestamp(5,Timestamp.valueOf(c.getFechaHoraColoca()));
             ps.setInt(6, c.getVacuna().getNroSerieDosis());
             ps.setBoolean(7,c.getCancelar());
             ps.executeUpdate();
@@ -139,8 +139,8 @@ public class CitaVacunacionData {
         
 
 
-        public List citasVencidasPorMes(){
-        String sql = "SELECT * FROM citaVacunacion WHEREcentroVacunacion = ? AND fechaHoraColoca = null";
+        public List citasVencidasPorMes(ChronoUnit vencidas){
+        String sql = "SELECT EXTRACT (YEAR_MONTH) FROM citaVacunacion WHERE fechaHoraCita = ? AND fechaHoraColoca = null";
         PreparedStatement ps;
             try {
                 ps = con.prepareStatement(sql);
@@ -161,7 +161,7 @@ public class CitaVacunacionData {
                 cita.setCiudadano(ciudadano);
                 lista.add(cita);
                 
-                if(ChronoUnit.MONTHS.equals(rs.getTimestamp("fechaHoraColoca").toLocalDateTime())){                     
+                if(vencidas.equals(rs.getTimestamp("fechaHoraColoca").toLocalDateTime())){                     
                             lista.forEach((b)->{b.toString();});
                 }
                 }
@@ -176,15 +176,15 @@ public class CitaVacunacionData {
         
     
         
-        public List citasCumplidasPorMes(String centroVacunacion){
-        String sql = "SELECT * FROM citaVacunacion WHERE centroVacunacion =? AND cancelar = 0";
+        public List citasCumplidasPorMes(ChronoUnit cumplidas){
+        String sql = "SELECT EXTRACT (YEAR_MONTH ) FROM citaVacunacion WHERE fechaHoraCita? AND cancelar = 0";
         try {
             CitaVacunacion cv= new CitaVacunacion();  
             Vacuna vac = new Vacuna();
             Ciudadano ciudadano = new Ciudadano();
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            ps.setString(1,centroVacunacion);
+            //ps.setString(1,fechaHoraCita);
             while(rs.next()){
                 cv.setCodigoCita(rs.getInt("codCita"));
                 cv.setCodRefuerzo(rs.getInt("codRefuerzo"));
@@ -196,7 +196,7 @@ public class CitaVacunacionData {
                 //cv.setCiudadano(ciudadano.setDni(rs.getInt("dni")));
                 cv.setCiudadano(ciudadano);
                 lista.add(cv);
-                 if(ChronoUnit.MONTHS.equals(mes)){ 
+                 if(cumplidas.equals(rs.getTime("fechaHoraCita"))){ 
                 lista.forEach((b)->{b.toString();});}
             }
         } catch (SQLException ex) {
@@ -209,15 +209,15 @@ public class CitaVacunacionData {
         }
         
         
-public List citasCanceladasPorMes(String centroVacunacion){            
-           String sql ="SELECT * FROM citaVacunacion WHERE centroVacunacion = ? AND cancelar = 1";
+public List citasCanceladasPorMes(ChronoUnit canceladas){            
+           String sql ="SELECT EXTRACT (YEAR_MONTH) FROM citaVacunacion WHERE fechaHoraCita = ? AND cancelar = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             CitaVacunacion c = new CitaVacunacion();
             Ciudadano ciudadano = new Ciudadano();
             Vacuna v = new Vacuna();
-            ps.setString(1, centroVacunacion);
+         
             while(rs.next()){
                 c.setCodigoCita(rs.getInt("codCita"));
                 c.setCodRefuerzo(rs.getInt("codRefuerzo"));
@@ -230,9 +230,9 @@ public List citasCanceladasPorMes(String centroVacunacion){
                 c.setCiudadano(ciudadano);
                 lista.add(c);
                 
-                
+               if(canceladas.equals(rs.getDate("fechaHoraCita"))){
                 lista.forEach((elem)->{elem.toString();});}
-           
+            }
             
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error al acceder a la VacunAR23"); 
