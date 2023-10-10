@@ -43,13 +43,10 @@ public class CitaVacunacionData {
             ps.setInt(2,c.getCodRefuerzo());
             ps.setTimestamp(3,Timestamp.valueOf(c.getFechaHoraCita()));
             ps.setString(4, c.getCentroVacunacion());
-<<<<<<< Updated upstream
             ps.setTimestamp(5,Timestamp.valueOf(c.getFechaHoraColoca()));
             ps.setInt(6, c.getVacuna().getNroSerieDosis());
-=======
             ps.setDate(5,null);
             ps.setInt(6, 0);
->>>>>>> Stashed changes
             ps.setBoolean(7,c.getCancelar());
             ps.executeUpdate();
             

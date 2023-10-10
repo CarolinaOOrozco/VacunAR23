@@ -33,7 +33,7 @@ Vacuna v = new Vacuna(5,"Astra Zeneca",0.3, LocalDate.of(2021, Month.MARCH, 15),
 
 //data.nuevaVacuna(v);
 
-CitaVacunacion cv  =new CitaVacunacion(c, 35,LocalDateTime.of(2021, 12, 21, 18, 30), "Club", LocalDateTime.of(2021,10,12,9,0), v, Boolean.FALSE);
+CitaVacunacion cv  =new CitaVacunacion(c, 35,LocalDateTime.of(2021, 12, 21, 18, 30), "Club",   Boolean.FALSE);
 
 CitaVacunacionData data = new CitaVacunacionData();
 
