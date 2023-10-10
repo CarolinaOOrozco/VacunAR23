@@ -33,13 +33,13 @@ public class CitaVacunacion {
         this.cancelar=cancelar;
     }
 
-    public CitaVacunacion(Ciudadano ciudadano, int codRefuerzo, LocalDateTime fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColoca, Vacuna vacuna,Boolean cancelar) {
+    public CitaVacunacion(Ciudadano ciudadano, int codRefuerzo, LocalDateTime fechaHoraCita, String centroVacunacion,Boolean cancelar) {
         this.ciudadano = ciudadano;
         this.codRefuerzo = codRefuerzo;
         this.fechaHoraCita = fechaHoraCita;
         this.centroVacunacion = centroVacunacion;
-        this.fechaHoraColoca = fechaHoraColoca;
-        this.vacuna = vacuna;
+        //this.fechaHoraColoca = fechaHoraColoca;
+        //this.vacuna = null;
         this.cancelar=cancelar;
                 
     }

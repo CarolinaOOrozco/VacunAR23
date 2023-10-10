@@ -5,6 +5,10 @@
  */
 package Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author carol
@@ -27,15 +31,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< Updated upstream
         escritorio = new javax.swing.JDesktopPane();
         jSplitPane2 = new javax.swing.JSplitPane();
+=======
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Desktop1.jpg"));
+        Image image = icon.getImage();
+        escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
+>>>>>>> Stashed changes
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jBAgenteSan = new javax.swing.JButton();
+        jBCiudadano = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+<<<<<<< Updated upstream
         jSplitPane2.setDividerSize(0);
 
+=======
+>>>>>>> Stashed changes
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("¡BIENVENIDO A VacunAR23!");
@@ -43,9 +62,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Elija la opción que corresponda");
 
+<<<<<<< Updated upstream
         escritorio.setLayer(jSplitPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+=======
+        jBAgenteSan.setText("A Sanitario");
+
+        jBCiudadano.setText("Ciudadano");
+        jBCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCiudadanoActionPerformed(evt);
+            }
+        });
+
+>>>>>>> Stashed changes
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBAgenteSan, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBCiudadano, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -54,7 +87,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+<<<<<<< Updated upstream
                     .addComponent(jSplitPane2)
+=======
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addComponent(jBAgenteSan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBCiudadano))
+>>>>>>> Stashed changes
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(78, Short.MAX_VALUE))
@@ -66,9 +106,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
+<<<<<<< Updated upstream
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBAgenteSan)
+                    .addComponent(jBCiudadano))
+                .addGap(64, 64, 64))
+>>>>>>> Stashed changes
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -84,6 +132,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCiudadanoActionPerformed
+       escritorio.removeAll();
+       escritorio.repaint();
+       MenuCiudadano mc = new MenuCiudadano();
+       mc.setVisible(true);
+       escritorio.add(mc);
+       escritorio.moveToFront(mc);
+    }//GEN-LAST:event_jBCiudadanoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,8 +179,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JButton jBAgenteSan;
+    private javax.swing.JButton jBCiudadano;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+<<<<<<< Updated upstream
     private javax.swing.JSplitPane jSplitPane2;
+=======
+>>>>>>> Stashed changes
     // End of variables declaration//GEN-END:variables
 }
