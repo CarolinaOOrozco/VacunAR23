@@ -8,10 +8,9 @@ package AccesoDatos;
 import entidades.*;
 import java.sql.*;
 import java.util.*;
-
 import javax.swing.JOptionPane;
 import java.time.*;
-import java.time.temporal.*;
+import java.time.temporal.ChronoUnit;
 
 
 /**
@@ -141,8 +140,8 @@ public class CitaVacunacionData {
         
 
 
-        public List citasVencidasPorMes(ChronoUnit vencidas){
-        String sql = "SELECT EXTRACT (YEAR_MONTH) FROM citaVacunacion WHERE fechaHoraCita = ? AND fechaHoraColoca = null";
+        public List citasVencidasPorMes(int mesDelAnio){  
+        String sql = "SELECT *  FROM citaVacunacion WHERE fechaHoraColoca = null";
         PreparedStatement ps;
             try {
                 ps = con.prepareStatement(sql);
@@ -160,33 +159,31 @@ public class CitaVacunacionData {
                 cita.setVacuna(vac);
                 
                 //cita.setCiudadano(ciudadano.getDni(rs.getInt("dni"))); 
-                cita.setCiudadano(ciudadano);
-                lista.add(cita);
-                
-                if(vencidas.equals(rs.getTimestamp("fechaHoraColoca").toLocalDateTime())){                     
-                            lista.forEach((b)->{b.toString();});
+                cita.setCiudadano(ciudadano);         
+                                   
+            if(cita.getFechaHoraCita().getMonthValue()==(mesDelAnio)){
+
+                   lista.remove(cita);                    
+            }
                 }
-                }
-                
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos");       
         }
             
             return lista;
-        }
-     
+        }    
+
+           
         
-    
         
-        public List citasCumplidasPorMes(ChronoUnit cumplidas){
-        String sql = "SELECT EXTRACT (YEAR_MONTH ) FROM citaVacunacion WHERE fechaHoraCita? AND cancelar = 0";
+        public List citasCumplidasPorMes(int mesDelAnio){
+        String sql = "SELECT * FROM citaVacunacion WHERE cancelar = 0 AND NOT fechaHoraColoca  = null";
         try {
             CitaVacunacion cv= new CitaVacunacion();  
             Vacuna vac = new Vacuna();
             Ciudadano ciudadano = new Ciudadano();
             PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            //ps.setString(1,fechaHoraCita);
+            ResultSet rs = ps.executeQuery();         
             while(rs.next()){
                 cv.setCodigoCita(rs.getInt("codCita"));
                 cv.setCodRefuerzo(rs.getInt("codRefuerzo"));
@@ -197,9 +194,10 @@ public class CitaVacunacionData {
                 cv.setVacuna(vac);
                 //cv.setCiudadano(ciudadano.setDni(rs.getInt("dni")));
                 cv.setCiudadano(ciudadano);
-                lista.add(cv);
-                 if(cumplidas.equals(rs.getTime("fechaHoraCita"))){ 
-                lista.forEach((b)->{b.toString();});}
+               
+                  if(cv.getFechaHoraCita().getMonthValue()==(mesDelAnio)){
+                      lista.add(cv);                     
+                  }      
             }
         } catch (SQLException ex) {
           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla citaVacunacion"); 
@@ -211,15 +209,14 @@ public class CitaVacunacionData {
         }
         
         
-public List citasCanceladasPorMes(ChronoUnit canceladas){            
-           String sql ="SELECT EXTRACT (YEAR_MONTH) FROM citaVacunacion WHERE fechaHoraCita = ? AND cancelar = 1";
+public List citasCanceladasPorMes(int mesDelAnio){            
+           String sql ="SELECT * FROM citaVacunacion WHERE fechaHoraCita = ? AND cancelar = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             CitaVacunacion c = new CitaVacunacion();
             Ciudadano ciudadano = new Ciudadano();
             Vacuna v = new Vacuna();
-         
             while(rs.next()){
                 c.setCodigoCita(rs.getInt("codCita"));
                 c.setCodRefuerzo(rs.getInt("codRefuerzo"));
@@ -230,20 +227,31 @@ public List citasCanceladasPorMes(ChronoUnit canceladas){
 //                c.setCiudadano(ciudadano.setDni(rs.getInt("dni")));
                 c.setVacuna(v);
                 c.setCiudadano(ciudadano);
-                lista.add(c);
+              
                 
-               if(canceladas.equals(rs.getDate("fechaHoraCita"))){
-                lista.forEach((elem)->{elem.toString();});}
+                   if(c.getFechaHoraCita().getMonthValue()==(mesDelAnio)){
+                      lista.add(c);                     
+                  }   
             }
             
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Error al acceder a la VacunAR23"); 
-        }
-         
+           JOptionPane.showMessageDialog(null, "Error al acceder a VacunAR23"); 
+        }         
          return lista;   
 }
-        
-        
-        
-      
 }
+        
+/*
+public void horarioTurnos(){
+int turno = (int)(Math.random()*21); 
+if(turno<8){
+   int  turnoMadrugada = turno+8;
+    JOptionPane.showMessageDialog(null,"su cita está programada para asistir a las: "+turnoMadrugada+" horas");    
+}else{
+    JOptionPane.showMessageDialog(null,"su cita está programada para asistir a las: "+turno+" horas"); 
+}
+}
+}
+       */ 
+      
+

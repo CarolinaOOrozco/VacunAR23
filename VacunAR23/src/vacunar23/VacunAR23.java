@@ -2,6 +2,7 @@
 package vacunar23;
 
 import AccesoDatos.*;
+import Vistas.Mapa;
 import entidades.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ public class VacunAR23 {
    
     public static void main(String[] args) {
         
-      Ciudadano c = new Ciudadano("Juan Rodriguez","juanroodriguez@hotmail.com", "11743823", "-","soldador");
+     // Ciudadano c = new Ciudadano("Juan Rodriguez","juanroodriguez@hotmail.com", "11743823", "-","soldador");
        
       //  CiudadanoData data = new CiudadanoData();
 
@@ -22,7 +23,7 @@ public class VacunAR23 {
         
 //Laboratorio lab = new Laboratorio(123, "lab","Argentina","pharma lab","Astra Zeneca");
 
-Vacuna v = new Vacuna(5,"Astra Zeneca",0.3, LocalDate.of(2021, Month.MARCH, 15), false);
+//Vacuna v = new Vacuna(5,"Astra Zeneca",0.3, LocalDate.of(2021, Month.MARCH, 15), false);
 //
 //LaboratorioData data =new LaboratorioData();
 
@@ -33,11 +34,14 @@ Vacuna v = new Vacuna(5,"Astra Zeneca",0.3, LocalDate.of(2021, Month.MARCH, 15),
 
 //data.nuevaVacuna(v);
 
-CitaVacunacion cv  =new CitaVacunacion(c, 35,LocalDateTime.of(2021, 12, 21, 18, 30), "Club",   Boolean.FALSE);
-
+//CitaVacunacion cv  =new CitaVacunacion(c, 35,LocalDateTime.of(2021, 12, 21, 18, 30), "Club",   Boolean.FALSE);
+//
 CitaVacunacionData data = new CitaVacunacionData();
+//
+//data.nuevaCita(cv);
 
-data.nuevaCita(cv);
-       
+
+//Mapa map = new Mapa("test");
+//data.horarioTurnos();
     }
 }

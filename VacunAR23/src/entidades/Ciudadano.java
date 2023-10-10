@@ -13,6 +13,7 @@ public class Ciudadano {
     private String celular;
     private String patologia;
     private String ambitoTrabajo;
+    private CentroDeVacunacion centro;
     
     public Ciudadano(){}
     
