@@ -6,7 +6,6 @@ import Vistas.Mapa;
 import entidades.*;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 
@@ -35,16 +34,27 @@ public class VacunAR23 {
 //data.nuevaVacuna(v);
 
 //CitaVacunacion cv  =new CitaVacunacion(c, 35,LocalDateTime.of(2021, 12, 21, 18, 30), "Club",   Boolean.FALSE);
-//
+
 CitaVacunacionData data = new CitaVacunacionData();
 //
 //data.nuevaCita(cv);
+
 
 
 Mapa map = new Mapa("test");
 map.paint(map.getGraphics());
 
 //data.horarioTurnos();
+
+//data.nuevaCita(cv);
+
+        System.out.println(data.getFechaDeHoy());
+        data.setFechaDeHoy(data.getFechaDeHoy().plusDays(1));
+        System.out.println(data.getFechaDeHoy());
+        //data.cargarTurnos();
+        System.out.println(data.cargarTurnos());
+       
+
     }
     
 }

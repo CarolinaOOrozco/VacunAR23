@@ -5,7 +5,12 @@
  */
 package Vistas;
 
-import entidades.Ciudadano;
+import AccesoDatos.*;
+import entidades.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class CiudadanoTurno extends javax.swing.JInternalFrame {
 
+    //private LocalDateTime fechaDeHoy;
+    
     /**
      * Creates new form CiudadanoTurno
      */
@@ -21,6 +28,8 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
         initComponents();
         cargarCBFdeRiesgo();
         cargarCBTrabajo();
+        
+        
     }
 
     /**
@@ -49,7 +58,7 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
         jTTelefono = new javax.swing.JTextField();
         jTEmail = new javax.swing.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(496, 432));
+        setPreferredSize(new java.awt.Dimension(512, 466));
 
         jLabel1.setText("Solicitar turno");
 
@@ -59,13 +68,9 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Factor de riesgo");
 
-        jComboPatologia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel5.setText("Trabajo");
 
         jLabel6.setText("DNI");
-
-        jComboTrabajo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("Teléfono");
 
@@ -100,22 +105,22 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(97, 97, 97)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1)))
+                                        .addComponent(jLabel1))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(49, 49, 49)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTTelefono)
-                                            .addComponent(jTDNI)
-                                            .addComponent(jTNombre)
-                                            .addComponent(jTApellido)
-                                            .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jTTelefono)
+                                                .addComponent(jTDNI)
+                                                .addComponent(jTNombre)
+                                                .addComponent(jTApellido)
+                                                .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jComboTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(186, 186, 186)
                         .addComponent(jBSolicitar)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +154,7 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jBSolicitar)
                 .addGap(38, 38, 38))
         );
@@ -158,18 +163,28 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSolicitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitarActionPerformed
-        if(jTApellido.getText().isEmpty()||jTDNI.getText().isEmpty()||jTEmail.getText().isEmpty()||jTTelefono.getText().isEmpty()){
-            JOptionPane.showInternalMessageDialog(null, "Complete todos los campos");
-            return;
-        }
-        String nombreCompleto=jTNombre.getText()+" "+ jTApellido.getText();
-        String email=jTEmail.getText();
-        int dni=Integer.parseInt(jTDNI.getText());
-        String trabajo=(String)jComboTrabajo.getSelectedItem();
-        String patologia=(String)jComboPatologia.getSelectedItem();
-        String telefono=jTTelefono.getText();
+        CitaVacunacionData cvd = new CitaVacunacionData();
         
-        Ciudadano ciud =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
+        if(jTApellido.getText().isEmpty()||jTDNI.getText().isEmpty()||jTEmail.getText().isEmpty()||jTTelefono.getText().isEmpty()){
+           JOptionPane.showInternalMessageDialog(this, "Complete todos los campos");
+           return;
+        }
+        ArrayList <CitaVacunacion> citas = new ArrayList();
+        citas=cvd.citasPorPersona(Integer.parseInt(jTDNI.getText()));
+        if(citas.size()>=1){
+            JOptionPane.showMessageDialog(this, "Usted no puede soicitar turno,ya que cuenta con 1 o más dosis");
+        }else{
+            
+            String nombreCompleto=jTNombre.getText()+" "+ jTApellido.getText();
+            String email=jTEmail.getText();
+            int dni=Integer.parseInt(jTDNI.getText());
+            String trabajo=(String)jComboTrabajo.getSelectedItem();
+            String patologia=(String)jComboPatologia.getSelectedItem();
+            String telefono=jTTelefono.getText();
+            
+            Ciudadano ciud =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
+        }
+        
         
     }//GEN-LAST:event_jBSolicitarActionPerformed
 
@@ -209,6 +224,11 @@ public void cargarCBTrabajo(){
     jComboTrabajo.addItem("COMERCIO");
     jComboTrabajo.addItem("OTRO");
 }
+
+
+
+
+
 
 
 }

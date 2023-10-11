@@ -24,11 +24,16 @@ public class CitaVacunacionData {
     private CitaVacunacion cita;
     private int mes;
     private ArrayList<CitaVacunacion>lista;
+    private CiudadanoData cd;
+    private VacunaData vd;
+    private ArrayList <LocalDateTime> turnos = new ArrayList();
+    private LocalDateTime fechaDeHoy=LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 8, 00, 00);
   
     public CitaVacunacionData(){
-  con= Conexion.getConexion();
-  mes=LocalDate.now().getMonthValue();
-  lista = new ArrayList<>();
+        con= Conexion.getConexion();
+        mes=LocalDate.now().getMonthValue();
+        lista = new ArrayList<>();
+  
   }
   
      public void nuevaCita(CitaVacunacion c){  
@@ -239,6 +244,73 @@ public List citasCanceladasPorMes(int mesDelAnio){
         }         
          return lista;   
 }
+
+        
+        public ArrayList citasPorPersona(int dni){
+            ArrayList <CitaVacunacion> cantidadCitas=new ArrayList();
+            String sql="SELECT * FROM citaVacunacion WHERE dni=?";
+            try{
+                PreparedStatement ps=con.prepareStatement(sql);
+                ps.setInt(1, dni);
+                ResultSet rs=ps.executeQuery();
+                Ciudadano ciudadano =new Ciudadano();
+                ciudadano=cd.buscarPorDni(dni);
+                Vacuna v= new Vacuna();
+                CitaVacunacion citav= new CitaVacunacion();
+                while(rs.next()){
+                    v=vd.buscarVacuna(rs.getInt("dosis"));
+                    citav.setVacuna(v);
+                    citav.setCiudadano(ciudadano);
+                    citav.setCodRefuerzo(rs.getInt("codRefuerzo"));
+                    citav.setCancelar(rs.getBoolean("cancelar"));
+                    citav.setCodigoCita(rs.getInt("codCita"));
+                    citav.setFechaHoraCita(rs.getTimestamp("fechaHoraCita").toLocalDateTime());
+                    citav.setFechaHoraColoca(rs.getTimestamp("fechaHoracoloca").toLocalDateTime());
+                    citav.setCentroVacunacion(rs.getString("centroVacunacion"));
+                }
+            }catch(SQLException ex){
+                
+            }
+            return cantidadCitas;
+        }
+        
+        public ArrayList cargarTurnos(){
+            //fechaDeHoy=fechaDeHoy.plusDays(1);
+            /*do{
+                turnos.add(fechaDeHoy);
+                fechaDeHoy.plusMinutes(15);
+            }while(fechaDeHoy.getHour()<18);*/
+            int minutos=10;
+            LocalDateTime t=fechaDeHoy.plusMinutes(minutos);
+            for(int i=0;i<60;i++){
+
+                if(i==0){
+                    turnos.add(fechaDeHoy);
+                    
+                }else{
+                    
+                    turnos.add(t);
+                    t=t.plusMinutes(minutos);
+                }
+            }
+            return turnos;
+        }
+
+    public LocalDateTime getFechaDeHoy() {
+        return fechaDeHoy;
+    }
+
+    public void setFechaDeHoy(LocalDateTime fechaDeHoy) {
+        this.fechaDeHoy = fechaDeHoy;
+    }
+
+    /*public ArrayList<LocalDateTime> getTurnos() {
+        return turnos;
+    }*/
+        
+        
+    
+
 }
         
 /*

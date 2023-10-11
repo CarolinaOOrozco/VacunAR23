@@ -33,7 +33,7 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jBCancelarC = new javax.swing.JButton();
 
-        escritorioCiudadano.setPreferredSize(new java.awt.Dimension(496, 432));
+        escritorioCiudadano.setPreferredSize(new java.awt.Dimension(512, 466));
 
         jBPostergarC.setText("Postergar cita");
 
@@ -65,7 +65,7 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
                         .addComponent(jBSolicitarC)
                         .addComponent(jLabel1)
                         .addComponent(jBPostergarC)))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         escritorioCiudadanoLayout.setVerticalGroup(
             escritorioCiudadanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,7 +77,7 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
                 .addComponent(jBPostergarC)
                 .addGap(76, 76, 76)
                 .addComponent(jBCancelarC)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -88,7 +88,7 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorioCiudadano, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addComponent(escritorioCiudadano, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
