@@ -41,7 +41,10 @@ CitaVacunacionData data = new CitaVacunacionData();
 //data.nuevaCita(cv);
 
 
-//Mapa map = new Mapa("test");
+Mapa map = new Mapa("test");
+map.paint(map.getGraphics());
+
 //data.horarioTurnos();
     }
+    
 }
