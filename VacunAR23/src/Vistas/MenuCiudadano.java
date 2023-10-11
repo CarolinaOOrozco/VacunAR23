@@ -33,6 +33,8 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jBCancelarC = new javax.swing.JButton();
 
+        setClosable(true);
+
         escritorioCiudadano.setPreferredSize(new java.awt.Dimension(512, 466));
 
         jBPostergarC.setText("Postergar cita");
@@ -88,7 +90,7 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorioCiudadano, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(escritorioCiudadano, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
         );
 
         pack();

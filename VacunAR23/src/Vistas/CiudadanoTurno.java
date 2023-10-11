@@ -58,6 +58,7 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
         jTTelefono = new javax.swing.JTextField();
         jTEmail = new javax.swing.JTextField();
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(512, 466));
 
         jLabel1.setText("Solicitar turno");
