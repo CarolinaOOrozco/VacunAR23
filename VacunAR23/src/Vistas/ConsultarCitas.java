@@ -7,6 +7,7 @@ package Vistas;
 
 import AccesoDatos.*;
 import entidades.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -62,13 +63,28 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablaCitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablaCitasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablaCitas);
 
         jBPostergar.setText("Postergar");
         jBPostergar.setEnabled(false);
+        jBPostergar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPostergarActionPerformed(evt);
+            }
+        });
 
         jBCancelar.setText("Cancelar");
         jBCancelar.setEnabled(false);
+        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarActionPerformed(evt);
+            }
+        });
 
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +124,9 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
                     .addComponent(jTDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jBBuscar))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBPostergar)
                     .addComponent(jBCancelar))
@@ -174,6 +190,35 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jTablaCitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaCitasMouseClicked
+        jBPostergar.setEnabled(true);
+        jBCancelar.setEnabled(true);
+    }//GEN-LAST:event_jTablaCitasMouseClicked
+
+    private void jBPostergarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPostergarActionPerformed
+        ArrayList <CitaVacunacion> citas = new ArrayList();
+        CitaVacunacionData cvd= new CitaVacunacionData();
+        citas=cvd.citasPorPersona(Integer.parseInt(jTDNI.getText()));
+        int codCita=citas.get(jTablaCitas.getSelectedRow()).getCodigoCita();
+        LocalDateTime fecha=citas.get(jTablaCitas.getSelectedRow()).getFechaHoraCita();
+        cvd.postergarCita(fecha,codCita);
+        
+    }//GEN-LAST:event_jBPostergarActionPerformed
+
+    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
+        ArrayList <CitaVacunacion> citas = new ArrayList();
+        CitaVacunacionData cvd= new CitaVacunacionData();
+        citas=cvd.citasPorPersona(Integer.parseInt(jTDNI.getText()));
+        if(citas.get(jTablaCitas.getSelectedRow()).getCancelar()==true){
+            JOptionPane.showMessageDialog(this, "La cita ya fué cancelada");
+        }else{
+           int codCita=citas.get(jTablaCitas.getSelectedRow()).getCodigoCita();
+            LocalDateTime fecha=citas.get(jTablaCitas.getSelectedRow()).getFechaHoraCita();
+            cvd.cancelarCitaPorDni(fecha,codCita); 
+        }
+        
+    }//GEN-LAST:event_jBCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

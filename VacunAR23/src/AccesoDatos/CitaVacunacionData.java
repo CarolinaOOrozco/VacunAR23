@@ -67,9 +67,12 @@ public class CitaVacunacionData {
         }
      }
    
-        public void cancelarCitaPorDni(int dni){
+        public void cancelarCitaPorDni(LocalDateTime fecha,int dni){
         
-            String sql = "UPDATE citaVacunacion set cancelar = 1 Where dni = ?";
+            if(fecha.isBefore(LocalDateTime.now())){
+                JOptionPane.showMessageDialog(null, "La cita no puede cancelarse porque ya expiró");
+            }else{
+                String sql = "UPDATE citaVacunacion set cancelar = 1 Where dni = ?";
             
         try {
             PreparedStatement ps =con.prepareStatement(sql);
@@ -82,6 +85,8 @@ public class CitaVacunacionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos");
         }
+            }
+            
             
         
         }
@@ -300,6 +305,26 @@ public List citasCanceladasPorMes(int mesDelAnio){
         this.fechaDeHoy = fechaDeHoy;
     }
 
+    public void postergarCita(LocalDateTime ldt,int codCita){
+        //LocalDateTime fechaActualizada=ldt.plusDays(14);
+        if(ldt.isBefore(LocalDateTime.now())){
+            JOptionPane.showMessageDialog(null, "No puede cancelar su cita porque la fecha de la misma ya expiró");
+        }else{
+           String sql="UPDATE citaVacunacion SET fechaHoraCita=? WHERE codCita=?";
+        try{
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setTimestamp(1, Timestamp.valueOf(ldt.plusDays(14)));
+            ps.setInt(2, codCita);
+            int filas=ps.executeUpdate();
+            if(filas==1){
+                JOptionPane.showMessageDialog(null, "Su cita fue postergada,le enviaremos un mensaje con la nueva fecha y hora");
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a base de datos citaVacunación "+ex.getMessage());
+        } 
+        }
+        
+    }
     /*public ArrayList<LocalDateTime> getTurnos() {
         return turnos;
     }*/

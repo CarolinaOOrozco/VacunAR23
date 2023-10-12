@@ -101,6 +101,8 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
         escritorioCiudadano.add(ct);
         escritorioCiudadano.moveToFront(ct);
         
+        //MenuCiudadano.this.setVisible(false);
+        
     }//GEN-LAST:event_jBSolicitarCActionPerformed
 
     private void jBConsultarCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarCitasActionPerformed
@@ -110,6 +112,7 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
         cc.setVisible(true);
         escritorioCiudadano.add(cc);
         escritorioCiudadano.moveToFront(cc);
+        //MenuCiudadano.this.setVisible(false);
     }//GEN-LAST:event_jBConsultarCitasActionPerformed
 
 
