@@ -28,16 +28,20 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         escritorioCiudadano = new javax.swing.JDesktopPane();
-        jBPostergarC = new javax.swing.JButton();
+        jBConsultarCitas = new javax.swing.JButton();
         jBSolicitarC = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jBCancelarC = new javax.swing.JButton();
 
         setClosable(true);
 
         escritorioCiudadano.setPreferredSize(new java.awt.Dimension(512, 466));
 
-        jBPostergarC.setText("Postergar cita");
+        jBConsultarCitas.setText("Consultar citas");
+        jBConsultarCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConsultarCitasActionPerformed(evt);
+            }
+        });
 
         jBSolicitarC.setText("Solicitar cita");
         jBSolicitarC.addActionListener(new java.awt.event.ActionListener() {
@@ -48,12 +52,9 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
 
         jLabel1.setText("MENU");
 
-        jBCancelarC.setText("Cancelar cita");
-
-        escritorioCiudadano.setLayer(jBPostergarC, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioCiudadano.setLayer(jBConsultarCitas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorioCiudadano.setLayer(jBSolicitarC, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorioCiudadano.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorioCiudadano.setLayer(jBCancelarC, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioCiudadanoLayout = new javax.swing.GroupLayout(escritorioCiudadano);
         escritorioCiudadano.setLayout(escritorioCiudadanoLayout);
@@ -61,13 +62,11 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
             escritorioCiudadanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioCiudadanoLayout.createSequentialGroup()
                 .addGap(177, 177, 177)
-                .addGroup(escritorioCiudadanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBCancelarC)
-                    .addGroup(escritorioCiudadanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jBSolicitarC)
-                        .addComponent(jLabel1)
-                        .addComponent(jBPostergarC)))
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addGroup(escritorioCiudadanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBSolicitarC)
+                    .addComponent(jLabel1)
+                    .addComponent(jBConsultarCitas))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         escritorioCiudadanoLayout.setVerticalGroup(
             escritorioCiudadanoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,10 +75,8 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
                 .addGap(48, 48, 48)
                 .addComponent(jBSolicitarC)
                 .addGap(58, 58, 58)
-                .addComponent(jBPostergarC)
-                .addGap(76, 76, 76)
-                .addComponent(jBCancelarC)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addComponent(jBConsultarCitas)
+                .addContainerGap(304, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,13 +100,22 @@ public class MenuCiudadano extends javax.swing.JInternalFrame {
         ct.setVisible(true);
         escritorioCiudadano.add(ct);
         escritorioCiudadano.moveToFront(ct);
+        
     }//GEN-LAST:event_jBSolicitarCActionPerformed
+
+    private void jBConsultarCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarCitasActionPerformed
+        escritorioCiudadano.removeAll();
+        escritorioCiudadano.repaint();
+        ConsultarCitas cc= new ConsultarCitas();
+        cc.setVisible(true);
+        escritorioCiudadano.add(cc);
+        escritorioCiudadano.moveToFront(cc);
+    }//GEN-LAST:event_jBConsultarCitasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorioCiudadano;
-    private javax.swing.JButton jBCancelarC;
-    private javax.swing.JButton jBPostergarC;
+    private javax.swing.JButton jBConsultarCitas;
     private javax.swing.JButton jBSolicitarC;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

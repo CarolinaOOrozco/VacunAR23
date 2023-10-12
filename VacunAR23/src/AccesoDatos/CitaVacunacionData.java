@@ -275,11 +275,7 @@ public List citasCanceladasPorMes(int mesDelAnio){
         }
         
         public ArrayList cargarTurnos(){
-            //fechaDeHoy=fechaDeHoy.plusDays(1);
-            /*do{
-                turnos.add(fechaDeHoy);
-                fechaDeHoy.plusMinutes(15);
-            }while(fechaDeHoy.getHour()<18);*/
+            
             int minutos=10;
             LocalDateTime t=fechaDeHoy.plusMinutes(minutos);
             for(int i=0;i<60;i++){
