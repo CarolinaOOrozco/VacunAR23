@@ -32,6 +32,7 @@ public class Menuprincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Desktop1.jpg"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){
@@ -39,14 +40,12 @@ public class Menuprincipal extends javax.swing.JFrame {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
-        jBASanitario = new javax.swing.JButton();
         jBCiudadano = new javax.swing.JButton();
+        jBASanitario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         escritorio.setPreferredSize(new java.awt.Dimension(512, 466));
-
-        jBASanitario.setText("Agente sanitario");
 
         jBCiudadano.setText("Ciudadano");
         jBCiudadano.addActionListener(new java.awt.event.ActionListener() {
@@ -55,7 +54,6 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
-        escritorio.setLayer(jBASanitario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBCiudadano, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -63,31 +61,37 @@ public class Menuprincipal extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jBASanitario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBCiudadano)
                 .addGap(57, 57, 57))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBASanitario)
-                    .addComponent(jBCiudadano))
+                .addContainerGap(158, Short.MAX_VALUE)
+                .addComponent(jBCiudadano)
                 .addGap(100, 100, 100))
         );
+
+        jBASanitario.setText("Agente sanitario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jBASanitario)
+                .addContainerGap(238, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jBASanitario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -145,5 +149,6 @@ public class Menuprincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jBASanitario;
     private javax.swing.JButton jBCiudadano;
+    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }

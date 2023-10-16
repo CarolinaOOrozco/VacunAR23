@@ -33,6 +33,7 @@ public class CitaVacunacionData {
         con= Conexion.getConexion();
         mes=LocalDate.now().getMonthValue();
         lista = new ArrayList<>();
+        turnos=cargarTurnos();
   
   }
   
@@ -281,18 +282,11 @@ public List citasCanceladasPorMes(int mesDelAnio){
         
         public ArrayList cargarTurnos(){
             
-            int minutos=10;
-            LocalDateTime t=fechaDeHoy.plusMinutes(minutos);
-            for(int i=0;i<60;i++){
-
-                if(i==0){
-                    turnos.add(fechaDeHoy);
-                    
-                }else{
-                    
-                    turnos.add(t);
-                    t=t.plusMinutes(minutos);
-                }
+            //int minutos=10;
+            LocalDateTime t=fechaDeHoy;
+            while(t.getHour()<=18){
+                turnos.add(t);
+                t=t.plusHours(1);
             }
             return turnos;
         }
@@ -305,6 +299,15 @@ public List citasCanceladasPorMes(int mesDelAnio){
         this.fechaDeHoy = fechaDeHoy;
     }
 
+    public ArrayList<LocalDateTime> getTurnos() {
+        return turnos;
+    }
+
+    public void setTurnos(ArrayList<LocalDateTime> turnos) {
+        this.turnos = turnos;
+    }
+
+    
     public void postergarCita(LocalDateTime ldt,int codCita){
         //LocalDateTime fechaActualizada=ldt.plusDays(14);
         if(ldt.isBefore(LocalDateTime.now())){
@@ -325,6 +328,63 @@ public List citasCanceladasPorMes(int mesDelAnio){
         }
         
     }
+    
+    public LocalDateTime turnoPara2semanas(){
+        LocalDateTime turnoAsignado=null;
+        while(turnoAsignado==null){
+            for(LocalDateTime t:turnos){
+            
+                t=t.plusDays(14);
+                try{
+                String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora ROM citaVacunacion WHERE fechaHoraCita=?";
+                 PreparedStatement ps=con.prepareStatement(sql);
+                 ps.setTimestamp(1, Timestamp.valueOf(t));
+                 ResultSet rs=ps.executeQuery();
+                 if(rs.getInt("citasPorHora")<12){
+                     turnoAsignado=t;
+                     break;
+                 }
+                }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos "+ex.getMessage());
+                }
+                if(turnoAsignado==null){
+                    setFechaDeHoy(fechaDeHoy.plusDays(1));
+                    turnos.removeAll(turnos);
+                    setTurnos(cargarTurnos());
+                }
+            }
+        }
+        return turnoAsignado;
+    }
+    
+    public LocalDateTime turnoPara4semanas(){
+        LocalDateTime turnoAsignado=null;
+        while(turnoAsignado==null){
+            for(LocalDateTime t:turnos){
+            
+                t=t.plusDays(28);
+                try{
+                    String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora ROM citaVacunacion WHERE fechaHoraCita=?";
+                    PreparedStatement ps=con.prepareStatement(sql);
+                    ps.setTimestamp(1, Timestamp.valueOf(t));
+                    ResultSet rs=ps.executeQuery();
+                       if(rs.getInt("citasPorHora")<12){
+                        turnoAsignado=t;
+                        break;
+                    }
+                }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos "+ex.getMessage());
+                }
+                if(turnoAsignado==null){
+                    setFechaDeHoy(fechaDeHoy.plusDays(1));
+                    turnos.removeAll(turnos);
+                    setTurnos(cargarTurnos());
+                }
+            }
+        }
+        return turnoAsignado;
+    }
+    
     /*public ArrayList<LocalDateTime> getTurnos() {
         return turnos;
     }*/
