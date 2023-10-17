@@ -2,7 +2,6 @@
 package vacunar23;
 
 import AccesoDatos.*;
-import Vistas.Mapa2;
 import entidades.*;
 import java.sql.Date;
 import java.time.LocalDate;
