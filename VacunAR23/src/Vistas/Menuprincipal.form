@@ -31,22 +31,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="escritorio" alignment="1" pref="400" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-              <Component id="jBASanitario" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="238" max="32767" attributes="0"/>
-          </Group>
+          <Component id="escritorio" alignment="0" pref="400" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="jBASanitario" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="escritorio" min="-2" pref="281" max="-2" attributes="0"/>
-          </Group>
+          <Component id="escritorio" alignment="1" pref="310" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -66,23 +56,69 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jBCiudadano" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <Component id="jBAtras" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jBLaboratorios" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jBASanitario" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBVacunas" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBCitas" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="72" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jBConsultarC" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBSolicitarT" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBCiudadano" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="158" max="32767" attributes="0"/>
-                  <Component id="jBCiudadano" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Component id="jBAtras" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="152" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBASanitario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBCiudadano" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBSolicitarT" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBVacunas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBConsultarC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBCitas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jBLaboratorios" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JButton" name="jBASanitario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Agente sanitario"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBASanitarioActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="jBCiudadano">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ciudadano"/>
@@ -91,12 +127,46 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCiudadanoActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="jBSolicitarT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Solicitar turno"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSolicitarTActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBConsultarC">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consultar citas"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConsultarCActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBAtras">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Atr&#xe1;s"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAtrasActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBVacunas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vacunas"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBCitas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Citas"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBLaboratorios">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Laboratorios"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jBASanitario">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Agente sanitario"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

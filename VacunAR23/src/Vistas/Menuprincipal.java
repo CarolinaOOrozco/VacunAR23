@@ -21,6 +21,12 @@ public class Menuprincipal extends javax.swing.JFrame {
      */
     public Menuprincipal() {
         initComponents();
+        jBSolicitarT.setVisible(false);
+        jBConsultarC.setVisible(false);
+        jBAtras.setEnabled(false);
+        jBVacunas.setVisible(false);
+        jBCitas.setVisible(false);
+        jBLaboratorios.setVisible(false);
     }
 
     /**
@@ -40,12 +46,25 @@ public class Menuprincipal extends javax.swing.JFrame {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
-        jBCiudadano = new javax.swing.JButton();
         jBASanitario = new javax.swing.JButton();
+        jBCiudadano = new javax.swing.JButton();
+        jBSolicitarT = new javax.swing.JButton();
+        jBConsultarC = new javax.swing.JButton();
+        jBAtras = new javax.swing.JButton();
+        jBVacunas = new javax.swing.JButton();
+        jBCitas = new javax.swing.JButton();
+        jBLaboratorios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         escritorio.setPreferredSize(new java.awt.Dimension(512, 466));
+
+        jBASanitario.setText("Agente sanitario");
+        jBASanitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBASanitarioActionPerformed(evt);
+            }
+        });
 
         jBCiudadano.setText("Ciudadano");
         jBCiudadano.addActionListener(new java.awt.event.ActionListener() {
@@ -54,44 +73,97 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBSolicitarT.setText("Solicitar turno");
+        jBSolicitarT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSolicitarTActionPerformed(evt);
+            }
+        });
+
+        jBConsultarC.setText("Consultar citas");
+        jBConsultarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConsultarCActionPerformed(evt);
+            }
+        });
+
+        jBAtras.setText("Atrás");
+        jBAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAtrasActionPerformed(evt);
+            }
+        });
+
+        jBVacunas.setText("Vacunas");
+
+        jBCitas.setText("Citas");
+
+        jBLaboratorios.setText("Laboratorios");
+
+        escritorio.setLayer(jBASanitario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBCiudadano, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBSolicitarT, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBConsultarC, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBAtras, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBVacunas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBCitas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBLaboratorios, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBCiudadano)
-                .addGap(57, 57, 57))
+                .addComponent(jBAtras)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addComponent(jBLaboratorios)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBASanitario)
+                            .addComponent(jBVacunas)
+                            .addComponent(jBCitas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBConsultarC)
+                            .addComponent(jBSolicitarT)
+                            .addComponent(jBCiudadano))
+                        .addGap(62, 62, 62))))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
-                .addComponent(jBCiudadano)
-                .addGap(100, 100, 100))
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addComponent(jBAtras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBASanitario)
+                    .addComponent(jBCiudadano))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBSolicitarT)
+                    .addComponent(jBVacunas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBConsultarC)
+                    .addComponent(jBCitas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBLaboratorios)
+                .addGap(25, 25, 25))
         );
-
-        jBASanitario.setText("Agente sanitario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jBASanitario)
-                .addContainerGap(238, Short.MAX_VALUE))
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBASanitario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
         );
 
         pack();
@@ -100,15 +172,69 @@ public class Menuprincipal extends javax.swing.JFrame {
     private void jBCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCiudadanoActionPerformed
         
         
-        escritorio.removeAll();
+        /*escritorio.removeAll();
         escritorio.repaint();
         MenuCiudadano mc= new MenuCiudadano();
         mc.setVisible(true);
         escritorio.add(mc);
-        escritorio.moveToFront(mc);
+        escritorio.moveToFront(mc);*/
         
+        jBSolicitarT.setVisible(true);
+        jBConsultarC.setVisible(true);
+        jBAtras.setEnabled(true);
+        jBASanitario.setVisible(false);
         
     }//GEN-LAST:event_jBCiudadanoActionPerformed
+
+    private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
+        jBAtras.setEnabled(false);
+        jBCiudadano.setVisible(true);
+        jBASanitario.setVisible(true);
+        jBConsultarC.setVisible(false);
+        jBSolicitarT.setVisible(false);
+        jBVacunas.setVisible(false);
+        jBCitas.setVisible(false);
+        jBLaboratorios.setVisible(false);
+    }//GEN-LAST:event_jBAtrasActionPerformed
+
+    private void jBSolicitarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitarTActionPerformed
+        escritorio.repaint();
+        CiudadanoTurno ct= new CiudadanoTurno();
+        ct.setVisible(true);
+        escritorio.add(ct);
+        escritorio.moveToFront(ct);
+    }//GEN-LAST:event_jBSolicitarTActionPerformed
+
+    private void jBConsultarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarCActionPerformed
+        escritorio.repaint();
+        ConsultarCitas cc= new ConsultarCitas();
+        cc.setVisible(true);
+        escritorio.add(cc);
+        escritorio.moveToFront(cc);
+    }//GEN-LAST:event_jBConsultarCActionPerformed
+
+    private void jBASanitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBASanitarioActionPerformed
+        
+        try{
+            Integer dniAgente=Integer.parseInt(JOptionPane.showInputDialog("Ingrese su DNI"));
+            if(dniAgente==null){
+                JOptionPane.showMessageDialog(this, "Complete el campo");
+                return;
+            }else if(dniAgente!=1234){
+                JOptionPane.showMessageDialog(this, "El DNI no pertenece a un agente autorizado");
+                return;
+            }else{
+                jBCiudadano.setVisible(false);
+                jBVacunas.setVisible(true);
+                jBCitas.setVisible(true);
+                jBLaboratorios.setVisible(true);
+                jBAtras.setEnabled(true);
+            }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Recuerde,el campo solo recibe números y no debe quedar en blanco");
+        }
+        
+    }//GEN-LAST:event_jBASanitarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,7 +274,13 @@ public class Menuprincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jBASanitario;
+    private javax.swing.JButton jBAtras;
+    private javax.swing.JButton jBCitas;
     private javax.swing.JButton jBCiudadano;
+    private javax.swing.JButton jBConsultarC;
+    private javax.swing.JButton jBLaboratorios;
+    private javax.swing.JButton jBSolicitarT;
+    private javax.swing.JButton jBVacunas;
     private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }
