@@ -24,9 +24,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         jBSolicitarT.setVisible(false);
         jBConsultarC.setVisible(false);
         jBAtras.setEnabled(false);
-        jBVacunas.setVisible(false);
-        jBCitas.setVisible(false);
-        jBLaboratorios.setVisible(false);
+        
     }
 
     /**
@@ -51,9 +49,6 @@ public class Menuprincipal extends javax.swing.JFrame {
         jBSolicitarT = new javax.swing.JButton();
         jBConsultarC = new javax.swing.JButton();
         jBAtras = new javax.swing.JButton();
-        jBVacunas = new javax.swing.JButton();
-        jBCitas = new javax.swing.JButton();
-        jBLaboratorios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,20 +89,11 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
-        jBVacunas.setText("Vacunas");
-
-        jBCitas.setText("Citas");
-
-        jBLaboratorios.setText("Laboratorios");
-
         escritorio.setLayer(jBASanitario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBCiudadano, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBSolicitarT, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBConsultarC, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBAtras, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(jBVacunas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(jBCitas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(jBLaboratorios, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -118,21 +104,13 @@ public class Menuprincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
+                .addComponent(jBASanitario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addComponent(jBLaboratorios)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBASanitario)
-                            .addComponent(jBVacunas)
-                            .addComponent(jBCitas))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBConsultarC)
-                            .addComponent(jBSolicitarT)
-                            .addComponent(jBCiudadano))
-                        .addGap(62, 62, 62))))
+                    .addComponent(jBConsultarC)
+                    .addComponent(jBSolicitarT)
+                    .addComponent(jBCiudadano))
+                .addGap(62, 62, 62))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,16 +121,10 @@ public class Menuprincipal extends javax.swing.JFrame {
                     .addComponent(jBASanitario)
                     .addComponent(jBCiudadano))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBSolicitarT)
-                    .addComponent(jBVacunas))
+                .addComponent(jBSolicitarT)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBConsultarC)
-                    .addComponent(jBCitas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBLaboratorios)
-                .addGap(25, 25, 25))
+                .addComponent(jBConsultarC)
+                .addGap(54, 54, 54))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,7 +150,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         mc.setVisible(true);
         escritorio.add(mc);
         escritorio.moveToFront(mc);*/
-        
+        jBCiudadano.setEnabled(false);
         jBSolicitarT.setVisible(true);
         jBConsultarC.setVisible(true);
         jBAtras.setEnabled(true);
@@ -189,12 +161,12 @@ public class Menuprincipal extends javax.swing.JFrame {
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
         jBAtras.setEnabled(false);
         jBCiudadano.setVisible(true);
+        jBCiudadano.setEnabled(true);
+        jBASanitario.setEnabled(true);
         jBASanitario.setVisible(true);
         jBConsultarC.setVisible(false);
         jBSolicitarT.setVisible(false);
-        jBVacunas.setVisible(false);
-        jBCitas.setVisible(false);
-        jBLaboratorios.setVisible(false);
+        
     }//GEN-LAST:event_jBAtrasActionPerformed
 
     private void jBSolicitarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitarTActionPerformed
@@ -225,10 +197,9 @@ public class Menuprincipal extends javax.swing.JFrame {
                 return;
             }else{
                 jBCiudadano.setVisible(false);
-                jBVacunas.setVisible(true);
-                jBCitas.setVisible(true);
-                jBLaboratorios.setVisible(true);
+                
                 jBAtras.setEnabled(true);
+                jBASanitario.setEnabled(false);
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Recuerde,el campo solo recibe números y no debe quedar en blanco");
@@ -275,12 +246,9 @@ public class Menuprincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jBASanitario;
     private javax.swing.JButton jBAtras;
-    private javax.swing.JButton jBCitas;
     private javax.swing.JButton jBCiudadano;
     private javax.swing.JButton jBConsultarC;
-    private javax.swing.JButton jBLaboratorios;
     private javax.swing.JButton jBSolicitarT;
-    private javax.swing.JButton jBVacunas;
     private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }
