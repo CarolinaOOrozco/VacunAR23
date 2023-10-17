@@ -27,6 +27,59 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jVacunas = new javax.swing.JMenu();
+        jMCargarVacunas = new javax.swing.JMenuItem();
+        jMListarVacunas = new javax.swing.JMenuItem();
+        jCitas = new javax.swing.JMenu();
+        jMConfCitas = new javax.swing.JMenuItem();
+        jMListarCitas = new javax.swing.JMenuItem();
+        jMDosisDiarias = new javax.swing.JMenuItem();
+        jMListarVacxCiudadano = new javax.swing.JMenuItem();
+        jMPostergarCitaxFaltante = new javax.swing.JMenuItem();
+        jLaboratorios = new javax.swing.JMenu();
+        jMListarLabs = new javax.swing.JMenuItem();
+
+        setClosable(true);
+
+        jVacunas.setText("Vacunas");
+
+        jMCargarVacunas.setText("Cargar vacunas");
+        jVacunas.add(jMCargarVacunas);
+
+        jMListarVacunas.setText("Listar vacunas según...");
+        jVacunas.add(jMListarVacunas);
+
+        jMenuBar1.add(jVacunas);
+
+        jCitas.setText("Citas");
+
+        jMConfCitas.setText("Confirmar citas");
+        jCitas.add(jMConfCitas);
+
+        jMListarCitas.setText("Listar citas según..");
+        jCitas.add(jMListarCitas);
+
+        jMDosisDiarias.setText("Dosis diarias aplicadas");
+        jCitas.add(jMDosisDiarias);
+
+        jMListarVacxCiudadano.setText("Listar vacuna según ciudadano");
+        jCitas.add(jMListarVacxCiudadano);
+
+        jMPostergarCitaxFaltante.setText("Postergar cita por faltante");
+        jCitas.add(jMPostergarCitaxFaltante);
+
+        jMenuBar1.add(jCitas);
+
+        jLaboratorios.setText("Laboratorios");
+
+        jMListarLabs.setText("Listar laboratorios");
+        jLaboratorios.add(jMListarLabs);
+
+        jMenuBar1.add(jLaboratorios);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -35,7 +88,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 257, Short.MAX_VALUE)
         );
 
         pack();
@@ -43,5 +96,17 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jCitas;
+    private javax.swing.JMenu jLaboratorios;
+    private javax.swing.JMenuItem jMCargarVacunas;
+    private javax.swing.JMenuItem jMConfCitas;
+    private javax.swing.JMenuItem jMDosisDiarias;
+    private javax.swing.JMenuItem jMListarCitas;
+    private javax.swing.JMenuItem jMListarLabs;
+    private javax.swing.JMenuItem jMListarVacunas;
+    private javax.swing.JMenuItem jMListarVacxCiudadano;
+    private javax.swing.JMenuItem jMPostergarCitaxFaltante;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jVacunas;
     // End of variables declaration//GEN-END:variables
 }

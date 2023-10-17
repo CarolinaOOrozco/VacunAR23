@@ -200,6 +200,12 @@ public class Menuprincipal extends javax.swing.JFrame {
                 
                 jBAtras.setEnabled(true);
                 jBASanitario.setEnabled(false);
+                
+                escritorio.repaint();
+                MenuAgenteSanitario mas= new MenuAgenteSanitario();
+                mas.setVisible(true);
+                escritorio.add(mas);
+                escritorio.moveToFront(mas);
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Recuerde,el campo solo recibe números y no debe quedar en blanco");
