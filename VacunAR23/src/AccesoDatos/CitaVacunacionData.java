@@ -92,13 +92,14 @@ public class CitaVacunacionData {
         
         }
         
-        public void citaVacunacionConcretada(int codCita){
-           Timestamp fechaHoy=Timestamp.valueOf(LocalDateTime.now());
-           String sql="UPDATE citaVacunacion SET fechaHoraColoca=? WHERE codCita=?";
+        public void citaVacunacionConcretada(int codCita,LocalDateTime fechaHora,Vacuna v){
+           //Timestamp fechaHoy=Timestamp.valueOf(LocalDateTime.now());
+           String sql="UPDATE citaVacunacion SET fechaHoraColoca=?,dosis=? WHERE codCita=?";
            try{
                PreparedStatement ps=con.prepareStatement(sql);
-               ps.setTimestamp(1, fechaHoy);
-               ps.setInt(2, codCita);
+               ps.setTimestamp(1, Timestamp.valueOf(fechaHora));
+               ps.setInt(2, v.getNroSerieDosis());
+               ps.setInt(3, codCita);
                int filas=ps.executeUpdate();
                if(filas==1){
                    JOptionPane.showMessageDialog(null, "Cita acutalizada exitosamente");
@@ -128,25 +129,33 @@ public class CitaVacunacionData {
             }
         }
         
-        public int vacunacionesDiarias(String centroDeVacunacion){
+        public ArrayList vacunacionesDiarias(String centroDeVacunacion){
+            ArrayList <CitaVacunacion> citasDiarias=new ArrayList();
             LocalDate fecha=LocalDate.now();
             LocalDateTime fComienzo=LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 00, 00, 00);
             LocalDateTime fFinal=LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 23, 59, 59);
             Timestamp inicioDia=Timestamp.valueOf(fComienzo);
             Timestamp finalDia=Timestamp.valueOf(fFinal);
             int vacunaciones=0;
-            String sql="SELECT centroVacunacion,COUNT(codCita) AS vacunasDiarias FROM citaVacunacion WHERE fechaHoraColoca BETWEEN ? AND ?";
+            String sql="SELECT * FROM citaVacunacion WHERE fechaHoraColoca BETWEEN ? AND ?";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ps.setString(1,centroDeVacunacion);
                 ps.setTimestamp(2,inicioDia);
                 ps.setTimestamp(3,finalDia);
                 ResultSet rs=ps.executeQuery();
-                vacunaciones=rs.getInt("vacunasDiarias");
+                while(rs.next()){
+                    CiudadanoData cd=new CiudadanoData();
+                    VacunaData vd=new VacunaData();
+                    CitaVacunacion cv=new CitaVacunacion();
+                    Ciudadano c=cd.buscarPorDni(rs.getInt("dni"));
+                    //Vacuna v=vd.buscarVacuna(rs.getInt("dosis"));
+                    
+                }
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Error al acceder a base de datos citaVacunacion "+ex.getMessage());
             }
-            return vacunaciones;
+            return citasDiarias;
         }
         
 
