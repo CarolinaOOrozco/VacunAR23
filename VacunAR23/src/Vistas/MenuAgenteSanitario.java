@@ -75,9 +75,19 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jCitas.add(jMConfCitas);
 
         jMListarCitas.setText("Listar citas según..");
+        jMListarCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMListarCitasActionPerformed(evt);
+            }
+        });
         jCitas.add(jMListarCitas);
 
         jMDosisDiarias.setText("Dosis diarias aplicadas");
+        jMDosisDiarias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMDosisDiariasActionPerformed(evt);
+            }
+        });
         jCitas.add(jMDosisDiarias);
 
         jMListarVacxCiudadano.setText("Listar vacuna según ciudadano");
@@ -118,6 +128,22 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         escritorioASanitario.add(cc);
         escritorioASanitario.moveToFront(cc);
     }//GEN-LAST:event_jMConfCitasActionPerformed
+
+    private void jMListarCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarCitasActionPerformed
+        escritorioASanitario.repaint();
+        ListarCitas lc=new ListarCitas();
+        lc.setVisible(true);
+        escritorioASanitario.add(lc);
+        escritorioASanitario.moveToFront(lc);
+    }//GEN-LAST:event_jMListarCitasActionPerformed
+
+    private void jMDosisDiariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDosisDiariasActionPerformed
+        escritorioASanitario.repaint();
+        DosisDiariasAplicadas dda=new DosisDiariasAplicadas();
+        dda.setVisible(true);
+        escritorioASanitario.add(dda);
+        escritorioASanitario.moveToFront(dda);
+    }//GEN-LAST:event_jMDosisDiariasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

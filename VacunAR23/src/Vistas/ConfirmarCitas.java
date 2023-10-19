@@ -8,6 +8,7 @@ package Vistas;
 import AccesoDatos.*;
 import entidades.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -138,15 +139,22 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         VacunaData vd=new VacunaData();
         Vacuna v=(Vacuna)vd.vacunasDisponibles().get(0);
         CitaVacunacionData cvd=new CitaVacunacionData();
-        Integer codigo=(Integer)jTablaCitas.getValueAt(jTablaCitas.getSelectedRow(), 5);
-        LocalDateTime fechaHora=(LocalDateTime)jTablaCitas.getValueAt(jTablaCitas.getSelectedRow(), 3);
+        jTablaCitas.setValueAt(v.getNroSerieDosis(), jTablaCitas.getSelectedRow(),5);
+        Integer codigo=(Integer)jTablaCitas.getValueAt(jTablaCitas.getSelectedRow(), 4);
+        LocalDateTime fechaHora=(LocalDateTime)jTablaCitas.getValueAt(jTablaCitas.getSelectedRow(), 2);
         cvd.citaVacunacionConcretada(codigo,fechaHora, v);
         vd.marcarComoAplicada(v.getNroSerieDosis());
         jBConfirmarCita.setEnabled(false);
     }//GEN-LAST:event_jBConfirmarCitaActionPerformed
 
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
-        
+        borrarFilas();
+        String centroVacunacion=(String)jComboBox.getSelectedItem();
+        CitaVacunacionData cvd=new CitaVacunacionData();
+        ArrayList <CitaVacunacion> vacunacionesHoy=cvd.vacunacionesDiarias(centroVacunacion);
+        for(CitaVacunacion cv:vacunacionesHoy){
+            modelo.addRow(new Object[]{cv.getCiudadano().getNombreCompleto(),cv.getCiudadano().getDni(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getCodigoCita(),cv.getVacuna().getNroSerieDosis()});
+        }
     }//GEN-LAST:event_jComboBoxActionPerformed
 
 

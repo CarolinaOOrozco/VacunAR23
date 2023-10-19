@@ -189,10 +189,7 @@ public class Menuprincipal extends javax.swing.JFrame {
         
         try{
             Integer dniAgente=Integer.parseInt(JOptionPane.showInputDialog("Ingrese su DNI"));
-            if(dniAgente==null){
-                JOptionPane.showMessageDialog(this, "Complete el campo");
-                return;
-            }else if(dniAgente!=1234){
+            if(dniAgente!=1234){
                 JOptionPane.showMessageDialog(this, "El DNI no pertenece a un agente autorizado");
                 return;
             }else{

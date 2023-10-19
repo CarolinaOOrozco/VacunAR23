@@ -38,11 +38,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Listar citas seg&#xfa;n.."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMListarCitasActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMDosisDiarias">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dosis diarias aplicadas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMDosisDiariasActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMListarVacxCiudadano">
               <Properties>

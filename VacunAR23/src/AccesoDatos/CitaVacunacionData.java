@@ -132,25 +132,31 @@ public class CitaVacunacionData {
         public ArrayList vacunacionesDiarias(String centroDeVacunacion){
             ArrayList <CitaVacunacion> citasDiarias=new ArrayList();
             LocalDate fecha=LocalDate.now();
-            LocalDateTime fComienzo=LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 00, 00, 00);
-            LocalDateTime fFinal=LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 23, 59, 59);
-            Timestamp inicioDia=Timestamp.valueOf(fComienzo);
-            Timestamp finalDia=Timestamp.valueOf(fFinal);
-            int vacunaciones=0;
-            String sql="SELECT * FROM citaVacunacion WHERE fechaHoraColoca BETWEEN ? AND ?";
+            Timestamp inicioDia=Timestamp.valueOf(LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 00, 00, 00));
+            Timestamp finalDia=Timestamp.valueOf(LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 23, 59, 59));
+            
+            String sql="SELECT * FROM citaVacunacion WHERE centroVacunaion=? AND fechaHoraColoca BETWEEN ? AND ?";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ps.setString(1,centroDeVacunacion);
                 ps.setTimestamp(2,inicioDia);
                 ps.setTimestamp(3,finalDia);
                 ResultSet rs=ps.executeQuery();
-                while(rs.next()){
-                    CiudadanoData cd=new CiudadanoData();
-                    VacunaData vd=new VacunaData();
+                VacunaData vd=new VacunaData();
+                CiudadanoData cd=new CiudadanoData();
+                while(rs.next()){ 
                     CitaVacunacion cv=new CitaVacunacion();
                     Ciudadano c=cd.buscarPorDni(rs.getInt("dni"));
-                    //Vacuna v=vd.buscarVacuna(rs.getInt("dosis"));
-                    
+                    Vacuna v=vd.buscarVacuna(rs.getInt("dosis"));
+                    cv.setCodigoCita(rs.getInt("codCita"));
+                    cv.setCodRefuerzo(rs.getInt("codRefuerzo"));
+                    cv.setFechaHoraCita(rs.getTimestamp("fechaHoraCita").toLocalDateTime());
+                    cv.setCiudadano(c);
+                    cv.setCentroVacunacion(rs.getString("centroVacunacion"));
+                    cv.setVacuna(v);
+                    cv.setFechaHoraColoca(rs.getTimestamp("fechaHoraColoca").toLocalDateTime());
+                    cv.setCancelar(rs.getBoolean("cancelar"));
+                    citasDiarias.add(cv);
                 }
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Error al acceder a base de datos citaVacunacion "+ex.getMessage());
