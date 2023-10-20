@@ -45,9 +45,19 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jVacunas.setText("Vacunas");
 
         jMCargarVacunas.setText("Cargar vacunas");
+        jMCargarVacunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCargarVacunasActionPerformed(evt);
+            }
+        });
         jVacunas.add(jMCargarVacunas);
 
         jMListarVacunas.setText("Listar vacunas según...");
+        jMListarVacunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMListarVacunasActionPerformed(evt);
+            }
+        });
         jVacunas.add(jMListarVacunas);
 
         jMenuBar1.add(jVacunas);
@@ -93,6 +103,36 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMCargarVacunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarVacunasActionPerformed
+
+    jMenuBar1.removeAll();
+    jMenuBar1.repaint();
+    CargarVacuna cv = new CargarVacuna();
+
+    cv.setVisible(true);
+    
+    jMenuBar1.add(cv);
+    
+    
+    
+    //jMenuBar1.moveToFront();        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_jMCargarVacunasActionPerformed
+
+    private void jMListarVacunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarVacunasActionPerformed
+        // TODO add your handling code here:
+    jMenuBar1.removeAll();
+    jMenuBar1.repaint();
+    ListarVacunas lv = new ListarVacunas();
+
+    lv.setVisible(true);
+    
+    jMenuBar1.add(lv);
+    
+    }//GEN-LAST:event_jMListarVacunasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
