@@ -171,7 +171,7 @@ private VacunaData vacdata;
         else{
         ArrayList <Vacuna> carVacuna = new ArrayList();
             int numSerie = Integer.parseInt(jTNumSerie.getText()); 
-            int medida = Integer.parseInt(jTMedida.getText());        
+            Double medida = Double.parseDouble(jTMedida.getText());        
             String NroSerieDosis=jTNumSerie.getText();
             String Marca=jTMarca.getText();
             //int dni=Integer.parseInt(jTDNI.getText());
@@ -183,7 +183,7 @@ private VacunaData vacdata;
                // LocalDate FechaCaduca = Integer.parseInt(fecha.getText());
                // Boolean Coloca = Integer.parseInt(Coloca.getText();
             
-            Vacuna vacu =new Vacuna(NroSerieDosis,Marca,Medida,FechaCaduca);
+            Vacuna vacu =new Vacuna(numSerie,Marca,medida,FechaCaduca,Coloca);
         }
  
         

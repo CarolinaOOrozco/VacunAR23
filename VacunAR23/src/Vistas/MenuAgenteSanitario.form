@@ -56,15 +56,21 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMDosisDiariasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMListarVacxCiudadano">
+            <MenuItem class="javax.swing.JMenuItem" name="jMListarVacxCentro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listar vacuna seg&#xfa;n ciudadano"/>
+                <Property name="text" type="java.lang.String" value="Listar vacunas por centro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMListarVacxCentroActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMPostergarCitaxFaltante">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Postergar cita por faltante"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMPostergarCitaxFaltanteActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -116,10 +116,11 @@ public class ListarCitas extends javax.swing.JInternalFrame {
                     .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRBConcretadas)
@@ -139,7 +140,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
         List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasCumplidasPorMes(jComboBoxMes.getSelectedIndex());
+        citasConcretadas=cvd.citasCumplidasPorMes(jComboBoxMes.getSelectedIndex()+1);
         for(CitaVacunacion cv:citasConcretadas){
             modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
         }
@@ -151,7 +152,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
         List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasVencidasPorMes(jComboBoxMes.getSelectedIndex());
+        citasConcretadas=cvd.citasVencidasPorMes(jComboBoxMes.getSelectedIndex()+1);
         for(CitaVacunacion cv:citasConcretadas){
             modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
         }
@@ -163,7 +164,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
         List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasCanceladasPorMes(jComboBoxMes.getSelectedIndex());
+        citasConcretadas=cvd.citasCanceladasPorMes(jComboBoxMes.getSelectedIndex()+1);
         for(CitaVacunacion cv:citasConcretadas){
             modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
         }

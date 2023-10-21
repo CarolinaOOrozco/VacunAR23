@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 import java.time.*;
+import static java.time.DayOfWeek.*;
 import java.time.temporal.ChronoUnit;
 
 
@@ -350,8 +351,13 @@ public List citasCanceladasPorMes(int mesDelAnio){
             for(LocalDateTime t:turnos){
             
                 t=t.plusDays(14);
+                if(t.getDayOfWeek().equals(SATURDAY)){
+                    t=t.plusDays(2);
+                }else if(t.getDayOfWeek().equals(SUNDAY)){
+                    t=t.plusDays(1);
+                }
                 try{
-                String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora ROM citaVacunacion WHERE fechaHoraCita=?";
+                String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora FROM citaVacunacion WHERE fechaHoraCita=?";
                  PreparedStatement ps=con.prepareStatement(sql);
                  ps.setTimestamp(1, Timestamp.valueOf(t));
                  ResultSet rs=ps.executeQuery();
@@ -378,8 +384,13 @@ public List citasCanceladasPorMes(int mesDelAnio){
             for(LocalDateTime t:turnos){
             
                 t=t.plusDays(28);
+                if(t.getDayOfWeek().equals(SATURDAY)){
+                    t=t.plusDays(2);
+                }else if(t.getDayOfWeek().equals(SUNDAY)){
+                    t=t.plusDays(1);
+                }
                 try{
-                    String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora ROM citaVacunacion WHERE fechaHoraCita=?";
+                    String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora FROM citaVacunacion WHERE fechaHoraCita=?";
                     PreparedStatement ps=con.prepareStatement(sql);
                     ps.setTimestamp(1, Timestamp.valueOf(t));
                     ResultSet rs=ps.executeQuery();

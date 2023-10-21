@@ -36,7 +36,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jMConfCitas = new javax.swing.JMenuItem();
         jMListarCitas = new javax.swing.JMenuItem();
         jMDosisDiarias = new javax.swing.JMenuItem();
-        jMListarVacxCiudadano = new javax.swing.JMenuItem();
+        jMListarVacxCentro = new javax.swing.JMenuItem();
         jMPostergarCitaxFaltante = new javax.swing.JMenuItem();
         jLaboratorios = new javax.swing.JMenu();
         jMListarLabs = new javax.swing.JMenuItem();
@@ -100,10 +100,20 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         });
         jCitas.add(jMDosisDiarias);
 
-        jMListarVacxCiudadano.setText("Listar vacuna según ciudadano");
-        jCitas.add(jMListarVacxCiudadano);
+        jMListarVacxCentro.setText("Listar vacunas por centro");
+        jMListarVacxCentro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMListarVacxCentroActionPerformed(evt);
+            }
+        });
+        jCitas.add(jMListarVacxCentro);
 
         jMPostergarCitaxFaltante.setText("Postergar cita por faltante");
+        jMPostergarCitaxFaltante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMPostergarCitaxFaltanteActionPerformed(evt);
+            }
+        });
         jCitas.add(jMPostergarCitaxFaltante);
 
         jMenuBar1.add(jCitas);
@@ -131,20 +141,20 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
+
     private void jMCargarVacunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarVacunasActionPerformed
 
-    jMenuBar1.removeAll();
-    jMenuBar1.repaint();
+    //jMenuBar1.removeAll();
+    escritorioASanitario.repaint();
     CargarVacuna cv = new CargarVacuna();
 
     cv.setVisible(true);
     
-    jMenuBar1.add(cv);
+    escritorioASanitario.add(cv);
     
     
     
-    //jMenuBar1.moveToFront();        // TODO add your handling code here:
+    escritorioASanitario.moveToFront(cv);        // TODO add your handling code here:
         
         
         
@@ -152,16 +162,16 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
 
     private void jMListarVacunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarVacunasActionPerformed
         // TODO add your handling code here:
-    jMenuBar1.removeAll();
-    jMenuBar1.repaint();
+    escritorioASanitario.removeAll();
+    escritorioASanitario.repaint();
     ListarVacunas lv = new ListarVacunas();
 
     lv.setVisible(true);
     
-    jMenuBar1.add(lv);
+    escritorioASanitario.add(lv);
     
     }//GEN-LAST:event_jMListarVacunasActionPerformed
-=======
+
     private void jMConfCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMConfCitasActionPerformed
         escritorioASanitario.repaint();
         ConfirmarCitas cc= new ConfirmarCitas();
@@ -185,7 +195,23 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         escritorioASanitario.add(dda);
         escritorioASanitario.moveToFront(dda);
     }//GEN-LAST:event_jMDosisDiariasActionPerformed
->>>>>>> 7fa60f80eef309c8f4eb3d54aadf29eba69b28ce
+
+
+    private void jMListarVacxCentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarVacxCentroActionPerformed
+        escritorioASanitario.repaint();
+        ListadoVacunasPorCentro lvc=new ListadoVacunasPorCentro();
+        lvc.setVisible(true);
+        escritorioASanitario.add(lvc);
+        escritorioASanitario.moveToFront(lvc);
+    }//GEN-LAST:event_jMListarVacxCentroActionPerformed
+
+    private void jMPostergarCitaxFaltanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPostergarCitaxFaltanteActionPerformed
+        escritorioASanitario.repaint();
+        PostergarCitaXFaltante pcf=new PostergarCitaXFaltante();
+        pcf.setVisible(true);
+        escritorioASanitario.add(pcf);
+        escritorioASanitario.moveToFront(pcf);
+    }//GEN-LAST:event_jMPostergarCitaxFaltanteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,7 +224,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMListarCitas;
     private javax.swing.JMenuItem jMListarLabs;
     private javax.swing.JMenuItem jMListarVacunas;
-    private javax.swing.JMenuItem jMListarVacxCiudadano;
+    private javax.swing.JMenuItem jMListarVacxCentro;
     private javax.swing.JMenuItem jMPostergarCitaxFaltante;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jVacunas;
