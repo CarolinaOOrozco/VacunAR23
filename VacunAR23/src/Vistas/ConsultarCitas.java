@@ -44,6 +44,8 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
         jBCancelar = new javax.swing.JButton();
         jBBuscar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jTDNI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTDNIKeyTyped(evt);

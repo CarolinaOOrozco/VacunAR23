@@ -109,7 +109,9 @@ public class Menuprincipal extends javax.swing.JFrame {
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBConsultarC)
                     .addComponent(jBSolicitarT)
-                    .addComponent(jBCiudadano))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jBCiudadano)))
                 .addGap(62, 62, 62))
         );
         escritorioLayout.setVerticalGroup(
@@ -159,30 +161,42 @@ public class Menuprincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCiudadanoActionPerformed
 
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
-        jBAtras.setEnabled(false);
-        jBCiudadano.setVisible(true);
-        jBCiudadano.setEnabled(true);
-        jBASanitario.setEnabled(true);
-        jBASanitario.setVisible(true);
-        jBConsultarC.setVisible(false);
-        jBSolicitarT.setVisible(false);
+        if(escritorio.getSelectedFrame()==null){
+            jBAtras.setEnabled(false);
+            jBCiudadano.setVisible(true);
+            jBCiudadano.setEnabled(true);
+            jBASanitario.setEnabled(true);
+            jBASanitario.setVisible(true);
+            jBConsultarC.setVisible(false);
+            jBSolicitarT.setVisible(false);
+        }
+        
         
     }//GEN-LAST:event_jBAtrasActionPerformed
 
     private void jBSolicitarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitarTActionPerformed
-        escritorio.repaint();
-        CiudadanoTurno ct= new CiudadanoTurno();
-        ct.setVisible(true);
-        escritorio.add(ct);
-        escritorio.moveToFront(ct);
+        if(escritorio.getSelectedFrame()==null){
+            escritorio.repaint();
+            CiudadanoTurno ct= new CiudadanoTurno();
+            ct.setVisible(true);
+            escritorio.add(ct);
+            escritorio.moveToFront(ct);
+            escritorio.setSelectedFrame(ct);
+        }
+        
+        
     }//GEN-LAST:event_jBSolicitarTActionPerformed
 
     private void jBConsultarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarCActionPerformed
-        escritorio.repaint();
-        ConsultarCitas cc= new ConsultarCitas();
-        cc.setVisible(true);
-        escritorio.add(cc);
-        escritorio.moveToFront(cc);
+        if(escritorio.getSelectedFrame()==null){
+            escritorio.repaint();
+            ConsultarCitas cc= new ConsultarCitas();
+            cc.setVisible(true);
+            escritorio.add(cc);
+            escritorio.moveToFront(cc);
+            escritorio.setSelectedFrame(cc);
+        }
+        
     }//GEN-LAST:event_jBConsultarCActionPerformed
 
     private void jBASanitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBASanitarioActionPerformed

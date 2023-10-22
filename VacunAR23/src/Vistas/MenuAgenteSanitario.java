@@ -144,73 +144,94 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
 
     private void jMCargarVacunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarVacunasActionPerformed
 
-    //jMenuBar1.removeAll();
-    escritorioASanitario.repaint();
-    CargarVacuna cv = new CargarVacuna();
-
-    cv.setVisible(true);
-    
-    escritorioASanitario.add(cv);
-    
-    
-    
-    escritorioASanitario.moveToFront(cv);        // TODO add your handling code here:
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            CargarVacuna cv = new CargarVacuna();
+            cv.setVisible(true);
+            escritorioASanitario.add(cv);
+            escritorioASanitario.moveToFront(cv);
+            //escritorioASanitario.setSelectedFrame(cv);
+        }
+               
         
         
         
     }//GEN-LAST:event_jMCargarVacunasActionPerformed
 
     private void jMListarVacunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarVacunasActionPerformed
-        // TODO add your handling code here:
-    escritorioASanitario.removeAll();
-    escritorioASanitario.repaint();
-    ListarVacunas lv = new ListarVacunas();
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.removeAll();
+            escritorioASanitario.repaint();
+            ListarVacunas lv = new ListarVacunas();
 
-    lv.setVisible(true);
-    
-    escritorioASanitario.add(lv);
+            lv.setVisible(true);
+
+            escritorioASanitario.add(lv);
+            //escritorioASanitario.setSelectedFrame(lv);
+        }
+        
     
     }//GEN-LAST:event_jMListarVacunasActionPerformed
 
     private void jMConfCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMConfCitasActionPerformed
-        escritorioASanitario.repaint();
-        ConfirmarCitas cc= new ConfirmarCitas();
-        cc.setVisible(true);
-        escritorioASanitario.add(cc);
-        escritorioASanitario.moveToFront(cc);
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            ConfirmarCitas cc= new ConfirmarCitas();
+            cc.setVisible(true);
+            escritorioASanitario.add(cc);
+            escritorioASanitario.moveToFront(cc);
+            escritorioASanitario.setSelectedFrame(cc);
+        }
+        
     }//GEN-LAST:event_jMConfCitasActionPerformed
 
     private void jMListarCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarCitasActionPerformed
-        escritorioASanitario.repaint();
-        ListarCitas lc=new ListarCitas();
-        lc.setVisible(true);
-        escritorioASanitario.add(lc);
-        escritorioASanitario.moveToFront(lc);
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            ListarCitas lc=new ListarCitas();
+            lc.setVisible(true);
+            escritorioASanitario.add(lc);
+            escritorioASanitario.moveToFront(lc);
+            escritorioASanitario.setSelectedFrame(lc);
+        }
+        
     }//GEN-LAST:event_jMListarCitasActionPerformed
 
     private void jMDosisDiariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDosisDiariasActionPerformed
-        escritorioASanitario.repaint();
-        DosisDiariasAplicadas dda=new DosisDiariasAplicadas();
-        dda.setVisible(true);
-        escritorioASanitario.add(dda);
-        escritorioASanitario.moveToFront(dda);
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            DosisDiariasAplicadas dda=new DosisDiariasAplicadas();
+            dda.setVisible(true);
+            escritorioASanitario.add(dda);
+            escritorioASanitario.moveToFront(dda);
+            escritorioASanitario.setSelectedFrame(dda);
+        }
+        
     }//GEN-LAST:event_jMDosisDiariasActionPerformed
 
 
     private void jMListarVacxCentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarVacxCentroActionPerformed
-        escritorioASanitario.repaint();
-        ListadoVacunasPorCentro lvc=new ListadoVacunasPorCentro();
-        lvc.setVisible(true);
-        escritorioASanitario.add(lvc);
-        escritorioASanitario.moveToFront(lvc);
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            ListadoVacunasPorCentro lvc=new ListadoVacunasPorCentro();
+            lvc.setVisible(true);
+            escritorioASanitario.add(lvc);
+            escritorioASanitario.moveToFront(lvc);
+            escritorioASanitario.setSelectedFrame(lvc);
+        }
+        
     }//GEN-LAST:event_jMListarVacxCentroActionPerformed
 
     private void jMPostergarCitaxFaltanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPostergarCitaxFaltanteActionPerformed
-        escritorioASanitario.repaint();
-        PostergarCitaXFaltante pcf=new PostergarCitaXFaltante();
-        pcf.setVisible(true);
-        escritorioASanitario.add(pcf);
-        escritorioASanitario.moveToFront(pcf);
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            PostergarCitaXFaltante pcf=new PostergarCitaXFaltante();
+            pcf.setVisible(true);
+            escritorioASanitario.add(pcf);
+            escritorioASanitario.moveToFront(pcf);
+            escritorioASanitario.setSelectedFrame(pcf);
+        }
+        
     }//GEN-LAST:event_jMPostergarCitaxFaltanteActionPerformed
 
 

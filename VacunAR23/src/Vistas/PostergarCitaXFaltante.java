@@ -5,6 +5,7 @@
  */
 package Vistas;
 
+import AccesoDatos.*;
 import java.time.LocalDate;
 
 /**
@@ -23,6 +24,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
         viernes=lunes.plusDays(4);
         jLInicioSemana.setText(lunes+"");
         jLFinDeLaSemana.setText(viernes+"");
+        cargarComboBox();
     }
 
     /**
@@ -36,7 +38,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLInicioSemana = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -44,14 +46,18 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLVacunasDisponibles = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLCitasProgramadas = new javax.swing.JLabel();
         jBPostergar = new javax.swing.JButton();
 
         jLabel1.setText("Previsión de vacunas");
 
         jLabel2.setText("Semana");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Centro de vacunación");
 
@@ -75,7 +81,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(77, 77, 77)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLCitasProgramadas, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -84,7 +90,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -123,7 +129,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -132,7 +138,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(114, 114, 114)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLCitasProgramadas, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jBPostergar)
                 .addGap(39, 39, 39))
@@ -141,10 +147,24 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
+        CitaVacunacionData cvd=new CitaVacunacionData();
+        VacunaData vd=new VacunaData();
+        String centro=(String)jComboBox.getSelectedItem();
+        int vacunas=vd.vacunasDisponibles().size();
+        jLVacunasDisponibles.setText(vacunas+"");
+        int citasProgramadas=0;
+        for(int i=0;i>=4;i++){
+            citasProgramadas=citasProgramadas+cvd.vacunacionesDiarias(centro,lunes.plusDays(i)).size();
+        }
+        jLCitasProgramadas.setText(citasProgramadas+"");
+    }//GEN-LAST:event_jComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBPostergar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox;
+    private javax.swing.JLabel jLCitasProgramadas;
     private javax.swing.JLabel jLFinDeLaSemana;
     private javax.swing.JLabel jLInicioSemana;
     private javax.swing.JLabel jLVacunasDisponibles;
@@ -154,7 +174,6 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 
     public void seleccionarLunes(){
@@ -174,5 +193,9 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                                     case(7):
                                         lunes=hoy.plusDays(1);break;
         }
+    }
+    
+    public void cargarComboBox(){
+        
     }
 }

@@ -7,6 +7,7 @@ package Vistas;
 
 import AccesoDatos.*;
 import entidades.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -151,7 +152,7 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         borrarFilas();
         String centroVacunacion=(String)jComboBox.getSelectedItem();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        ArrayList <CitaVacunacion> vacunacionesHoy=cvd.vacunacionesDiarias(centroVacunacion);
+        ArrayList <CitaVacunacion> vacunacionesHoy=cvd.vacunacionesDiarias(centroVacunacion,LocalDate.now());
         for(CitaVacunacion cv:vacunacionesHoy){
             modelo.addRow(new Object[]{cv.getCiudadano().getNombreCompleto(),cv.getCiudadano().getDni(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getCodigoCita(),cv.getVacuna().getNroSerieDosis()});
         }

@@ -130,11 +130,11 @@ public class CitaVacunacionData {
             }
         }
         
-        public ArrayList vacunacionesDiarias(String centroDeVacunacion){
+        public ArrayList vacunacionesDiarias(String centroDeVacunacion,LocalDate fechaHoy){
             ArrayList <CitaVacunacion> citasDiarias=new ArrayList();
-            LocalDate fecha=LocalDate.now();
-            Timestamp inicioDia=Timestamp.valueOf(LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 00, 00, 00));
-            Timestamp finalDia=Timestamp.valueOf(LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 23, 59, 59));
+            //LocalDate fecha=LocalDate.now();
+            Timestamp inicioDia=Timestamp.valueOf(LocalDateTime.of(fechaHoy.getYear(), fechaHoy.getMonth(), fechaHoy.getDayOfMonth(), 00, 00, 00));
+            Timestamp finalDia=Timestamp.valueOf(LocalDateTime.of(fechaHoy.getYear(), fechaHoy.getMonth(), fechaHoy.getDayOfMonth(), 23, 59, 59));
             
             String sql="SELECT * FROM citaVacunacion WHERE centroVacunaion=? AND fechaHoraColoca BETWEEN ? AND ?";
             try{
