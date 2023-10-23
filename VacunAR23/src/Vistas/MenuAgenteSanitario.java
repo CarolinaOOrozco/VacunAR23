@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package Vistas;
-
+import java.awt.*;
+import javax.swing.*;
 /**
  *
  * @author carol
@@ -27,7 +28,13 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorioASanitario = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/Desktop1.jpg"));
+        Image image = icon.getImage();
+        escritorioASanitario =  new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jVacunas = new javax.swing.JMenu();
         jMCargarVacunas = new javax.swing.JMenuItem();
