@@ -151,7 +151,7 @@ GeoPosition geo6 = new GeoPosition(-34.8994704,-57.9630709);
     }//GEN-LAST:event_escobaActionPerformed
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
-        int respuesta=JOptionPane.showConfirmDialog(this, "¿Desea regresar al menú principal?","confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int respuesta=JOptionPane.showConfirmDialog(this, "¿Desea Salir del programa?","confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(respuesta==JOptionPane.NO_OPTION){
         return;
         }else{
