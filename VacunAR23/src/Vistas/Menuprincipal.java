@@ -7,6 +7,9 @@ package Vistas;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -49,11 +52,14 @@ public class Menuprincipal extends javax.swing.JFrame {
         jBSolicitarT = new javax.swing.JButton();
         jBConsultarC = new javax.swing.JButton();
         jBAtras = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(6);
 
         escritorio.setPreferredSize(new java.awt.Dimension(512, 466));
 
+        jBASanitario.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
         jBASanitario.setText("Agente sanitario");
         jBASanitario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +67,7 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBCiudadano.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
         jBCiudadano.setText("Ciudadano");
         jBCiudadano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +75,7 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBSolicitarT.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
         jBSolicitarT.setText("Solicitar turno");
         jBSolicitarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +83,7 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBConsultarC.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
         jBConsultarC.setText("Consultar citas");
         jBConsultarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,10 +91,21 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBAtras.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras.png"))); // NOI18N
         jBAtras.setText("Atrás");
         jBAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAtrasActionPerformed(evt);
+            }
+        });
+
+        jBSalir.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
+        jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
             }
         });
 
@@ -94,38 +114,45 @@ public class Menuprincipal extends javax.swing.JFrame {
         escritorio.setLayer(jBSolicitarT, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBConsultarC, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jBAtras, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jBSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addComponent(jBAtras)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jBASanitario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBConsultarC)
-                    .addComponent(jBSolicitarT)
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jBCiudadano)))
-                .addGap(62, 62, 62))
+                        .addComponent(jBASanitario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                        .addComponent(jBSolicitarT, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)))
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBConsultarC, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addComponent(jBAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addComponent(jBAtras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBASanitario)
-                    .addComponent(jBCiudadano))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSolicitarT)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBConsultarC)
+                    .addComponent(jBAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBASanitario, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBConsultarC, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBSolicitarT, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54))
         );
 
@@ -224,6 +251,15 @@ public class Menuprincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBASanitarioActionPerformed
 
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+              int respuesta=JOptionPane.showConfirmDialog(this, "¿Desea regresar salir del programa?","confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(respuesta==JOptionPane.NO_OPTION){
+        return;
+        }else{
+            System.exit(0);
+            }
+    }//GEN-LAST:event_jBSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -265,6 +301,7 @@ public class Menuprincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBAtras;
     private javax.swing.JButton jBCiudadano;
     private javax.swing.JButton jBConsultarC;
+    private javax.swing.JButton jBSalir;
     private javax.swing.JButton jBSolicitarT;
     private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
