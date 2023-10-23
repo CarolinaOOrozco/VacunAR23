@@ -59,7 +59,9 @@ public class Menuprincipal extends javax.swing.JFrame {
 
         escritorio.setPreferredSize(new java.awt.Dimension(512, 466));
 
+        jBASanitario.setBackground(new java.awt.Color(0, 153, 255));
         jBASanitario.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBASanitario.setForeground(new java.awt.Color(255, 255, 255));
         jBASanitario.setText("Agente sanitario");
         jBASanitario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +69,9 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBCiudadano.setBackground(new java.awt.Color(255, 255, 255));
         jBCiudadano.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBCiudadano.setForeground(new java.awt.Color(0, 153, 255));
         jBCiudadano.setText("Ciudadano");
         jBCiudadano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,14 +125,15 @@ public class Menuprincipal extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addComponent(jBASanitario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                        .addContainerGap(24, Short.MAX_VALUE)
                         .addComponent(jBSolicitarT, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)))
+                        .addGap(30, 30, 30))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jBASanitario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBConsultarC, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))

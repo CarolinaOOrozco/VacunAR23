@@ -157,7 +157,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             cv.setVisible(true);
             escritorioASanitario.add(cv);
             escritorioASanitario.moveToFront(cv);
-            //escritorioASanitario.setSelectedFrame(cv);
+            escritorioASanitario.setSelectedFrame(cv);
         }
                
         
@@ -174,7 +174,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             lv.setVisible(true);
 
             escritorioASanitario.add(lv);
-            //escritorioASanitario.setSelectedFrame(lv);
+            escritorioASanitario.setSelectedFrame(lv);
         }
         
     
