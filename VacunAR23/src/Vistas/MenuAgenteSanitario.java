@@ -49,16 +49,19 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jMListarLabs = new javax.swing.JMenuItem();
 
         setClosable(true);
+        setPreferredSize(new java.awt.Dimension(800, 800));
+
+        escritorioASanitario.setPreferredSize(new java.awt.Dimension(800, 800));
 
         javax.swing.GroupLayout escritorioASanitarioLayout = new javax.swing.GroupLayout(escritorioASanitario);
         escritorioASanitario.setLayout(escritorioASanitarioLayout);
         escritorioASanitarioLayout.setHorizontalGroup(
             escritorioASanitarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 725, Short.MAX_VALUE)
         );
         escritorioASanitarioLayout.setVerticalGroup(
             escritorioASanitarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 261, Short.MAX_VALUE)
+            .addGap(0, 335, Short.MAX_VALUE)
         );
 
         jVacunas.setText("Vacunas");
@@ -138,11 +141,11 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorioASanitario)
+            .addComponent(escritorioASanitario, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorioASanitario)
+            .addComponent(escritorioASanitario, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
         );
 
         pack();

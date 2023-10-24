@@ -72,6 +72,7 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
         });
 
         jBDAplicadas.setText("Listar dosis aplicadas");
+        jBDAplicadas.setEnabled(false);
         jBDAplicadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBDAplicadasActionPerformed(evt);
@@ -106,8 +107,8 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBDAplicadas, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jBDAplicadas, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -116,23 +117,35 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jDCFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDCFechaPropertyChange
-        
-        if(jDCFecha.getDate()!=null){
+        //borrarFilas();
+        try{
+            
+            if(jDCFecha.getDate()!=null){
             fechaElegida=jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            jBDAplicadas.setEnabled(true);
+            jDCFecha.setEnabled(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "Ingrese una fecha válida");
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Ingrese una fecha válida");
         }
+        
          
-        //jBDAplicadas.setEnabled(true);
+        
         
         
     }//GEN-LAST:event_jDCFechaPropertyChange
 
     private void jBDAplicadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDAplicadasActionPerformed
         try{
-            if(fechaElegida==null){
-                JOptionPane.showMessageDialog(this, "Elija una fecha o complete el campo");
+            borrarFilas();
+            if(fechaElegida.equals(null)){
+                JOptionPane.showMessageDialog(this, "Ingrese una fecha válida o complete el campo");
+                jDCFecha.cleanup();
                 return;
             }else{
-                borrarFilas();
+                
                 List<CitaVacunacion>citas=new ArrayList();
                 CitaVacunacionData cvd=new CitaVacunacionData();
                 citas=cvd.citasCumplidasPorMes(fechaElegida.getMonthValue());
@@ -144,8 +157,12 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
                         }
                     }
                     modelo.addRow(new Object[]{centro,cantidad});
-                }   
+                }  
+                jBDAplicadas.setEnabled(false);
+                jDCFecha.setEnabled(true);
+                fechaElegida=null;
             }
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Ingrese una fecha válida");
         }
