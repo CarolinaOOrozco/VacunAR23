@@ -11,12 +11,12 @@ import javax.swing.*;
  * @author carol
  */
 public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
+    
 
-    /**
-     * Creates new form MenuAgenteSanitario
-     */
+    
     public MenuAgenteSanitario() {
         initComponents();
+    
     }
 
     /**
@@ -49,21 +49,27 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jMListarLabs = new javax.swing.JMenuItem();
 
         setClosable(true);
+        setResizable(true);
 
         javax.swing.GroupLayout escritorioASanitarioLayout = new javax.swing.GroupLayout(escritorioASanitario);
         escritorioASanitario.setLayout(escritorioASanitarioLayout);
         escritorioASanitarioLayout.setHorizontalGroup(
             escritorioASanitarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 584, Short.MAX_VALUE)
         );
         escritorioASanitarioLayout.setVerticalGroup(
             escritorioASanitarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 261, Short.MAX_VALUE)
+            .addGap(0, 449, Short.MAX_VALUE)
         );
 
         jVacunas.setText("Vacunas");
 
         jMCargarVacunas.setText("Cargar vacunas");
+        jMCargarVacunas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMCargarVacunasMouseClicked(evt);
+            }
+        });
         jMCargarVacunas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMCargarVacunasActionPerformed(evt);
@@ -158,9 +164,9 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(cv);
             escritorioASanitario.moveToFront(cv);
             escritorioASanitario.setSelectedFrame(cv);
+            
         }
-               
-        
+            
         
         
     }//GEN-LAST:event_jMCargarVacunasActionPerformed
@@ -240,6 +246,10 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jMPostergarCitaxFaltanteActionPerformed
+
+    private void jMCargarVacunasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMCargarVacunasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMCargarVacunasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
