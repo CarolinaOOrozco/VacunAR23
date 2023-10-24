@@ -99,8 +99,9 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
         borrarFilas();
         String centro=(String)jComboBox.getSelectedItem();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        
+        //ArrayList <Vacuna> vacunas=new ArrayList();
         List<CitaVacunacion> citasTotales=new ArrayList();
+        VacunaData vd=new VacunaData();
         for(int i=1;i<13;i++){
             List<CitaVacunacion> citasXMes=new ArrayList();
             citasXMes=cvd.citasCumplidasPorMes(i);
@@ -114,8 +115,10 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
                 return 1;
             }
         };
+        
         for(CitaVacunacion c:citasTotales){
-            modelo.addRow(new Object[]{c.getVacuna().getNroSerieDosis(),c.getCiudadano().getDni()});
+            Vacuna v=vd.buscarVacuna(c.getVacuna().getNroSerieDosis());
+            modelo.addRow(new Object[]{v.getMarca(),c.getVacuna().getNroSerieDosis(),c.getCiudadano().getDni()});
         }
     }//GEN-LAST:event_jComboBoxActionPerformed
 
@@ -128,6 +131,7 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarCabecera(){
+        modelo.addColumn("Marca");
         modelo.addColumn("Vacuna(N° de dósis)");
         modelo.addColumn("DNI ciudadano");
         jTabla.setModel(modelo);
