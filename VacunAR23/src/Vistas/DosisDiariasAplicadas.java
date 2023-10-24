@@ -72,7 +72,6 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
         });
 
         jBDAplicadas.setText("Listar dosis aplicadas");
-        jBDAplicadas.setEnabled(false);
         jBDAplicadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBDAplicadasActionPerformed(evt);
@@ -122,10 +121,8 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
             
             if(jDCFecha.getDate()!=null){
             fechaElegida=jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            jBDAplicadas.setEnabled(true);
+            //jBDAplicadas.setEnabled(true);
             jDCFecha.setEnabled(false);
-            }else{
-                JOptionPane.showMessageDialog(this, "Ingrese una fecha válida");
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Ingrese una fecha válida");
@@ -140,9 +137,9 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
     private void jBDAplicadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDAplicadasActionPerformed
         try{
             borrarFilas();
-            if(fechaElegida.equals(null)){
+            if(jDCFecha.equals(null)){
                 JOptionPane.showMessageDialog(this, "Ingrese una fecha válida o complete el campo");
-                jDCFecha.cleanup();
+                //jDCFecha.cleanup();
                 return;
             }else{
                 
@@ -158,7 +155,7 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
                     }
                     modelo.addRow(new Object[]{centro,cantidad});
                 }  
-                jBDAplicadas.setEnabled(false);
+                //jBDAplicadas.setEnabled(false);
                 jDCFecha.setEnabled(true);
                 fechaElegida=null;
             }

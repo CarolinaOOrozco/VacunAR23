@@ -36,8 +36,10 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jRBConcretadas = new javax.swing.JRadioButton();
         jRBVencidas = new javax.swing.JRadioButton();
         jRBCanceladas = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jYCAnio = new com.toedter.calendar.JYearChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTablaCitas = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(800, 400));
         setRequestFocusEnabled(false);
@@ -79,7 +81,9 @@ public class ListarCitas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTablaCitas);
+        jScrollPane2.setViewportView(jTablaCitas);
+
+        jLabel5.setText("Seleccione año");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,28 +100,32 @@ public class ListarCitas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(141, 141, 141)
                 .addComponent(jLabel4)
                 .addGap(83, 83, 83))
             .addGroup(layout.createSequentialGroup()
-                .addGap(218, 218, 218)
+                .addGap(191, 191, 191)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jYCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(175, 175, 175))
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel5))
+                    .addComponent(jYCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -128,9 +136,9 @@ public class ListarCitas extends javax.swing.JInternalFrame {
                     .addComponent(jRBConcretadas)
                     .addComponent(jRBVencidas)
                     .addComponent(jRBCanceladas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,7 +152,10 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         List <CitaVacunacion> citasConcretadas=new ArrayList();
         citasConcretadas=cvd.citasCumplidasPorMes(jComboBoxMes.getSelectedIndex()+1);
         for(CitaVacunacion cv:citasConcretadas){
-            modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
+            if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
+               modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()}); 
+            }
+            
         }
     }//GEN-LAST:event_jRBConcretadasActionPerformed
 
@@ -156,7 +167,10 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         List <CitaVacunacion> citasConcretadas=new ArrayList();
         citasConcretadas=cvd.citasVencidasPorMes(jComboBoxMes.getSelectedIndex()+1);
         for(CitaVacunacion cv:citasConcretadas){
-            modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
+            if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
+                modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
+            }
+            
         }
     }//GEN-LAST:event_jRBVencidasActionPerformed
 
@@ -168,7 +182,10 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         List <CitaVacunacion> citasConcretadas=new ArrayList();
         citasConcretadas=cvd.citasCanceladasPorMes(jComboBoxMes.getSelectedIndex()+1);
         for(CitaVacunacion cv:citasConcretadas){
-            modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
+            if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
+                modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
+            }
+            
         }
     }//GEN-LAST:event_jRBCanceladasActionPerformed
 
@@ -179,11 +196,13 @@ public class ListarCitas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JRadioButton jRBCanceladas;
     private javax.swing.JRadioButton jRBConcretadas;
     private javax.swing.JRadioButton jRBVencidas;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablaCitas;
+    private com.toedter.calendar.JYearChooser jYCAnio;
     // End of variables declaration//GEN-END:variables
 
     public void cargarComboBoxMes(){

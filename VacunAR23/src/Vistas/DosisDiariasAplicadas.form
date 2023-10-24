@@ -93,7 +93,6 @@
     <Component class="javax.swing.JButton" name="jBDAplicadas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Listar dosis aplicadas"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDAplicadasActionPerformed"/>
