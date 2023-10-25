@@ -1,22 +1,18 @@
 
-package waypoint;
+package Waypoints;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
-import java.util.Locale;
 import javax.swing.JButton;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.viewer.WaypointPainter;
 
 
-
-
-public class WaypointRender extends WaypointPainter<miPuntero>{
-
-    @Override
+public class Render extends WaypointPainter<Puntero> {
+   @Override
     protected void doPaint(Graphics2D g, JXMapViewer map, int width, int height) {
-      for(miPuntero elem: getWaypoints()){
+      for(Puntero elem: getWaypoints()){
           Point2D p = map.getTileFactory().geoToPixel(elem.getPosition(), map.getZoom());
           Rectangle rec = map.getViewportBounds();
           int x = (int)(p.getX() - rec.getX());
@@ -24,6 +20,5 @@ public class WaypointRender extends WaypointPainter<miPuntero>{
           JButton com = elem.getBoton();
           com.setLocation(x-com.getWidth()/2, y-com.getHeight());
       }
-    }
-
+}
 }

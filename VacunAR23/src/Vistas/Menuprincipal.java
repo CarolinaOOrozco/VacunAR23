@@ -301,7 +301,7 @@ public class Menuprincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jBASanitario;
     private javax.swing.JButton jBAtras;
     private javax.swing.JButton jBCiudadano;

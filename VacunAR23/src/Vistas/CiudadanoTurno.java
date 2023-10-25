@@ -13,7 +13,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import mapaenjava.FrameMapa;
+
 
 /**
  *
@@ -224,9 +224,10 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSolicitarActionPerformed
 
     private void jMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMapaActionPerformed
-       JFrame mapa = new FrameMapa();
-       mapa.setVisible(true);
-       mapa.toFront();
+   map m = new map();
+   Menuprincipal.escritorio.add(m);
+   m.setVisible(true);
+   m.moveToFront();
     }//GEN-LAST:event_jMapaActionPerformed
 
 
