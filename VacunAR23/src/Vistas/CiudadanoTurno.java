@@ -6,11 +6,18 @@
 package Vistas;
 
 import AccesoDatos.*;
+import Waypoints.Puntero;
 import entidades.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.Cipher;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -20,7 +27,7 @@ import javax.swing.JOptionPane;
  * @author carol
  */
 public class CiudadanoTurno extends javax.swing.JInternalFrame {
-
+private Connection con;
     //private LocalDateTime fechaDeHoy;
     
     /**
@@ -199,6 +206,26 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
 
     private void jBSolicitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitarActionPerformed
         CitaVacunacionData cvd = new CitaVacunacionData();
+    
+      String sql = "INSERT INTO Ciudadano, citaVacunacion(Ciudadano.nombreCompleto,Ciudadano.dni,Ciudadano.patologia,Ciudadano.ambitoTrabajo,Ciudadano.celular,Ciudadano.email, citaVacunacion.centroVacunacion)"
+              + " VALUES(?,?,?,?,?,?,?)";
+    
+//      int celular = Integer.parseInt(jTDNI.getText());
+//      try {
+//        PreparedStatement ps = con.prepareStatement(sql);
+//        ps.setString(1,jTNombre.getText()+" "+jTApellido.getText());
+//        ps.setInt(2, celular);
+//        ps.setString(3, (String) jComboPatologia.getSelectedItem());
+//        ps.setString(4, (String) jComboTrabajo.getSelectedItem());
+//        ps.setString(5, jTTelefono.getText());
+//        ps.setString(6, jTEmail.getText());
+//    
+//        ps.executeUpdate();
+//               
+//    } catch (SQLException | NullPointerException ex) {
+//        JOptionPane.showMessageDialog(this, "Error al acceder a la base de datos");
+//    }
+//      
         
         if(jTApellido.getText().isEmpty()||jTDNI.getText().isEmpty()||jTEmail.getText().isEmpty()||jTTelefono.getText().isEmpty()){
            JOptionPane.showInternalMessageDialog(this, "Complete todos los campos");
@@ -207,15 +234,16 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
         ArrayList <CitaVacunacion> citas = new ArrayList();
         citas=cvd.citasPorPersona(Integer.parseInt(jTDNI.getText()));
         if(citas.size()>=1){
-            JOptionPane.showMessageDialog(this, "Usted no puede soicitar turno,ya que cuenta con 1 o más dosis");
+            JOptionPane.showMessageDialog(this, "Usted no puede solicitar turno,ya que cuenta con 1 o más dosis");
         }else{
-            
+                Puntero p = new Puntero();
             String nombreCompleto=jTNombre.getText()+" "+ jTApellido.getText();
             String email=jTEmail.getText();
             int dni=Integer.parseInt(jTDNI.getText());
             String trabajo=(String)jComboTrabajo.getSelectedItem();
             String patologia=(String)jComboPatologia.getSelectedItem();
             String telefono=jTTelefono.getText();
+            String centroVacunatorio=p.getcentroVacunatorio();
             
             Ciudadano ciud =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
         }
