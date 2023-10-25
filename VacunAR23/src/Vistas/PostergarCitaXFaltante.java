@@ -49,6 +49,8 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
         jLCitasProgramadas = new javax.swing.JLabel();
         jBPostergar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setText("Previsión de vacunas");
 
         jLabel2.setText("Semana");
@@ -98,14 +100,13 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel1)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLInicioSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(21, 21, 21)
                                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(18, 18, 18)
                                 .addComponent(jLFinDeLaSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(54, 54, 54))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
