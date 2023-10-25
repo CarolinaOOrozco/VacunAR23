@@ -94,7 +94,7 @@ Laboratorio laboratorio;
 
 laboratorio = null;
 
-String sql = "SELECT * FROM laboratorio  WHERE estado = 1";
+String sql = "SELECT * FROM laboratorio  WHERE NOT marca = null";
     try {
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();

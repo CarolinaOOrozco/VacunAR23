@@ -21,6 +21,8 @@ public class Laboratorio {
         this.marca=marca;
          }
     
+        public Laboratorio(String pais){this.pais = pais;}
+        
         public Laboratorio(){}
 
     public int getCuit() { return cuit;}    

@@ -183,6 +183,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.setSelectedFrame(lv);
         }
         
+        
     
     }//GEN-LAST:event_jMListarVacunasActionPerformed
 
@@ -251,6 +252,15 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMCargarVacunasMouseClicked
 
+private void jMListarLabsActionPerformed(java.awt.event.ActionEvent evt){
+if(escritorioASanitario.getSelectedFrame()==null){
+    escritorioASanitario.repaint();
+    ListaLaboratorio listaLab = new ListaLaboratorio();
+    listaLab.setVisible(true);
+    listaLab.moveToFront();
+    escritorioASanitario.setSelectedFrame(listaLab);
+}
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorioASanitario;
