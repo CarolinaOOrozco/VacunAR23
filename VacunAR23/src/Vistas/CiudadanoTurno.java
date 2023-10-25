@@ -253,6 +253,9 @@ public class CiudadanoTurno extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 public void cargarCBFdeRiesgo(){
+    try{
+    jComboPatologia.addItem("--");
+    }catch(NullPointerException ex){JOptionPane.showMessageDialog(this,"Ingrese una opción válida");}
     jComboPatologia.addItem("OBESIDAD");
     jComboPatologia.addItem("HIPERTENSIÓN");
     jComboPatologia.addItem("DIABÉTES");
@@ -262,6 +265,9 @@ public void cargarCBFdeRiesgo(){
 }
 
 public void cargarCBTrabajo(){
+    try{
+    jComboTrabajo.addItem("--");
+    }catch(NullPointerException ex){JOptionPane.showMessageDialog(this,"Ingrese una opción válida");}
     jComboTrabajo.addItem("SALUD");
     jComboTrabajo.addItem("EDUCACIÓN");
     jComboTrabajo.addItem("SEGURIDAD");

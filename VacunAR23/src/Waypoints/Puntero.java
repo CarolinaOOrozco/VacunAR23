@@ -36,7 +36,7 @@ boton= new Marker();
 boton.addActionListener(new ActionListener() {
 @Override
     public void actionPerformed(ActionEvent e) {
-             int respuesta=JOptionPane.showConfirmDialog(null, "¿Desea reservar su turno en "+centroVacunatorio+" ?","Gracias por utilizar VacunAR23",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int respuesta=JOptionPane.showConfirmDialog(null, "¿Desea reservar su turno en "+centroVacunatorio+" ?","Gracias por utilizar VacunAR23",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(respuesta==JOptionPane.NO_OPTION){
         return;
         }else{
@@ -46,7 +46,7 @@ boton.addActionListener(new ActionListener() {
                      ps = con.prepareStatement(sql);
                       ps.executeUpdate();
                       ResultSet rs = ps.getGeneratedKeys();
-                      if(rs.next()){JOptionPane.showMessageDialog(null,"Turno confirmado!");}
+                      if(rs.next()){JOptionPane.showMessageDialog(null,"Centro Vacunatorio agregado");}
                  } catch (SQLException | NullPointerException ex) {
                     JOptionPane.showMessageDialog(null, "error al conectarse a la base de datos");
                  }
