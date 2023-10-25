@@ -41,6 +41,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jTablaCitas = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(800, 400));
         setRequestFocusEnabled(false);
 

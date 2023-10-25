@@ -51,6 +51,8 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         jTablaCitas = new javax.swing.JTable();
         jBConfirmarCita = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setText("CITAS DE HOY");
 
         jComboBox.addActionListener(new java.awt.event.ActionListener() {

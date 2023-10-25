@@ -40,6 +40,8 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel1.setText("Seleccione un centro de vacunación");
 
         jComboBox.addActionListener(new java.awt.event.ActionListener() {

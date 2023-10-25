@@ -50,6 +50,8 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
         jDCFecha = new com.toedter.calendar.JDateChooser();
         jBDAplicadas = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setText("Seleccione una fecha");
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
