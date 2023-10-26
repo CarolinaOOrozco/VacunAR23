@@ -134,6 +134,11 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jLaboratorios.setText("Laboratorios");
 
         jMListarLabs.setText("Listar laboratorios");
+        jMListarLabs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMListarLabsActionPerformed(evt);
+            }
+        });
         jLaboratorios.add(jMListarLabs);
 
         jMenuBar1.add(jLaboratorios);
@@ -252,15 +257,16 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMCargarVacunasMouseClicked
 
-private void jMListarLabsActionPerformed(java.awt.event.ActionEvent evt){
-if(escritorioASanitario.getSelectedFrame()==null){
-    escritorioASanitario.repaint();
-    ListaLaboratorio listaLab = new ListaLaboratorio();
-    listaLab.setVisible(true);
-    listaLab.moveToFront();
-    escritorioASanitario.setSelectedFrame(listaLab);
-}
-}
+    private void jMListarLabsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListarLabsActionPerformed
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            ListaLaboratorio listaLab = new ListaLaboratorio();
+            listaLab.setVisible(true);
+            escritorioASanitario.add(listaLab);
+            escritorioASanitario.moveToFront(listaLab);
+            escritorioASanitario.setSelectedFrame(listaLab);
+        }
+    }//GEN-LAST:event_jMListarLabsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorioASanitario;
