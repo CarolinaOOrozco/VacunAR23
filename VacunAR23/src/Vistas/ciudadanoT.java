@@ -39,9 +39,7 @@ public final Set<Puntero> waypoints =new HashSet<>();
     /**
      * Creates new form map
      */
-    public ciudadanoT() {
-        initComponents(); jBSalir.setBackground(new Color (245,64,163)); jBSalir.setForeground(Color.WHITE); init(); cargarCBFdeRiesgo(); cargarCBTrabajo(); mostrarCentros();
-    }
+    public ciudadanoT() {initComponents(); jBSalir.setBackground(new Color (245,64,163)); jBSalir.setForeground(Color.WHITE); init(); cargarCBFdeRiesgo(); cargarCBTrabajo(); mostrarCentros();}
 
 GeoPosition geo1 = new GeoPosition(-33.2969386,-66.3277915);
 GeoPosition geo2 = new GeoPosition(-33.3057368,-66.3422729);
@@ -382,5 +380,16 @@ inicializarWaypoint();
     jComboPatologia.addItem("MAYOR DE 65 AÑOS");
     jComboPatologia.addItem("NINGUNO");
 }
-}
 
+public WaypointPainter cargarWaypoints(){
+   Puntero p = new Puntero();
+
+    for (Puntero waypoint : waypoints) {
+       if(waypoints.equals().p.inicializarBoton()){
+        waypoints.add(waypoint);
+        break;
+    }
+    }
+return p;
+}
+}
