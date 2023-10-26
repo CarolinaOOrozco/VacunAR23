@@ -33,7 +33,7 @@ public JButton getBoton(){return boton;}
 public void setBoton(JButton boton){this.boton=boton;}
 
 
-private void inicializarBoton(){
+public void inicializarBoton(){
 boton= new Marker(); 
 boton.addActionListener(new ActionListener() {
 @Override
