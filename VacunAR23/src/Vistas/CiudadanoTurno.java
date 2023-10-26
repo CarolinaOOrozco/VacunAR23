@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
  */
 public class CiudadanoTurno extends javax.swing.JInternalFrame {
 private Connection con;
+private String centroV;
     //private LocalDateTime fechaDeHoy;
     
     /**
@@ -245,7 +246,17 @@ private Connection con;
             String telefono=jTTelefono.getText();
             String centroVacunatorio=p.getcentroVacunatorio();
             
+            
             Ciudadano ciud =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
+            CiudadanoData cd=new CiudadanoData();
+            cd.guardarCiudadano(ciud);
+            LocalDateTime turno;
+            if(trabajo.equalsIgnoreCase("OTRO")||patologia.equalsIgnoreCase("NINGUNO")){
+                turno=cvd.turnoPara4semanas();
+            }else{
+                turno=cvd.turnoPara2semanas();
+            }
+            CitaVacunacion cita=new CitaVacunacion(ciud,1,turno,centroVacunatorio,false);
         }
         
         
@@ -256,6 +267,13 @@ private Connection con;
    Menuprincipal.escritorio.add(m);
    m.setVisible(true);
    m.moveToFront();
+   for(Puntero p:m.getWaypoints()){
+       if(p.getcentroVacunatorio()!=null){
+           centroV=p.getcentroVacunatorio();
+           jTEmail.setText(centroV);
+           break;
+       }
+   }
     }//GEN-LAST:event_jMapaActionPerformed
 
 

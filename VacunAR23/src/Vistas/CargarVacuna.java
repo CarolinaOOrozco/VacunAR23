@@ -8,7 +8,7 @@ package Vistas;
 import AccesoDatos.*;
 import entidades.Vacuna;
 import java.time.*;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -133,27 +133,29 @@ public class CargarVacuna extends javax.swing.JInternalFrame {
         VacunaData vd = new VacunaData();
         
         
-        
-        if(jTNumSerie.getText().isEmpty()||jTMarca.getText().isEmpty()||jTMedida.getText().isEmpty()/*|| fecha==null*/){
+        if(jTNumSerie.getText().isEmpty()||jTMarca.getText().isEmpty()||jTMedida.getText().isEmpty()|| fecha==null){
            JOptionPane.showInternalMessageDialog(this, "Complete todos los campos");
            return;
         }
         else{
-        ArrayList <Vacuna> carVacuna = new ArrayList();
+        List <Vacuna> carVacuna = new ArrayList();
             int numSerie = Integer.parseInt(jTNumSerie.getText()); 
-            Double medida = Double.parseDouble(jTMedida.getText());        
+            Double medida = Double.parseDouble(jTMedida.getText());
+            
             String NroSerieDosis=jTNumSerie.getText();
             String Marca=jTMarca.getText();
-            //int dni=Integer.parseInt(jTDNI.getText());
-            String Medida=jTMedida.getText();
+            double Medida= medida;
+            //String Medida=jTMedida.getText();
             LocalDate FechaCaduca=fecha;
             Boolean Coloca=false;
             
+            Vacuna vacu =new Vacuna(numSerie,Marca,medida,FechaCaduca,Coloca);            
+            vd.nuevaVacuna(vacu);
               
                // LocalDate FechaCaduca = Integer.parseInt(fecha.getText());
                // Boolean Coloca = Integer.parseInt(Coloca.getText();
             
-            Vacuna vacu =new Vacuna(numSerie,Marca,medida,FechaCaduca,Coloca);
+
         }
     }//GEN-LAST:event_jBCargarActionPerformed
 

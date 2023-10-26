@@ -109,7 +109,7 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
         borrarFilas();
         VacunaData vd = new VacunaData();
         List<Vacuna> vacunasDisponibles = new ArrayList();
-        vacunasDisponibles = vd.vacunasDisponibles();//(jComboBoxMes.getSelectedIndex() + 1);
+        vacunasDisponibles = vd.vacunasDisponibles();
         for (Vacuna v : vacunasDisponibles) {
             modelo.addRow(new Object[]{v.getNroSerieDosis(), v.getMarca(), v.getMedida(), v.getFechacaduca()});
         }
