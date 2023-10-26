@@ -154,7 +154,10 @@ public class CargarVacuna extends javax.swing.JInternalFrame {
               
                // LocalDate FechaCaduca = Integer.parseInt(fecha.getText());
                // Boolean Coloca = Integer.parseInt(Coloca.getText();
-            
+            jTNumSerie.setText(null);
+            jTMarca.setText(null);
+            jTMedida.setText(null);
+            jDateCaducidad.setDate(null);
 
         }
     }//GEN-LAST:event_jBCargarActionPerformed
