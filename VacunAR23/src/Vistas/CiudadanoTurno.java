@@ -267,13 +267,6 @@ private String centroV;
    Menuprincipal.escritorio.add(m);
    m.setVisible(true);
    m.moveToFront();
-   for(Puntero p:m.getWaypoints()){
-       if(p.getcentroVacunatorio()!=null){
-           centroV=p.getcentroVacunatorio();
-           jTEmail.setText(centroV);
-           break;
-       }
-   }
     }//GEN-LAST:event_jMapaActionPerformed
 
 
