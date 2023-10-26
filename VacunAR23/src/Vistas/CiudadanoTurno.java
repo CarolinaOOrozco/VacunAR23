@@ -263,10 +263,19 @@ private String centroV;
     }//GEN-LAST:event_jBSolicitarActionPerformed
 
     private void jMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMapaActionPerformed
-   map m = new map();
+   ciudadanoT m = new ciudadanoT();
    Menuprincipal.escritorio.add(m);
    m.setVisible(true);
    m.moveToFront();
+
+   for(Puntero p:m.waypoints){
+       if(p.getcentroVacunatorio()!=null){
+           centroV=p.getcentroVacunatorio();
+           jTEmail.setText(centroV);
+           break;
+       }
+   }
+
     }//GEN-LAST:event_jMapaActionPerformed
 
 

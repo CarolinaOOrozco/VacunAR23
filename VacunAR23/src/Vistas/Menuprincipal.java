@@ -209,7 +209,7 @@ public class Menuprincipal extends javax.swing.JFrame {
     private void jBSolicitarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitarTActionPerformed
         if(escritorio.getSelectedFrame()==null){
             escritorio.repaint();
-            CiudadanoTurno ct= new CiudadanoTurno();
+            ciudadanoT ct= new ciudadanoT();
             ct.setVisible(true);
             escritorio.add(ct);
             escritorio.moveToFront(ct);
