@@ -7,16 +7,20 @@ package Vistas;
 
 import AccesoDatos.LaboratorioData;
 import entidades.Laboratorio;
-import javax.print.event.PrintJobEvent;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author dev0
  */
 public class ListaLaboratorio extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo = new DefaultTableModel();
+private final DefaultTableModel modelo = new DefaultTableModel();
+private Connection con;
     /**
      * Creates new form ListaLaboratorio
      */
@@ -104,8 +108,16 @@ private DefaultTableModel modelo = new DefaultTableModel();
 
     private void jCbLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbLaboratorioActionPerformed
        String filtro = "SELECT * FROM laboratorio WHERE NOT pais = null";
-       LaboratorioData lab = new LaboratorioData();
-       lab.mostrarLaboratorio();
+        LaboratorioData lab = new LaboratorioData();
+    try {
+        PreparedStatement ps = con.prepareStatement(filtro);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){lab.mostrarLaboratorio();}             
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(this, "Error en la base de datos");
+    }
+      
+
        
     }//GEN-LAST:event_jCbLaboratorioActionPerformed
 
