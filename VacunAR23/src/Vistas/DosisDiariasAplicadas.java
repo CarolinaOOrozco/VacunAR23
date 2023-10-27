@@ -151,7 +151,7 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
                 for(String centro:centrosVacunacion){
                     int cantidad=0;
                     for(CitaVacunacion c:citas){
-                        if(c.getCentroVacunacion()==centro&&c.getFechaHoraCita().getDayOfMonth()==fechaElegida.getDayOfMonth()){
+                        if(c.getCentroVacunacion()==centro&&c.getFechaHoraCita().toLocalDate()==fechaElegida){
                             cantidad=cantidad+1;
                         }
                     }
@@ -187,7 +187,11 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
     
     public ArrayList cargarCentrosVacunacion(){
         ArrayList<String> centros=new ArrayList();
-        centros.add("");
+        centros.add("Hospital del Norte");
+        centros.add("Hospital del Oeste Dr. Atilio Luchini");
+        centros.add("Hospital del Sur");
+        centros.add("Hospital Ramón Carrillo");
+        centros.add("Policlínico");
         return centros;
     }
     

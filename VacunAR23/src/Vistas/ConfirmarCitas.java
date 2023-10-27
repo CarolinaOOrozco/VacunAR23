@@ -7,9 +7,12 @@ package Vistas;
 
 import AccesoDatos.*;
 import entidades.*;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class ConfirmarCitas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo =new DefaultTableModel();
+    ArrayList <CitaVacunacion> citasVencidasAyer=new ArrayList();
     
     public boolean inCellEditable(int fila,int columna){
         if(columna<=4){
@@ -33,6 +37,7 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         initComponents();
         cargarCabecera();
         cargarComboBox();
+        cargarCitasVencidas();
     }
 
     /**
@@ -50,6 +55,8 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaCitas = new javax.swing.JTable();
         jBConfirmarCita = new javax.swing.JButton();
+        jBReasignarCitasVencidas = new javax.swing.JButton();
+        jLCitasVencidas = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -89,28 +96,46 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBReasignarCitasVencidas.setText("Reasignar citas vencidas");
+        jBReasignarCitasVencidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBReasignarCitasVencidasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel2)
-                .addGap(43, 43, 43)
-                .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(304, 304, 304))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel2)
+                        .addGap(43, 43, 43)
+                        .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLCitasVencidas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jBReasignarCitasVencidas)
+                        .addGap(259, 543, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBConfirmarCita)
-                .addGap(259, 259, 259))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(304, 304, 304))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jBConfirmarCita)
+                        .addGap(259, 259, 259))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,9 +147,13 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addComponent(jBConfirmarCita)
-                .addGap(56, 56, 56))
+                .addGap(2, 2, 2)
+                .addComponent(jBReasignarCitasVencidas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLCitasVencidas, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -174,10 +203,24 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jComboBoxActionPerformed
 
+    private void jBReasignarCitasVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReasignarCitasVencidasActionPerformed
+        CitaVacunacionData cvd=new CitaVacunacionData();
+        for(CitaVacunacion cv:citasVencidasAyer){
+            CitaVacunacion citaNueva=cv;
+            if(cv.getCiudadano().getPatologia().equalsIgnoreCase("NINGUNO")||cv.getCiudadano().getAmbitoTrabajo().equalsIgnoreCase("OTRO")){
+                cv.setFechaHoraCita(cvd.turnoPara4semanas().minusDays(1));
+            }else{
+                cv.setFechaHoraCita(cvd.turnoPara2semanas().minusDays(1));
+            }
+        }
+    }//GEN-LAST:event_jBReasignarCitasVencidasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBConfirmarCita;
+    private javax.swing.JButton jBReasignarCitasVencidas;
     private javax.swing.JComboBox<String> jComboBox;
+    private javax.swing.JLabel jLCitasVencidas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -203,6 +246,53 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
     }
     
     public void cargarComboBox(){
+        jComboBox.addItem("Hospital del Norte");
+        jComboBox.addItem("Hospital del Oeste Dr. Atilio Luchini");
+        jComboBox.addItem("Hospital del Sur");
+        jComboBox.addItem("Hospital Ramón Carrillo");
+        jComboBox.addItem("Policlínico");
+    }
+    
+    public void cargarCitasVencidas(){
+        CitaVacunacionData cvd=new CitaVacunacionData();
+        citasVencidasAyer.addAll(cvd.citasVencidasPorMes(LocalDateTime.now().getMonthValue()));
+        for(CitaVacunacion cv:citasVencidasAyer){
+            if(cv.getFechaHoraCita().toLocalDate()!=LocalDate.now().minusDays(1)||cv.getCentroVacunacion()!=(String)jComboBox.getSelectedItem()){
+                citasVencidasAyer.remove(cv);
+            }
+        }
         
+        /*Comparator <CitaVacunacion> CompararFecha=new Comparator <CitaVacunacion>(){
+            public int compare(CitaVacunacion cv1,CitaVacunacion cv2){
+                if(cv1.getFechaHoraCita().isBefore(cv2.getFechaHoraCita()))return -1;
+                //if(cv1.getFechaHoraCita().compareTo(cv2.getFechaHoraCita())==-1)return -1;
+                //if(cv1.getFechaHoraCita() < cv2.getFechaHoraCita()) return -1;
+                if(cv1.getFechaHoraCita().equals(cv2.getFechaHoraCita())) return 0;
+                return 1;
+            }
+        };*/
+        
+        for(CitaVacunacion cv:citasVencidasAyer){
+            ArrayList<CitaVacunacion>citas=cvd.citasPorPersona(cv.getCiudadano().getDni());
+            //citas.sort(CompararFecha);
+            LocalDate a=LocalDate.now().plusDays(13);
+            LocalDate b=LocalDate.now().plusDays(14);
+            LocalDate c=LocalDate.now().plusDays(15);
+            LocalDate d=LocalDate.now().plusDays(27);
+            LocalDate e=LocalDate.now().plusDays(28);
+            LocalDate f=LocalDate.now().plusDays(29);
+            LocalDate fecha=citas.get(citas.size()-1).getFechaHoraCita().toLocalDate();
+            if(fecha.equals(a)||fecha.equals(b)||fecha.equals(c)||fecha.equals(d)||fecha.equals(e)||fecha.equals(f)){
+                jBReasignarCitasVencidas.setEnabled(false);
+                Color color=new Color(51,255,51);
+                jLCitasVencidas.setForeground(color);
+                jLCitasVencidas.setText("No hay citas vencidas pendientes del día de ayer");
+                break;
+            }else{
+                Color color=new Color(255,0,51);
+                jLCitasVencidas.setForeground(color);
+                jLCitasVencidas.setText("Hay citas vencidas pendientes del día de ayer");
+            }
+        }
     }
 }

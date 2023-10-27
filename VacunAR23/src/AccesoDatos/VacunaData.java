@@ -81,7 +81,7 @@ public class VacunaData {
     
     public ArrayList vacunasDisponibles(){
         ArrayList <Vacuna> vacunasDisponibles=new ArrayList();
-        String sql="SELECT * FROM Vacuna WHERE colocada=false AND fechaCaduca > ?";
+        String sql="SELECT * FROM Vacuna WHERE colocada=false AND fechaCaduca > ? ORDER BY fechaCaduca";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(LocalDate.now()));
@@ -106,7 +106,7 @@ public class VacunaData {
     
     public ArrayList vacunasAplicadas(){
         ArrayList <Vacuna> vacunasAplicadas=new ArrayList();
-        String sql="SELECT * FROM Vacuna WHERE colocada=true";
+        String sql="SELECT * FROM Vacuna WHERE colocada=true ORDER BY fechaCaduca";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -127,7 +127,7 @@ public class VacunaData {
     
     public ArrayList vacunasVencidas(){
         ArrayList <Vacuna> vacunasVencidas=new ArrayList();
-        String sql="SELECT * FROM Vacuna WHERE fechaCaduca < ? ";
+        String sql="SELECT * FROM Vacuna WHERE fechaCaduca < ? ORDER BY fechaCaduca";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setDate(1,Date.valueOf(LocalDate.now()));

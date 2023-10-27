@@ -47,6 +47,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jMPostergarCitaxFaltante = new javax.swing.JMenuItem();
         jLaboratorios = new javax.swing.JMenu();
         jMListarLabs = new javax.swing.JMenuItem();
+        jMNuevoLab = new javax.swing.JMenuItem();
 
         setClosable(true);
         setResizable(true);
@@ -140,6 +141,14 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             }
         });
         jLaboratorios.add(jMListarLabs);
+
+        jMNuevoLab.setText("Nuevo laboratorio");
+        jMNuevoLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMNuevoLabActionPerformed(evt);
+            }
+        });
+        jLaboratorios.add(jMNuevoLab);
 
         jMenuBar1.add(jLaboratorios);
 
@@ -268,6 +277,17 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jMListarLabsActionPerformed
 
+    private void jMNuevoLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMNuevoLabActionPerformed
+        if(escritorioASanitario.getSelectedFrame()==null){
+            escritorioASanitario.repaint();
+            CargarLaboratorio cb = new CargarLaboratorio();
+            cb.setVisible(true);
+            escritorioASanitario.add(cb);
+            escritorioASanitario.moveToFront(cb);
+            escritorioASanitario.setSelectedFrame(cb);
+        }
+    }//GEN-LAST:event_jMNuevoLabActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorioASanitario;
     private javax.swing.JMenu jCitas;
@@ -279,6 +299,7 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMListarLabs;
     private javax.swing.JMenuItem jMListarVacunas;
     private javax.swing.JMenuItem jMListarVacxCentro;
+    private javax.swing.JMenuItem jMNuevoLab;
     private javax.swing.JMenuItem jMPostergarCitaxFaltante;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jVacunas;

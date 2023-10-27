@@ -5,6 +5,7 @@
  */
 package Vistas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyVetoException;
@@ -59,9 +60,9 @@ public class Menuprincipal extends javax.swing.JFrame {
 
         escritorio.setPreferredSize(new java.awt.Dimension(512, 466));
 
-        jBASanitario.setBackground(new java.awt.Color(0, 153, 255));
+        jBASanitario.setBackground(new java.awt.Color(255, 255, 255));
         jBASanitario.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
-        jBASanitario.setForeground(new java.awt.Color(255, 255, 255));
+        jBASanitario.setForeground(new java.awt.Color(0, 153, 255));
         jBASanitario.setText("Agente sanitario");
         jBASanitario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +80,9 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBSolicitarT.setBackground(new java.awt.Color(255, 255, 255));
         jBSolicitarT.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBSolicitarT.setForeground(new java.awt.Color(0, 153, 255));
         jBSolicitarT.setText("Solicitar turno");
         jBSolicitarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +90,9 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBConsultarC.setBackground(new java.awt.Color(255, 255, 255));
         jBConsultarC.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBConsultarC.setForeground(new java.awt.Color(0, 153, 255));
         jBConsultarC.setText("Consultar citas");
         jBConsultarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +100,9 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBAtras.setBackground(new java.awt.Color(255, 255, 255));
         jBAtras.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBAtras.setForeground(new java.awt.Color(0, 153, 255));
         jBAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/atras.png"))); // NOI18N
         jBAtras.setText("Atrás");
         jBAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +111,9 @@ public class Menuprincipal extends javax.swing.JFrame {
             }
         });
 
+        jBSalir.setBackground(new java.awt.Color(255, 255, 255));
         jBSalir.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
+        jBSalir.setForeground(new java.awt.Color(0, 153, 255));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +223,7 @@ public class Menuprincipal extends javax.swing.JFrame {
             escritorio.add(ct);
             escritorio.moveToFront(ct);
             escritorio.setSelectedFrame(ct);
+            
         }
         
         
@@ -227,6 +237,8 @@ public class Menuprincipal extends javax.swing.JFrame {
             escritorio.add(cc);
             escritorio.moveToFront(cc);
             escritorio.setSelectedFrame(cc);
+            Color color=new Color(0,204,255);
+            cc.getContentPane().setBackground(color);
         }
         
     }//GEN-LAST:event_jBConsultarCActionPerformed

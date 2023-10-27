@@ -136,7 +136,7 @@ public class CitaVacunacionData {
             Timestamp inicioDia=Timestamp.valueOf(LocalDateTime.of(fechaHoy.getYear(), fechaHoy.getMonth(), fechaHoy.getDayOfMonth(), 00, 00, 00));
             Timestamp finalDia=Timestamp.valueOf(LocalDateTime.of(fechaHoy.getYear(), fechaHoy.getMonth(), fechaHoy.getDayOfMonth(), 23, 59, 59));
             
-            String sql="SELECT * FROM citaVacunacion WHERE centroVacunaion=? AND fechaHoraColoca BETWEEN ? AND ?";
+            String sql="SELECT * FROM citaVacunacion WHERE centroVacunacion=? AND fechaHoraCita BETWEEN ? AND ? ORDER BY fechaHoraCita";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ps.setString(1,centroDeVacunacion);
@@ -168,7 +168,7 @@ public class CitaVacunacionData {
 
 
         public List citasVencidasPorMes(int mesDelAnio){  
-        String sql = "SELECT *  FROM citaVacunacion WHERE fechaHoraColoca = null";
+        String sql = "SELECT *  FROM citaVacunacion WHERE fechaHoraColoca = null AND cancelar=0";
         PreparedStatement ps;
             try {
                 ps = con.prepareStatement(sql);

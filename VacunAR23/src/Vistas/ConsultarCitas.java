@@ -53,6 +53,8 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DNI");
 
         jTablaCitas.setModel(new javax.swing.table.DefaultTableModel(
@@ -89,6 +91,9 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        jBBuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBBuscar.setForeground(new java.awt.Color(0, 153, 255));
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

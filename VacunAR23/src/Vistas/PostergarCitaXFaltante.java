@@ -7,6 +7,9 @@ package Vistas;
 
 import AccesoDatos.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,8 +25,10 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
         hoy=LocalDate.now();
         seleccionarLunes();
         viernes=lunes.plusDays(4);
-        jLInicioSemana.setText(lunes+"");
-        jLFinDeLaSemana.setText(viernes+"");
+        DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        jLInicioSemana.setText(lunes.format(dtf));
+        jLFinDeLaSemana.setText(viernes.format(dtf));
         cargarComboBox();
     }
 
@@ -72,6 +77,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
         jLabel6.setText("Citas programadas");
 
         jBPostergar.setText("Postergar");
+        jBPostergar.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,21 +100,20 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 204, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLInicioSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(21, 21, 21)
-                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addComponent(jLFinDeLaSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(54, 54, 54))))
+                                        .addComponent(jLInicioSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLFinDeLaSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(39, 39, 39))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBPostergar)
@@ -140,7 +145,7 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(jLCitasProgramadas, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jBPostergar)
                 .addGap(39, 39, 39))
         );
@@ -155,10 +160,14 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
         int vacunas=vd.vacunasDisponibles().size();
         jLVacunasDisponibles.setText(vacunas+"");
         int citasProgramadas=0;
-        for(int i=0;i>=4;i++){
+        for(int i=0;i<=4;i++){
             citasProgramadas=citasProgramadas+cvd.vacunacionesDiarias(centro,lunes.plusDays(i)).size();
         }
         jLCitasProgramadas.setText(citasProgramadas+"");
+        if(citasProgramadas>vacunas){
+            JOptionPane.showMessageDialog(this, "Debe postergar las citas de la semana siguiente por faltante de dosis");
+            jBPostergar.setEnabled(true);
+        }
     }//GEN-LAST:event_jComboBoxActionPerformed
 
 
@@ -197,6 +206,10 @@ public class PostergarCitaXFaltante extends javax.swing.JInternalFrame {
     }
     
     public void cargarComboBox(){
-        
+        jComboBox.addItem("Hospital del Norte");
+        jComboBox.addItem("Hospital del Oeste Dr. Atilio Luchini");
+        jComboBox.addItem("Hospital del Sur");
+        jComboBox.addItem("Hospital Ramón Carrillo");
+        jComboBox.addItem("Policlínico");
     }
 }

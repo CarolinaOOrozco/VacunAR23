@@ -131,7 +131,7 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
         borrarFilas();
         VacunaData vd = new VacunaData();
         List<Vacuna> vacunasVencidas = new ArrayList();
-        vacunasVencidas = vd.vacunasAplicadas();
+        vacunasVencidas = vd.vacunasVencidas();
         for (Vacuna v : vacunasVencidas) {
             modelo.addRow(new Object[]{v.getNroSerieDosis(), v.getMarca(), v.getMedida(), v.getFechacaduca()});
         }    // TODO add your handling code here:
