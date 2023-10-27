@@ -339,13 +339,6 @@ inicializarWaypoint();
             jXMap.add(waypoint.getBoton());
         }
     }
-    private void borrarCentros(){ 
-        for (Puntero waypoint : waypoints) {
-            jXMap.remove(waypoint.getBoton());
-        }
-    waypoints.clear();
-        inicializarWaypoint();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSalir;
