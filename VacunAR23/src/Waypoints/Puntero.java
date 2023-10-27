@@ -1,18 +1,15 @@
 
 package Waypoints;
 
+import Vistas.ciudadanoT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import org.jxmapviewer.viewer.DefaultWaypoint;
 import org.jxmapviewer.viewer.GeoPosition;
+
 
 
 
@@ -39,23 +36,24 @@ boton.addActionListener(new ActionListener() {
 @Override
     
 
-public void actionPerformed(ActionEvent e) {
+public void actionPerformed(ActionEvent e){ 
         int respuesta=JOptionPane.showConfirmDialog(null, "¿Desea reservar su turno en "+centroVacunatorio+" ?","Gracias por utilizar VacunAR23",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(respuesta==JOptionPane.NO_OPTION){
         return;
         }else{
-            String sql = "INSERT INTO citaVacunacion(centroVacunacion)VALUES(?) WHERE fechaHoraColoca=null";
-            PreparedStatement ps;
-            try {
-                ps = con.prepareStatement(sql);
-//                      ps.executeUpdate();
-//                      ResultSet rs = ps.getGeneratedKeys();
-//                      if(rs.next()){JOptionPane.showMessageDialog(null,"Centro Vacunatorio agregado");}
-            } catch (SQLException | NullPointerException ex) {
-                JOptionPane.showMessageDialog(null, "error al conectarse a la base de datos");
-            }
-        }
-    }
+          ciudadanoT ciudadano = new ciudadanoT();
+         
+         // ciudadano.jTCentroElegido.addActionListener(this);        
+         //  ciudadano.jTCentroElegido.getActionListeners()
+          //ciudadano.jTCentroElegido.setActionCommand(boton.getActionCommand());
+          
+         
+          
+          
+          JOptionPane.showMessageDialog(null, ciudadano);
+}
+        
+}
 });
 }
 }

@@ -29,13 +29,18 @@ import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 import org.jxmapviewer.viewer.WaypointPainter;
+import org.mariadb.jdbc.plugin.codec.LocalDateTimeCodec;
 
 /**
  *
  * @author dev0
  */
-public final class ciudadanoT extends javax.swing.JInternalFrame {
+public class ciudadanoT extends javax.swing.JInternalFrame {
 public final Set<Puntero> waypoints =new HashSet<>();
+private String nombreCompleto,email,trabajo,patologia,telefono,centroVacunatorio;
+private int dni;
+private LocalDateTime turno;
+private Ciudadano ciud;
     /**
      * Creates new form map
      */
@@ -78,11 +83,13 @@ inicializarWaypoint();
         jTNombre = new javax.swing.JTextField();
         jTApellido = new javax.swing.JTextField();
         jTDNI = new javax.swing.JTextField();
-        jComboPatologia = new javax.swing.JComboBox<>();
         jComboTrabajo = new javax.swing.JComboBox<>();
         jTTelefono = new javax.swing.JTextField();
         jTEmail = new javax.swing.JTextField();
         jBSolicitar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTCentroElegido = new javax.swing.JTextField();
+        jComboPatologia = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -102,7 +109,7 @@ inicializarWaypoint();
         jXMapLayout.setHorizontalGroup(
             jXMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXMapLayout.createSequentialGroup()
-                .addContainerGap(349, Short.MAX_VALUE)
+                .addContainerGap(359, Short.MAX_VALUE)
                 .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -139,54 +146,65 @@ inicializarWaypoint();
             }
         });
 
+        jLabel1.setText("Elija vacunatorio desde el mapa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLfactorDeRiesgo)
+                                    .addComponent(jLTrabajo))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
                                     .addComponent(jLTelefono)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(28, 28, 28)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLEmail)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLfactorDeRiesgo)
-                                                .addComponent(jLDNI)
-                                                .addComponent(jLApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLNombre))
-                                            .addGap(0, 0, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLTrabajo)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jComboTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(125, 125, 125)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                                        .addComponent(jTApellido)
-                                        .addComponent(jTDNI)
-                                        .addComponent(jComboPatologia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGap(47, 47, 47)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
+                                .addComponent(jLEmail)
+                                .addGap(65, 65, 65)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jComboTrabajo, 0, 172, Short.MAX_VALUE)
+                                    .addComponent(jComboPatologia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTCentroElegido, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(jXMap, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBSolicitar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)))
-                .addComponent(jXMap, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(475, 475, 475))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBSolicitar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLDNI)))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,36 +212,38 @@ inicializarWaypoint();
                 .addGap(23, 23, 23)
                 .addComponent(jLTitulo)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLNombre)
-                            .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLApellido)
-                            .addComponent(jTApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLDNI)
-                            .addComponent(jTDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLfactorDeRiesgo)))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLTrabajo)
-                    .addComponent(jComboTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLTelefono)
-                    .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(jLNombre)
+                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLEmail)
-                    .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLApellido))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLDNI))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLfactorDeRiesgo)
+                    .addComponent(jComboPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTrabajo))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTelefono))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLEmail))
                 .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTCentroElegido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jBSolicitar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -253,55 +273,45 @@ inicializarWaypoint();
     
       String sql = "INSERT INTO Ciudadano, citaVacunacion(Ciudadano.nombreCompleto,Ciudadano.dni,Ciudadano.patologia,Ciudadano.ambitoTrabajo,Ciudadano.celular,Ciudadano.email, citaVacunacion.centroVacunacion)"
               + " VALUES(?,?,?,?,?,?,?)";
-    
-//      int celular = Integer.parseInt(jTDNI.getText());
-//      try {
-//        PreparedStatement ps = con.prepareStatement(sql);
-//        ps.setString(1,jTNombre.getText()+" "+jTApellido.getText());
-//        ps.setInt(2, celular);
-//        ps.setString(3, (String) jComboPatologia.getSelectedItem());
-//        ps.setString(4, (String) jComboTrabajo.getSelectedItem());
-//        ps.setString(5, jTTelefono.getText());
-//        ps.setString(6, jTEmail.getText());
-//    
-//        ps.executeUpdate();
-//               
-//    } catch (SQLException | NullPointerException ex) {
-//        JOptionPane.showMessageDialog(this, "Error al acceder a la base de datos");
-//    }
-//      
+
         
-        if(jTApellido.getText().isEmpty()||jTDNI.getText().isEmpty()||jTEmail.getText().isEmpty()||jTTelefono.getText().isEmpty()){
+        if(jTApellido.getText().isEmpty()||jTDNI.getText().isEmpty()||jTEmail.getText().isEmpty()||jTTelefono.getText().isEmpty()||jTCentroElegido.getText().isEmpty()){
            JOptionPane.showInternalMessageDialog(this, "Complete todos los campos");
-           return;
+        }else{
+        return;
         }
         ArrayList <CitaVacunacion> citas = new ArrayList();
+     try{
         citas=cvd.citasPorPersona(Integer.parseInt(jTDNI.getText()));
+                }catch(NumberFormatException ex){JOptionPane.showMessageDialog(this, "ingrese correctamente sus datos");}
+
         if(citas.size()>=1){
             JOptionPane.showMessageDialog(this, "Usted no puede solicitar turno,ya que cuenta con 1 o más dosis");
         }else{
-                Puntero p = new Puntero();
-            String nombreCompleto=jTNombre.getText()+" "+ jTApellido.getText();
-            String email=jTEmail.getText();
-            int dni=Integer.parseInt(jTDNI.getText());
-            String trabajo=(String)jComboTrabajo.getSelectedItem();
-            String patologia=(String)jComboPatologia.getSelectedItem();
-            String telefono=jTTelefono.getText();
-            String centroVacunatorio=p.getcentroVacunatorio();
             
-            
-            Ciudadano ciud =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
+            Puntero p = new Puntero();
+            nombreCompleto=jTNombre.getText()+" "+ jTApellido.getText();
+             email=jTEmail.getText();
+            dni=Integer.parseInt(jTDNI.getText());
+            trabajo=(String)jComboTrabajo.getSelectedItem();
+            patologia=(String)jComboPatologia.getSelectedItem();
+            telefono=jTTelefono.getText();
+            centroVacunatorio=jTCentroElegido.getText();
+        
+            ciud =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
             CiudadanoData cd=new CiudadanoData();
             cd.guardarCiudadano(ciud);
-            LocalDateTime turno;
+        }
             if(trabajo.equalsIgnoreCase("OTRO")||patologia.equalsIgnoreCase("NINGUNO")){
                 turno=cvd.turnoPara4semanas();
             }else{
                 turno=cvd.turnoPara2semanas();
-            }
+            
             CitaVacunacion cita=new CitaVacunacion(ciud,1,turno,centroVacunatorio,false);
-        }
+           
+            
         
+        }
         
     
     }//GEN-LAST:event_jBSolicitarActionPerformed
@@ -349,8 +359,10 @@ inicializarWaypoint();
     private javax.swing.JLabel jLTelefono;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLTrabajo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLfactorDeRiesgo;
     private javax.swing.JTextField jTApellido;
+    public javax.swing.JTextField jTCentroElegido;
     private javax.swing.JTextField jTDNI;
     private javax.swing.JTextField jTEmail;
     private javax.swing.JTextField jTNombre;
@@ -381,15 +393,11 @@ inicializarWaypoint();
     jComboPatologia.addItem("NINGUNO");
 }
 
-public WaypointPainter cargarWaypoints(){
-   Puntero p = new Puntero();
+public Puntero cargarWaypoints(Puntero p){
 
     for (Puntero waypoint : waypoints) {
-       if(waypoints.equals().p.inicializarBoton()){
-        waypoints.add(waypoint);
-        break;
-    }
-    }
+    p.getcentroVacunatorio();
+   }
 return p;
 }
 }
