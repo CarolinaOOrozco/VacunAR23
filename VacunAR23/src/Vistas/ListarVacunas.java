@@ -104,8 +104,7 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDisponiblesActionPerformed
-        jBAplicadas.setSelected(false);
-        jBVencidas.setSelected(false);
+
         borrarFilas();
         VacunaData vd = new VacunaData();
         List<Vacuna> vacunasDisponibles = new ArrayList();
@@ -117,25 +116,22 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBDisponiblesActionPerformed
 
     private void jBAplicadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAplicadasActionPerformed
-        // TODO add your handling code here:
-        jBDisponibles.setSelected(false);
-        jBVencidas.setSelected(false);
+
         borrarFilas();
         VacunaData vd = new VacunaData();
         List<Vacuna> vacunasAplicadas = new ArrayList();
-        vacunasAplicadas = vd.vacunasAplicadas();//(jComboBoxMes.getSelectedIndex() + 1);
+        vacunasAplicadas = vd.vacunasAplicadas();
         for (Vacuna v : vacunasAplicadas) {
             modelo.addRow(new Object[]{v.getNroSerieDosis(), v.getMarca(), v.getMedida(), v.getFechacaduca()});
         }
     }//GEN-LAST:event_jBAplicadasActionPerformed
 
     private void jBVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVencidasActionPerformed
-        jBDisponibles.setSelected(false);
-        jBAplicadas.setSelected(false);
+
         borrarFilas();
         VacunaData vd = new VacunaData();
         List<Vacuna> vacunasVencidas = new ArrayList();
-        vacunasVencidas = vd.vacunasAplicadas();//(jComboBoxMes.getSelectedIndex() + 1);
+        vacunasVencidas = vd.vacunasAplicadas();
         for (Vacuna v : vacunasVencidas) {
             modelo.addRow(new Object[]{v.getNroSerieDosis(), v.getMarca(), v.getMedida(), v.getFechacaduca()});
         }    // TODO add your handling code here:
