@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -113,15 +114,19 @@ private Connection con;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCbLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbLaboratorioActionPerformed
-       String filtro = "SELECT * FROM laboratorio WHERE NOT pais = null";
+       //String filtro = "SELECT * FROM laboratorio WHERE NOT pais = null";
+        
+    //try {
         LaboratorioData lab = new LaboratorioData();
-    try {
-        PreparedStatement ps = con.prepareStatement(filtro);
-        ResultSet rs = ps.executeQuery();
-        if(rs.next()){lab.mostrarLaboratorio();}             
-    } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(this, "Error en la base de datos");
-    }
+        ArrayList <Laboratorio> lista=lab.mostrarLaboratorio(); 
+        for(Laboratorio l:lista){
+            if(l.getPais()==(String)jCbLaboratorio.getSelectedItem()){
+                modelo.addRow(new Object[]{l.getNomLaboratorio(),l.getCuit(),l.getDomComercial(),l.marca()});
+            }
+        }
+    //} catch (SQLException ex) {
+      //JOptionPane.showMessageDialog(this, "Error en la base de datos");
+    //}
       
 
        
