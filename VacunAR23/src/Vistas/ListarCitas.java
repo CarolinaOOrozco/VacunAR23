@@ -45,12 +45,22 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(800, 400));
         setRequestFocusEnabled(false);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione mes");
 
+        jComboBoxMes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Citas concretadas");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Citas vencidas");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Citas canceladas");
 
         jRBConcretadas.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +81,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jTablaCitas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTablaCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -84,6 +95,8 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTablaCitas);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Seleccione año");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,7 +114,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(141, 141, 141)
                 .addComponent(jLabel4)

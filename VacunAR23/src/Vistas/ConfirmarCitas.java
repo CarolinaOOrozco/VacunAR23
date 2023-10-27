@@ -60,16 +60,22 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CITAS DE HOY");
 
+        jComboBox.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Centro de vacunación");
 
+        jTablaCitas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTablaCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -88,6 +94,9 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTablaCitas);
 
+        jBConfirmarCita.setBackground(new java.awt.Color(0, 153, 255));
+        jBConfirmarCita.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBConfirmarCita.setForeground(new java.awt.Color(255, 255, 255));
         jBConfirmarCita.setText("Confimar como concretada");
         jBConfirmarCita.setEnabled(false);
         jBConfirmarCita.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +105,9 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBReasignarCitasVencidas.setBackground(new java.awt.Color(0, 153, 255));
+        jBReasignarCitasVencidas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBReasignarCitasVencidas.setForeground(new java.awt.Color(255, 255, 255));
         jBReasignarCitasVencidas.setText("Reasignar citas vencidas");
         jBReasignarCitasVencidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +124,7 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(jLabel2)
-                        .addGap(43, 43, 43)
+                        .addGap(18, 18, 18)
                         .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -126,7 +138,7 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBReasignarCitasVencidas)
-                        .addGap(259, 543, Short.MAX_VALUE))))
+                        .addGap(259, 495, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +147,7 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
                         .addGap(304, 304, 304))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBConfirmarCita)
-                        .addGap(259, 259, 259))))
+                        .addGap(230, 230, 230))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,9 +159,9 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jBConfirmarCita)
-                .addGap(2, 2, 2)
+                .addGap(7, 7, 7)
                 .addComponent(jBReasignarCitasVencidas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLCitasVencidas, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)

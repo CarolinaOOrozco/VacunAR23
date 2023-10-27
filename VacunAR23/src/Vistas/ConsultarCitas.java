@@ -7,10 +7,12 @@ package Vistas;
 
 import AccesoDatos.*;
 import entidades.*;
+import java.awt.Color;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -53,7 +55,8 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DNI");
 
@@ -75,6 +78,9 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTablaCitas);
 
+        jBPostergar.setBackground(new java.awt.Color(0, 153, 255));
+        jBPostergar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBPostergar.setForeground(new java.awt.Color(255, 255, 255));
         jBPostergar.setText("Postergar");
         jBPostergar.setEnabled(false);
         jBPostergar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +89,9 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBCancelar.setBackground(new java.awt.Color(0, 153, 255));
+        jBCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBCancelar.setForeground(new java.awt.Color(255, 255, 255));
         jBCancelar.setText("Cancelar");
         jBCancelar.setEnabled(false);
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,9 +100,9 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
             }
         });
 
-        jBBuscar.setBackground(new java.awt.Color(255, 255, 255));
-        jBBuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBBuscar.setForeground(new java.awt.Color(0, 153, 255));
+        jBBuscar.setBackground(new java.awt.Color(0, 153, 255));
+        jBBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +125,7 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jBPostergar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBCancelar)
                 .addGap(70, 70, 70))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
@@ -131,10 +140,10 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
                     .addComponent(jBBuscar))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBPostergar)
-                    .addComponent(jBCancelar))
+                    .addComponent(jBPostergar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51))
         );
 
@@ -242,6 +251,10 @@ private void armarCabecera(){
     modelo.addColumn("Fecha");
     modelo.addColumn("Centro de vacunación");
     jTablaCitas.setModel(modelo);
+    JTableHeader jTH=jTablaCitas.getTableHeader();
+    Color fondo=new Color(0,153,255);
+    Color letra=new Color(255,255,255);
+    //jTH.setForeground(letra);
     }
 private void borrarFilas(){
         int f=jTablaCitas.getRowCount()-1;

@@ -52,8 +52,11 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione una fecha");
 
+        jTabla.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -73,6 +76,9 @@ public class DosisDiariasAplicadas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBDAplicadas.setBackground(new java.awt.Color(0, 153, 255));
+        jBDAplicadas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jBDAplicadas.setForeground(new java.awt.Color(255, 255, 255));
         jBDAplicadas.setText("Listar dosis aplicadas");
         jBDAplicadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -237,7 +237,7 @@ public class Menuprincipal extends javax.swing.JFrame {
             escritorio.add(cc);
             escritorio.moveToFront(cc);
             escritorio.setSelectedFrame(cc);
-            Color color=new Color(0,204,255);
+            Color color=new Color(153,204,255);
             cc.getContentPane().setBackground(color);
         }
         

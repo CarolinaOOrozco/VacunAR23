@@ -178,7 +178,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(cv);
             escritorioASanitario.moveToFront(cv);
             escritorioASanitario.setSelectedFrame(cv);
-            
+            Color color=new Color(153,204,255);
+            cv.getContentPane().setBackground(color);
         }
             
         
@@ -195,6 +196,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
 
             escritorioASanitario.add(lv);
             escritorioASanitario.setSelectedFrame(lv);
+            Color color=new Color(153,204,255);
+            lv.getContentPane().setBackground(color);
         }
         
         
@@ -209,6 +212,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(cc);
             escritorioASanitario.moveToFront(cc);
             escritorioASanitario.setSelectedFrame(cc);
+            Color color=new Color(153,204,255);
+            cc.getContentPane().setBackground(color);
         }
         
     }//GEN-LAST:event_jMConfCitasActionPerformed
@@ -221,6 +226,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(lc);
             escritorioASanitario.moveToFront(lc);
             escritorioASanitario.setSelectedFrame(lc);
+            Color color=new Color(153,204,255);
+            lc.getContentPane().setBackground(color);
         }
         
     }//GEN-LAST:event_jMListarCitasActionPerformed
@@ -233,6 +240,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(dda);
             escritorioASanitario.moveToFront(dda);
             escritorioASanitario.setSelectedFrame(dda);
+            Color color=new Color(153,204,255);
+            dda.getContentPane().setBackground(color);
         }
         
     }//GEN-LAST:event_jMDosisDiariasActionPerformed
@@ -246,6 +255,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(lvc);
             escritorioASanitario.moveToFront(lvc);
             escritorioASanitario.setSelectedFrame(lvc);
+            Color color=new Color(153,204,255);
+            lvc.getContentPane().setBackground(color);
         }
         
     }//GEN-LAST:event_jMListarVacxCentroActionPerformed
@@ -258,6 +269,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(pcf);
             escritorioASanitario.moveToFront(pcf);
             escritorioASanitario.setSelectedFrame(pcf);
+            Color color=new Color(153,204,255);
+            pcf.getContentPane().setBackground(color);
         }
         
     }//GEN-LAST:event_jMPostergarCitaxFaltanteActionPerformed
@@ -274,6 +287,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(listaLab);
             escritorioASanitario.moveToFront(listaLab);
             escritorioASanitario.setSelectedFrame(listaLab);
+            Color color=new Color(153,204,255);
+            listaLab.getContentPane().setBackground(color);
         }
     }//GEN-LAST:event_jMListarLabsActionPerformed
 
@@ -285,6 +300,8 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
             escritorioASanitario.add(cb);
             escritorioASanitario.moveToFront(cb);
             escritorioASanitario.setSelectedFrame(cb);
+            Color color=new Color(153,204,255);
+            cb.getContentPane().setBackground(color);
         }
     }//GEN-LAST:event_jMNuevoLabActionPerformed
 

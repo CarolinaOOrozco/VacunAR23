@@ -28,9 +28,12 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
         setClosable(true);
         setResizable(true);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(0, 153, 255));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Stock de vacunas");
 
+        jTableVacunas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTableVacunas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -44,6 +47,9 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableVacunas);
 
+        jBDisponibles.setBackground(new java.awt.Color(0, 153, 255));
+        jBDisponibles.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jBDisponibles.setForeground(new java.awt.Color(255, 255, 255));
         jBDisponibles.setText("Disponibles");
         jBDisponibles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,6 +57,9 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBVencidas.setBackground(new java.awt.Color(0, 153, 255));
+        jBVencidas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jBVencidas.setForeground(new java.awt.Color(255, 255, 255));
         jBVencidas.setText("Vencidas");
         jBVencidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,6 +67,9 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBAplicadas.setBackground(new java.awt.Color(0, 153, 255));
+        jBAplicadas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jBAplicadas.setForeground(new java.awt.Color(255, 255, 255));
         jBAplicadas.setText("Aplcadas");
         jBAplicadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,12 +88,12 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
                         .addComponent(jBDisponibles)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBAplicadas)
-                        .addGap(72, 72, 72)
+                        .addGap(53, 53, 53)
                         .addComponent(jBVencidas))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addComponent(jLabel1)
-                        .addGap(0, 141, Short.MAX_VALUE)))
+                        .addGap(0, 130, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -97,7 +109,7 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
                     .addComponent(jBDisponibles)
                     .addComponent(jBVencidas)
                     .addComponent(jBAplicadas))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
