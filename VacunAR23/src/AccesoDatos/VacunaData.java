@@ -41,7 +41,7 @@ public class VacunaData {
     }
     
     public Vacuna buscarVacuna(int nroSerieDosis){
-        String sql="SELET * FROM Vacuna WHERE nroSerieDosis=?";
+        String sql="SELECT * FROM vacuna WHERE nroSerieDosis=?";
         Vacuna v =new Vacuna();
         try{
             PreparedStatement ps=con.prepareStatement(sql);
@@ -49,7 +49,7 @@ public class VacunaData {
             ResultSet rs=ps.executeQuery();
             
             if(rs.next()){
-                v.setNroSerieDosis(rs.getInt("norSerieDosis"));
+                v.setNroSerieDosis(rs.getInt("nroSerieDosis"));
                 v.setMarca(rs.getString("marca"));
                 v.setMedida(rs.getDouble("medida"));
                 v.setFechacaduca(rs.getDate("fechaCaduca").toLocalDate());

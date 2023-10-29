@@ -48,9 +48,9 @@ CitaVacunacionData data = new CitaVacunacionData();
 //data.nuevaCita(cv);
 
         System.out.println(data.getFechaDeHoy());
-        //data.setFechaDeHoy(data.getFechaDeHoy().plusDays(1));
+        data.setFechaDeHoy(data.getFechaDeHoy().plusDays(1));
         System.out.println(data.getFechaDeHoy());
-        //data.cargarTurnos();
+        data.setTurnos();
         System.out.println(data.getTurnos());
        
 

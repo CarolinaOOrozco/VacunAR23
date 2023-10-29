@@ -37,12 +37,14 @@ boton.addActionListener(new ActionListener() {
     
 
 public void actionPerformed(ActionEvent e){ 
-        int respuesta=JOptionPane.showConfirmDialog(null, "¿Desea reservar su turno en "+centroVacunatorio+" ?","Gracias por utilizar VacunAR23",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+    JOptionPane.showMessageDialog(null, "Recuerde pulsar el botón 'Confirmar' para terminar de completar el formulario");
+    boton.setSelected(true);
+    /* int respuesta=JOptionPane.showConfirmDialog(null, "¿Desea reservar su turno en "+centroVacunatorio+" ?","Gracias por utilizar VacunAR23",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(respuesta==JOptionPane.NO_OPTION){
         return;
         }else{
           ciudadanoT ciudadano = new ciudadanoT();
-         
+          boton.setSelected(true);
          // ciudadano.jTCentroElegido.addActionListener(this);        
          //  ciudadano.jTCentroElegido.getActionListeners()
           //ciudadano.jTCentroElegido.setActionCommand(boton.getActionCommand());
@@ -51,7 +53,7 @@ public void actionPerformed(ActionEvent e){
           
           
           JOptionPane.showMessageDialog(null, ciudadano);
-}
+}*/
         
 }
 });

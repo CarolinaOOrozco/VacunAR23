@@ -90,15 +90,16 @@ public void modificarLaboratorioPorCuit(Laboratorio lab){
 
 public ArrayList<Laboratorio> mostrarLaboratorio(){
 
-Laboratorio laboratorio;
 
-laboratorio = null;
 
-String sql = "SELECT * FROM laboratorio  WHERE NOT marca = null";
+
+
+String sql = "SELECT * FROM laboratorio";
     try {
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
+        Laboratorio laboratorio=new Laboratorio();
         laboratorio.setCuit(rs.getInt("CUIT"));
         laboratorio.setNomLaboratorio(rs.getString("nomLaboratorio"));
         laboratorio.setPais(rs.getString("pais"));

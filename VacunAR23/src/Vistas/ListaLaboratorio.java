@@ -20,14 +20,14 @@ import java.util.ArrayList;
  * @author dev0
  */
 public class ListaLaboratorio extends javax.swing.JInternalFrame {
-private final DefaultTableModel modelo = new DefaultTableModel();
+DefaultTableModel modelo = new DefaultTableModel();
 private Connection con;
     /**
      * Creates new form ListaLaboratorio
      */
     public ListaLaboratorio() {
         initComponents();
-        cargarCombo();
+        
         armarCabecera();
     }
 
@@ -43,8 +43,7 @@ private Connection con;
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
-        jCbLaboratorio = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        jBListar = new javax.swing.JButton();
 
         jLabel1.setBackground(new java.awt.Color(0, 153, 255));
         jLabel1.setFont(new java.awt.Font("Zekton", 1, 16)); // NOI18N
@@ -65,35 +64,31 @@ private Connection con;
         ));
         jScrollPane1.setViewportView(jTabla);
 
-        jCbLaboratorio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jCbLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+        jBListar.setBackground(new java.awt.Color(0, 153, 255));
+        jBListar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jBListar.setForeground(new java.awt.Color(255, 255, 255));
+        jBListar.setText("Listar");
+        jBListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCbLaboratorioActionPerformed(evt);
+                jBListarActionPerformed(evt);
             }
         });
-
-        jLabel2.setBackground(new java.awt.Color(0, 153, 255));
-        jLabel2.setFont(new java.awt.Font("Noto Mono", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Seleccione la nacionalidad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCbLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(147, 147, 147)
+                        .addComponent(jBListar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,60 +97,41 @@ private Connection con;
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCbLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jBListar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCbLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbLaboratorioActionPerformed
-       //String filtro = "SELECT * FROM laboratorio WHERE NOT pais = null";
-        
-    //try {
+    private void jBListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBListarActionPerformed
         LaboratorioData lab = new LaboratorioData();
         ArrayList <Laboratorio> lista=lab.mostrarLaboratorio(); 
         for(Laboratorio l:lista){
-            if(l.getPais()==(String)jCbLaboratorio.getSelectedItem()){
-                modelo.addRow(new Object[]{l.getNomLaboratorio(),l.getCuit(),l.getDomComercial(),l.marca()});
-            }
+            
+             modelo.addRow(new Object[]{l.getNomLaboratorio(),l.getCuit(),l.getDomComercial(),l.marca()});
+            
         }
-    //} catch (SQLException ex) {
-      //JOptionPane.showMessageDialog(this, "Error en la base de datos");
-    //}
-      
-
-       
-    }//GEN-LAST:event_jCbLaboratorioActionPerformed
+    }//GEN-LAST:event_jBListarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Laboratorio> jCbLaboratorio;
+    private javax.swing.JButton jBListar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTabla;
     // End of variables declaration//GEN-END:variables
 
 private void cargarCombo(){
-  try{  
-jCbLaboratorio.addItem(new Laboratorio("--"));
-  }catch(NullPointerException ex){JOptionPane.showMessageDialog(this, "Elija una opción válida");}
-jCbLaboratorio.addItem(new Laboratorio("Alemania"));
-jCbLaboratorio.addItem(new Laboratorio("Estados Unidos"));
-jCbLaboratorio.addItem(new Laboratorio("Rusia"));
-jCbLaboratorio.addItem(new Laboratorio("China"));
-jCbLaboratorio.addItem(new Laboratorio("Inglaterra"));
+ 
 }
 private void armarCabecera(){
-modelo.addColumn("nombre");
-modelo.addColumn("cuit");
-modelo.addColumn("domicilio comercial");
-modelo.addColumn("marca");
+modelo.addColumn("Nombre");
+modelo.addColumn("CUIT");
+modelo.addColumn("Domicilio comercial");
+modelo.addColumn("Marca");
 jTabla.setModel(modelo);
 
 }

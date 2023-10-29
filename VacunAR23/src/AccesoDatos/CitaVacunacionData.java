@@ -34,13 +34,13 @@ public class CitaVacunacionData {
         con= Conexion.getConexion();
         mes=LocalDate.now().getMonthValue();
         lista = new ArrayList<>();
-        turnos=cargarTurnos();
-  
+        turnos.addAll(cargarTurnos());
+        vd=new VacunaData();
   }
   
      public void nuevaCita(CitaVacunacion c){  
-    
-         String sql = "INSERT INTO citaVacunacion(dni, codRefuerzo, fechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES  (?,?,?,?,?,?,?)";
+         
+         String sql = "INSERT INTO citaVacunacion(dni, codRefuerzo, fechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES (?,?,?,?,?,?,?)";
          
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -49,10 +49,9 @@ public class CitaVacunacionData {
             ps.setInt(2,c.getCodRefuerzo());
             ps.setTimestamp(3,Timestamp.valueOf(c.getFechaHoraCita()));
             ps.setString(4, c.getCentroVacunacion());
-            ps.setTimestamp(5,Timestamp.valueOf(c.getFechaHoraColoca()));
-            ps.setInt(6, c.getVacuna().getNroSerieDosis());
-            ps.setDate(5,null);
+            ps.setTimestamp(5,null);
             ps.setInt(6, 0);
+            
             ps.setBoolean(7,c.getCancelar());
             ps.executeUpdate();
             
@@ -276,10 +275,12 @@ public List citasCanceladasPorMes(int mesDelAnio){
                 ps.setInt(1, dni);
                 ResultSet rs=ps.executeQuery();
                 Ciudadano ciudadano =new Ciudadano();
-                ciudadano=cd.buscarPorDni(dni);
-                Vacuna v= new Vacuna();
-                CitaVacunacion citav= new CitaVacunacion();
+                CiudadanoData ciudD=new CiudadanoData();
+                ciudadano=ciudD.buscarPorDni(dni);
+                
                 while(rs.next()){
+                    Vacuna v= new Vacuna();
+                    CitaVacunacion citav= new CitaVacunacion();
                     v=vd.buscarVacuna(rs.getInt("dosis"));
                     citav.setVacuna(v);
                     citav.setCiudadano(ciudadano);
@@ -287,8 +288,14 @@ public List citasCanceladasPorMes(int mesDelAnio){
                     citav.setCancelar(rs.getBoolean("cancelar"));
                     citav.setCodigoCita(rs.getInt("codCita"));
                     citav.setFechaHoraCita(rs.getTimestamp("fechaHoraCita").toLocalDateTime());
-                    citav.setFechaHoraColoca(rs.getTimestamp("fechaHoracoloca").toLocalDateTime());
+                    if(rs.getTimestamp("fechaHoraColoca")==null){
+                        citav.setFechaHoraColoca(null);
+                    }else{
+                        citav.setFechaHoraColoca(rs.getTimestamp("fechaHoraColoca").toLocalDateTime());
+                    }
+                    
                     citav.setCentroVacunacion(rs.getString("centroVacunacion"));
+                    cantidadCitas.add(citav);
                 }
             }catch(SQLException ex){
                 
@@ -297,14 +304,14 @@ public List citasCanceladasPorMes(int mesDelAnio){
         }
         
         public ArrayList cargarTurnos(){
-            
+            ArrayList<LocalDateTime>turnosCopia=new ArrayList();
             //int minutos=10;
             LocalDateTime t=fechaDeHoy;
             while(t.getHour()<=18){
                 turnos.add(t);
                 t=t.plusHours(1);
             }
-            return turnos;
+            return turnosCopia;
         }
 
     public LocalDateTime getFechaDeHoy() {
@@ -319,8 +326,9 @@ public List citasCanceladasPorMes(int mesDelAnio){
         return turnos;
     }
 
-    public void setTurnos(ArrayList<LocalDateTime> turnos) {
-        this.turnos = turnos;
+    public void setTurnos() {
+        turnos.removeAll(turnos);
+        turnos.addAll(cargarTurnos());
     }
 
     
@@ -346,68 +354,77 @@ public List citasCanceladasPorMes(int mesDelAnio){
     }
     
     public LocalDateTime turnoPara2semanas(){
-        LocalDateTime turnoAsignado=null;
-        while(turnoAsignado==null){
-            for(LocalDateTime t:turnos){
-            
-                t=t.plusDays(14);
-                if(t.getDayOfWeek().equals(SATURDAY)){
-                    t=t.plusDays(2);
-                }else if(t.getDayOfWeek().equals(SUNDAY)){
-                    t=t.plusDays(1);
+        
+        //while(turnoAsignado==null){
+            //for(LocalDateTime t:turnos){
+                int i=(int)(Math.random()*10);
+                LocalDateTime turnoAsignado=turnos.get(i).plusDays(14);
+                if(turnoAsignado.getDayOfWeek().equals(SATURDAY)){
+                    turnoAsignado=turnoAsignado.plusDays(2);
+                }else if(turnoAsignado.getDayOfWeek().equals(SUNDAY)){
+                    turnoAsignado=turnoAsignado.plusDays(1);
                 }
-                try{
+                //turnoAsignado=turnoAsignado;
+                
+                /*try{
                 String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora FROM citaVacunacion WHERE fechaHoraCita=?";
                  PreparedStatement ps=con.prepareStatement(sql);
-                 ps.setTimestamp(1, Timestamp.valueOf(t));
+                 ps.setTimestamp(1, Timestamp.valueOf(t2));
                  ResultSet rs=ps.executeQuery();
-                 if(rs.getInt("citasPorHora")<12){
-                     turnoAsignado=t;
+                 int turnos=rs.getInt("citasPorHora");
+                 if(turnos<12){
+                     turnoAsignado=t2;
+                     break;
+                 }else if(turnos==0){
+                     turnoAsignado=t2;
                      break;
                  }
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos "+ex.getMessage());
                 }
-                if(turnoAsignado==null){
-                    setFechaDeHoy(fechaDeHoy.plusDays(1));
-                    turnos.removeAll(turnos);
-                    setTurnos(cargarTurnos());
-                }
+                
             }
-        }
+            if(turnoAsignado==null){
+                setFechaDeHoy(fechaDeHoy.plusDays(1));
+                turnos.removeAll(turnos);
+                setTurnos();
+            }*/
+        //}
         return turnoAsignado;
     }
     
     public LocalDateTime turnoPara4semanas(){
-        LocalDateTime turnoAsignado=null;
-        while(turnoAsignado==null){
-            for(LocalDateTime t:turnos){
-            
-                t=t.plusDays(28);
-                if(t.getDayOfWeek().equals(SATURDAY)){
-                    t=t.plusDays(2);
-                }else if(t.getDayOfWeek().equals(SUNDAY)){
-                    t=t.plusDays(1);
+        int i=(int)(Math.random()*10);
+                LocalDateTime turnoAsignado=turnos.get(i).plusDays(14);
+                if(turnoAsignado.getDayOfWeek().equals(SATURDAY)){
+                    turnoAsignado=turnoAsignado.plusDays(2);
+                }else if(turnoAsignado.getDayOfWeek().equals(SUNDAY)){
+                    turnoAsignado=turnoAsignado.plusDays(1);
                 }
-                try{
+                //turnoAsignado=turnoAsignado;
+                /*try{
                     String sql="SELECT COUNT(fechaHoraCita) AS citasPorHora FROM citaVacunacion WHERE fechaHoraCita=?";
                     PreparedStatement ps=con.prepareStatement(sql);
-                    ps.setTimestamp(1, Timestamp.valueOf(t));
+                    ps.setTimestamp(1, Timestamp.valueOf(t2));
                     ResultSet rs=ps.executeQuery();
                        if(rs.getInt("citasPorHora")<12){
-                        turnoAsignado=t;
+                        turnoAsignado=t2;
                         break;
-                    }
+                    }else if(rs.getInt("citasPorHora")==0){
+                     turnoAsignado=t2;
+                     break;
+                 }
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos "+ex.getMessage());
                 }
-                if(turnoAsignado==null){
-                    setFechaDeHoy(fechaDeHoy.plusDays(1));
-                    turnos.removeAll(turnos);
-                    setTurnos(cargarTurnos());
-                }
+                
             }
-        }
+            if(turnoAsignado==null){
+                setFechaDeHoy(fechaDeHoy.plusDays(1));
+                turnos.removeAll(turnos);
+                setTurnos();
+            }*/
+        
         return turnoAsignado;
     }
     

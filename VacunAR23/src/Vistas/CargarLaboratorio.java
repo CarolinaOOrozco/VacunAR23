@@ -7,6 +7,7 @@ package Vistas;
 
 import AccesoDatos.LaboratorioData;
 import entidades.Laboratorio;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -182,36 +183,47 @@ public class CargarLaboratorio extends javax.swing.JInternalFrame {
         }
 
         
-        if (jTFCuit.getText().trim().length() == 10) {
+        if (jTFCuit.getText().trim().length() >= 10) {
             evt.consume();
             
         }
     }//GEN-LAST:event_jTFCuitKeyTyped
 
     private void jBCargarLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarLabActionPerformed
-        try{
+        int cuit=0;
             if(jTFCuit.getText().isEmpty()||jTFDomicilio.getText().isEmpty()||jTFMarca.getText().isEmpty()||jTFNombreLab.getText().isEmpty()||jTFPais.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Complete todos los campos");
                 return;
-            }else{
-                if(jTFCuit.getText().length()<10){
+            }
+            if(jTFCuit.getText().length()<10){
                     JOptionPane.showMessageDialog(this, "El CUIT debe tener 10 dígitos");
                     return;
                 }
-                int cuit=Integer.parseInt(jTFCuit.getText());
+                    cuit=Integer.parseInt(jTFCuit.getText());
+                     LaboratorioData ld=new LaboratorioData();
+                     ArrayList<Laboratorio>lista=ld.mostrarLaboratorio();
+                      
+                    String domicilio=jTFDomicilio.getText();
+                    String marca=jTFMarca.getText();
+                    String nombre=jTFNombreLab.getText();
+                    String pais=jTFPais.getText();
+                    Laboratorio lab=new Laboratorio(cuit,nombre,pais,domicilio,marca);
+                   for(Laboratorio l:lista){
+                          if(l.getCuit()==lab.getCuit()){
+                              JOptionPane.showMessageDialog(this, "El CUIT/laboratorio ya existe,revise en el botón 'Listar laboratorio'");
+                              lab=null;
+                              break;
+                          }
+                      }
+                    if(lab!=null){
+                       ld.nuevoLaboratorio(lab);
+                        borrarCampos(); 
+                    }
+                    
                 
-                String domicilio=jTFDomicilio.getText();
-                String marca=jTFMarca.getText();
-                String nombre=jTFNombreLab.getText();
-                String pais=jTFPais.getText();
-                Laboratorio lab=new Laboratorio(cuit,nombre,pais,domicilio,marca);
-                LaboratorioData ld=new LaboratorioData();
-                ld.nuevoLaboratorio(lab);
-                borrarCampos();
-            }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Revise que todos sus campos tengan datos correctos");
-        }
+               
+            
+        
         
     }//GEN-LAST:event_jBCargarLabActionPerformed
 

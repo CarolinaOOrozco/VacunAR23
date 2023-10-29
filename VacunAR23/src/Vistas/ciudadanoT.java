@@ -12,6 +12,7 @@ import Waypoints.Render;
 import entidades.CitaVacunacion;
 import entidades.Ciudadano;
 import java.awt.Color;
+import java.awt.Component;
 import java.beans.PropertyVetoException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.event.MouseInputListener;
 import org.jxmapviewer.JXMapViewer;
@@ -72,6 +74,7 @@ inicializarWaypoint();
 
         jXMap = new org.jxmapviewer.JXMapViewer();
         jBSalir = new javax.swing.JButton();
+        jBConfirmar = new javax.swing.JButton();
         jLTitulo = new javax.swing.JLabel();
         jLNombre = new javax.swing.JLabel();
         jLApellido = new javax.swing.JLabel();
@@ -104,20 +107,31 @@ inicializarWaypoint();
             }
         });
 
+        jBConfirmar.setText("Confirmar");
+        jBConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConfirmarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jXMapLayout = new javax.swing.GroupLayout(jXMap);
         jXMap.setLayout(jXMapLayout);
         jXMapLayout.setHorizontalGroup(
             jXMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXMapLayout.createSequentialGroup()
-                .addContainerGap(359, Short.MAX_VALUE)
+                .addGap(85, 85, 85)
+                .addComponent(jBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jXMapLayout.setVerticalGroup(
             jXMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXMapLayout.createSequentialGroup()
-                .addContainerGap(469, Short.MAX_VALUE)
-                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(466, Short.MAX_VALUE)
+                .addGroup(jXMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(154, 154, 154))
         );
 
@@ -167,7 +181,7 @@ inicializarWaypoint();
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLEmail)
                                 .addGap(65, 65, 65)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -269,52 +283,75 @@ inicializarWaypoint();
 
    
     private void jBSolicitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSolicitarActionPerformed
-               CitaVacunacionData cvd = new CitaVacunacionData();
-    
-      String sql = "INSERT INTO Ciudadano, citaVacunacion(Ciudadano.nombreCompleto,Ciudadano.dni,Ciudadano.patologia,Ciudadano.ambitoTrabajo,Ciudadano.celular,Ciudadano.email, citaVacunacion.centroVacunacion)"
-              + " VALUES(?,?,?,?,?,?,?)";
-
+        CitaVacunacionData cvd = new CitaVacunacionData();
+        CiudadanoData cd=new CiudadanoData();
         
+
+        //botones();
         if(jTApellido.getText().isEmpty()||jTDNI.getText().isEmpty()||jTEmail.getText().isEmpty()||jTTelefono.getText().isEmpty()||jTCentroElegido.getText().isEmpty()){
            JOptionPane.showInternalMessageDialog(this, "Complete todos los campos");
+           return;
+        }else if(jComboPatologia.getSelectedItem().equals(jComboPatologia.getItemAt(0))||jComboTrabajo.getSelectedItem().equals(jComboTrabajo.getItemAt(dni))){
+            JOptionPane.showMessageDialog(this, "La opción "+jComboTrabajo.getItemAt(0)+" en trabajo o patología no es válida");
         }else{
-        return;
+            
+            dni=Integer.parseInt(jTDNI.getText());
+            ciud=cd.buscarPorDni(dni);
+            if(ciud==null){
+                Puntero p = new Puntero();
+                nombreCompleto=jTNombre.getText()+" "+ jTApellido.getText();
+                email=jTEmail.getText();
+                trabajo=(String)jComboTrabajo.getSelectedItem();
+                patologia=(String)jComboPatologia.getSelectedItem();
+                telefono=jTTelefono.getText();
+                centroVacunatorio=jTCentroElegido.getText();
+                
+                Ciudadano c =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
+                cd.guardarCiudadano(c);
+                if(trabajo.equalsIgnoreCase("OTRO")&&patologia.equalsIgnoreCase("NINGUNO")){
+                    turno=cvd.turnoPara4semanas();
+                }else{
+                    turno=cvd.turnoPara2semanas();
+                }
+                CitaVacunacion cita=new CitaVacunacion(c,1,turno,centroVacunatorio,false);
+                cvd.nuevaCita(cita);
+               
+            }else{
+                Ciudadano c=ciud;
+                ArrayList <CitaVacunacion> citas = new ArrayList();
+                citas=cvd.citasPorPersona(ciud.getDni());
+                if(citas.size()>=1){
+                    JOptionPane.showMessageDialog(this, "Usted no puede solicitar turno,ya que cuenta con 1 o más"+citas.size()+"citas.Revise el botón 'Consultar'");    
+                }else{
+                LocalDateTime t=null;
+                centroVacunatorio=jTCentroElegido.getText();
+                if(ciud.getAmbitoTrabajo().equalsIgnoreCase("OTRO")&&ciud.getPatologia().equalsIgnoreCase("NINGUNO")){
+                    t=cvd.turnoPara4semanas();
+                }else{
+                    t=cvd.turnoPara2semanas();
+                }
+                CitaVacunacion cita=new CitaVacunacion(c,1,t,centroVacunatorio,false);
+                cvd.nuevaCita(cita); 
+                    }
+                
+            
+            
         }
-        ArrayList <CitaVacunacion> citas = new ArrayList();
+        borrarCampos();
      try{
-        citas=cvd.citasPorPersona(Integer.parseInt(jTDNI.getText()));
+        
                 }catch(NumberFormatException ex){JOptionPane.showMessageDialog(this, "ingrese correctamente sus datos");}
 
-        if(citas.size()>=1){
-            JOptionPane.showMessageDialog(this, "Usted no puede solicitar turno,ya que cuenta con 1 o más dosis");
-        }else{
-            
-            Puntero p = new Puntero();
-            nombreCompleto=jTNombre.getText()+" "+ jTApellido.getText();
-             email=jTEmail.getText();
-            dni=Integer.parseInt(jTDNI.getText());
-            trabajo=(String)jComboTrabajo.getSelectedItem();
-            patologia=(String)jComboPatologia.getSelectedItem();
-            telefono=jTTelefono.getText();
-            centroVacunatorio=jTCentroElegido.getText();
         
-            ciud =new Ciudadano(dni,nombreCompleto,email,telefono,patologia,trabajo);
-            CiudadanoData cd=new CiudadanoData();
-            cd.guardarCiudadano(ciud);
-        }
-            if(trabajo.equalsIgnoreCase("OTRO")||patologia.equalsIgnoreCase("NINGUNO")){
-                turno=cvd.turnoPara4semanas();
-            }else{
-                turno=cvd.turnoPara2semanas();
-            
-            CitaVacunacion cita=new CitaVacunacion(ciud,1,turno,centroVacunatorio,false);
-           
             
         
-        }
-        
-    
+    }
     }//GEN-LAST:event_jBSolicitarActionPerformed
+
+    private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
+        botones();
+        //jBConfirmar.setEnabled(false);
+    }//GEN-LAST:event_jBConfirmarActionPerformed
 
     private void init(){TileFactoryInfo tfi = new OSMTileFactoryInfo();      
     DefaultTileFactory tf = new DefaultTileFactory(tfi);
@@ -336,11 +373,13 @@ inicializarWaypoint();
     wp.setWaypoints(waypoints);
     jXMap.setOverlayPainter(wp);
         for (Puntero waypoint : waypoints) {
+            
             jXMap.add(waypoint.getBoton());
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBConfirmar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JButton jBSolicitar;
     private javax.swing.JComboBox<String> jComboPatologia;
@@ -392,5 +431,26 @@ public Puntero cargarWaypoints(Puntero p){
     p.getcentroVacunatorio();
    }
 return p;
+}
+
+public void botones(){
+    for(Puntero p:waypoints){
+        if(p.getBoton().isSelected()==true){
+            jTCentroElegido.setText(p.getcentroVacunatorio());
+            p.getBoton().setSelected(false);
+            break;
+        }
+    }
+}
+
+public void borrarCampos(){
+    jTDNI.setText(null);
+    jTNombre.setText(null);
+    jTApellido.setText(null);
+    jTTelefono.setText(null);
+    jTEmail.setText(null);
+    jComboTrabajo.setSelectedItem(0);
+    jComboPatologia.setSelectedItem(0);
+    jTCentroElegido.setText(null);
 }
 }

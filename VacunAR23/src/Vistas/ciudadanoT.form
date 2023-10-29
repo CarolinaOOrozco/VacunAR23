@@ -44,7 +44,7 @@
                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -174,7 +174,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="359" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                  <Component id="jBConfirmar" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace pref="176" max="32767" attributes="0"/>
                   <Component id="jBSalir" min="-2" pref="94" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -182,9 +184,12 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="469" max="32767" attributes="0"/>
-                  <Component id="jBSalir" min="-2" pref="57" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace pref="466" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBSalir" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="jBConfirmar" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -200,6 +205,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSalirActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBConfirmar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Confirmar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBConfirmarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
