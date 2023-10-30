@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2023 a las 23:49:58
+-- Tiempo de generación: 30-10-2023 a las 03:06:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -33,12 +33,28 @@ CREATE TABLE `citavacunacion` (
   `codCita` int(11) NOT NULL,
   `dni` int(11) NOT NULL,
   `codRefuerzo` int(11) NOT NULL,
-  `fechaHoraCita` varchar(30) NOT NULL,
+  `fechaHoraCita` datetime NOT NULL,
   `centroVacunacion` varchar(50) NOT NULL,
-  `fechaHoraColoca` datetime NOT NULL,
-  `dosis` int(11) NOT NULL,
+  `fechaHoraColoca` datetime DEFAULT NULL,
+  `dosis` int(11) DEFAULT NULL,
   `cancelar` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELACIONES PARA LA TABLA `citavacunacion`:
+--   `dni`
+--       `ciudadano` -> `dni`
+--   `dosis`
+--       `vacuna` -> `nroSerieDosis`
+--
+
+--
+-- Volcado de datos para la tabla `citavacunacion`
+--
+
+INSERT INTO `citavacunacion` (`codCita`, `dni`, `codRefuerzo`, `fechaHoraCita`, `centroVacunacion`, `fechaHoraColoca`, `dosis`, `cancelar`) VALUES
+(3, 12345678, 1, '2023-11-13 10:00:00', 'Hospital Del Oeste Dr. Atilio Luchini', NULL, 0, 0),
+(4, 99887766, 1, '2023-10-28 08:00:00', 'Hospital Del Oeste Dr. Atilio Luchini', NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -55,6 +71,19 @@ CREATE TABLE `ciudadano` (
   `ambitoTrabajo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- RELACIONES PARA LA TABLA `ciudadano`:
+--
+
+--
+-- Volcado de datos para la tabla `ciudadano`
+--
+
+INSERT INTO `ciudadano` (`dni`, `nombreCompleto`, `email`, `celular`, `patologia`, `ambitoTrabajo`) VALUES
+(12345678, 'Carlos Ordoñez', 'charlyO@gmail.com', '2664998877', 'NINGUNO', 'EDUCACIÓN'),
+(99887766, 'José Correa', 'pepeNoGuardiola@mail.com', '11994466', 'OBESIDAD', 'SEGURIDAD'),
+(2147483647, 'María Jesús López', 'mariaJL@gmail.com', '74347856', 'EPOC', 'OTRO');
+
 -- --------------------------------------------------------
 
 --
@@ -70,11 +99,18 @@ CREATE TABLE `laboratorio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- RELACIONES PARA LA TABLA `laboratorio`:
+--
+
+--
 -- Volcado de datos para la tabla `laboratorio`
 --
 
 INSERT INTO `laboratorio` (`CUIT`, `nomLaboratorio`, `pais`, `domComercial`, `marca`) VALUES
-(123, 'lab', 'Argentina', 'pharma lab', 'Astra Zeneca');
+(1023336655, 'lab', 'USA', 'Oxford', 'Astra Zeneca'),
+(1111111111, 'Centro Gamaleya', 'Rusia', 'Clausse 5891', 'SputnikV'),
+(1234567890, 'Rotembergh', 'Suiza', 'Pensilvani 1566', 'Vikzin'),
+(2147483647, 'Instituto de Productos Biológi', 'China', 'Mitre 734', 'Sinopharm');
 
 -- --------------------------------------------------------
 
@@ -91,19 +127,26 @@ CREATE TABLE `vacuna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- RELACIONES PARA LA TABLA `vacuna`:
+--   `marca`
+--       `laboratorio` -> `marca`
+--
+
+--
 -- Volcado de datos para la tabla `vacuna`
 --
 
 INSERT INTO `vacuna` (`nroSerieDosis`, `marca`, `medida`, `fechaCaduca`, `colocada`) VALUES
-(20, 'Astra Zeneca', 0.3, '2023-10-04', 0),
+(0, 'Astra Zeneca', 0.3, '2023-10-04', 0),
 (21, 'Astra Zeneca', 0.3, '2023-10-04', 0),
 (22, 'Astra Zeneca', 0.3, '2023-10-04', 0),
-(23, 'Astra Zeneca', 0.3, '2023-10-04', 0),
+(23, 'Astra Zeneca', 0.3, '2023-11-04', 0),
 (28, 'Astra Zeneca', 0.3, '2023-10-04', 0),
 (30, 'Astra Zeneca', 0.3, '2023-10-04', 0),
-(31, 'Astra Zeneca', 0.3, '2023-10-04', 0),
-(35, 'Astra Zeneca', 0.3, '2023-10-04', 0),
-(40, 'Astra Zeneca', 0.3, '2023-10-04', 0);
+(31, 'Astra Zeneca', 0.3, '2024-11-14', 0),
+(35, 'Astra Zeneca', 0.3, '2025-03-04', 0),
+(40, 'Astra Zeneca', 0.3, '2023-10-04', 0),
+(1928, 'Astra Zeneca', 0.3, '2025-10-10', 0);
 
 --
 -- Índices para tablas volcadas
@@ -146,7 +189,7 @@ ALTER TABLE `vacuna`
 -- AUTO_INCREMENT de la tabla `citavacunacion`
 --
 ALTER TABLE `citavacunacion`
-  MODIFY `codCita` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codCita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
