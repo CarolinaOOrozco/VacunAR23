@@ -105,7 +105,7 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
         borrarFilas();
         String centro=(String)jComboBox.getSelectedItem();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        //ArrayList <Vacuna> vacunas=new ArrayList();
+        
         List<CitaVacunacion> citasTotales=new ArrayList();
         VacunaData vd=new VacunaData();
         for(int i=1;i<13;i++){
@@ -113,14 +113,7 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
             citasXMes=cvd.citasCumplidasPorMes(i);
             citasTotales.addAll(citasXMes);
         }
-        /*Comparator <CitaVacunacion> CompararFecha=new Comparator <CitaVacunacion>(){
-            public int compare(CitaVacunacion cv1,CitaVacunacion cv2){
-                if(cv1.getFechaHoraCita().compareTo(cv2.getFechaHoraCita())==-1)return -1;
-                //if(cv1.getFechaHoraCita() < cv2.getFechaHoraCita()) return -1;
-                if(cv1.getFechaHoraCita() == cv2.getFechaHoraCita()) return 0;
-                return 1;
-            }
-        };*/
+
         
         for(CitaVacunacion c:citasTotales){
             Vacuna v=vd.buscarVacuna(c.getVacuna().getNroSerieDosis());

@@ -187,12 +187,7 @@ public class Menuprincipal extends javax.swing.JFrame {
     private void jBCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCiudadanoActionPerformed
         
         
-        /*escritorio.removeAll();
-        escritorio.repaint();
-        MenuCiudadano mc= new MenuCiudadano();
-        mc.setVisible(true);
-        escritorio.add(mc);
-        escritorio.moveToFront(mc);*/
+      
         jBCiudadano.setEnabled(false);
         jBSolicitarT.setVisible(true);
         jBConsultarC.setVisible(true);

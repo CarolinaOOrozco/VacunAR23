@@ -15,7 +15,6 @@ public class ListarCitas extends javax.swing.JInternalFrame {
     DefaultTableModel modelo=new DefaultTableModel();
     public ListarCitas() {
         initComponents();
-        cargarComboBoxMes();
         cargarCabecera();
     }
 
@@ -217,21 +216,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JYearChooser jYCAnio;
     // End of variables declaration//GEN-END:variables
 
-    public void cargarComboBoxMes(){
-        /*jComboBoxMes.addItem("ENERO");
-        jComboBoxMes.addItem("FEBRERO");
-        jComboBoxMes.addItem("MARZO");
-        jComboBoxMes.addItem("ABRIL");
-        jComboBoxMes.addItem("MAYO");
-        jComboBoxMes.addItem("JUNIO");
-        jComboBoxMes.addItem("JULIO");
-        jComboBoxMes.addItem("AGOSTO");
-        jComboBoxMes.addItem("SEPTIEMBRE");
-        jComboBoxMes.addItem("OCTUBRE");
-        jComboBoxMes.addItem("NOVIEMBRE");
-        jComboBoxMes.addItem("DICIEMBRE");*/
-    }
-    
+
     private void borrarFilas(){
         int f=jTablaCitas.getRowCount()-1;      
         for(;f>=0;f--){

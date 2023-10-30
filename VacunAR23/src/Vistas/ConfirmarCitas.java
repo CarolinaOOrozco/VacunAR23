@@ -37,7 +37,6 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         initComponents();
         cargarCabecera();
         cargarComboBox();
-        //cargarCitasVencidas();
         jBReasignarCitasVencidas.setVisible(false);
     }
 
@@ -281,7 +280,6 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         
         for(CitaVacunacion cv:citasVencidasAyer){
             ArrayList<CitaVacunacion>citas=cvd.citasPorPersona(cv.getCiudadano().getDni());
-            //citas.sort(CompararFecha);
             LocalDate a=LocalDate.now().plusDays(13);
             LocalDate b=LocalDate.now().plusDays(14);
             LocalDate c=LocalDate.now().plusDays(15);

@@ -159,9 +159,7 @@ public class ListarVacunas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTableVacunas;
     // End of variables declaration//GEN-END:variables
 
-    /* private void borrarFilas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
+
     private void borrarFilas() {
         int f = jTableVacunas.getRowCount() - 1;
         for (; f >= 0; f--) {
