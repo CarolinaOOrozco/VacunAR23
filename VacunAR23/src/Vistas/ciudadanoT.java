@@ -321,7 +321,7 @@ inicializarWaypoint();
                 ArrayList <CitaVacunacion> citas = new ArrayList();
                 citas=cvd.citasPorPersona(ciud.getDni());
                 if(citas.size()>=1){
-                    JOptionPane.showMessageDialog(this, "Usted no puede solicitar turno,ya que cuenta con 1 o más"+citas.size()+"citas.Revise el botón 'Consultar'");    
+                    JOptionPane.showMessageDialog(this, "Usted no puede solicitar turno,ya que cuenta con "+citas.size()+" citas.Revise el botón 'Consultar'");    
                 }else{
                 LocalDateTime t=null;
                 centroVacunatorio=jTCentroElegido.getText();

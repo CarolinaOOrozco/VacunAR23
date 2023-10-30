@@ -29,7 +29,6 @@ public class ListarCitas extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBoxMes = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,6 +39,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablaCitas = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
+        jMes = new com.toedter.calendar.JMonthChooser();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(800, 400));
@@ -48,8 +48,6 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seleccione mes");
-
-        jComboBoxMes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,9 +120,9 @@ public class ListarCitas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jYCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,10 +134,10 @@ public class ListarCitas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
                         .addComponent(jLabel5))
-                    .addComponent(jYCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -164,7 +162,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
         List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasCumplidasPorMes(jComboBoxMes.getSelectedIndex()+1);
+        citasConcretadas=cvd.citasCumplidasPorMes(jMes.getMonth());
         for(CitaVacunacion cv:citasConcretadas){
             if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
                modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()}); 
@@ -178,9 +176,9 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jRBConcretadas.setSelected(false);
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasVencidasPorMes(jComboBoxMes.getSelectedIndex()+1);
-        for(CitaVacunacion cv:citasConcretadas){
+        List <CitaVacunacion> citasVencidas=new ArrayList();
+        citasVencidas=cvd.citasVencidasPorMes(jMes.getMonth());
+        for(CitaVacunacion cv:citasVencidas){
             if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
                 modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
             }
@@ -194,7 +192,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
         List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasCanceladasPorMes(jComboBoxMes.getSelectedIndex()+1);
+        citasConcretadas=cvd.citasCanceladasPorMes(jMes.getMonth());
         for(CitaVacunacion cv:citasConcretadas){
             if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
                 modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
@@ -205,12 +203,12 @@ public class ListarCitas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBoxMes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private com.toedter.calendar.JMonthChooser jMes;
     private javax.swing.JRadioButton jRBCanceladas;
     private javax.swing.JRadioButton jRBConcretadas;
     private javax.swing.JRadioButton jRBVencidas;
@@ -220,7 +218,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarComboBoxMes(){
-        jComboBoxMes.addItem("ENERO");
+        /*jComboBoxMes.addItem("ENERO");
         jComboBoxMes.addItem("FEBRERO");
         jComboBoxMes.addItem("MARZO");
         jComboBoxMes.addItem("ABRIL");
@@ -231,7 +229,7 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jComboBoxMes.addItem("SEPTIEMBRE");
         jComboBoxMes.addItem("OCTUBRE");
         jComboBoxMes.addItem("NOVIEMBRE");
-        jComboBoxMes.addItem("DICIEMBRE");
+        jComboBoxMes.addItem("DICIEMBRE");*/
     }
     
     private void borrarFilas(){

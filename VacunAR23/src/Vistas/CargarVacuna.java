@@ -294,6 +294,11 @@ public class CargarVacuna extends javax.swing.JInternalFrame {
         else{
         List <Vacuna> carVacuna = new ArrayList();
             int numSerie = Integer.parseInt(jTNumSerie.getText()); 
+            Vacuna v=vd.buscarVacuna(numSerie);
+            if(v!=null){
+                JOptionPane.showMessageDialog(this, "El número de serie/vacuna ya existe");
+                return;
+            }
             Double medida = Double.parseDouble(jTMedida.getText());
             
             String NroSerieDosis=jTNumSerie.getText();

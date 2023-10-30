@@ -23,21 +23,28 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jLabel3" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jLabel6" alignment="1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jLabel3" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="1" pref="96" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jTFNombreLab" max="32767" attributes="0"/>
+                  <Component id="jTFDomicilio" max="32767" attributes="0"/>
+                  <Component id="jTFPais" alignment="0" pref="177" max="32767" attributes="0"/>
+                  <Component id="jTFMarca" alignment="0" pref="177" max="32767" attributes="0"/>
                   <Component id="jTFCuit" max="32767" attributes="0"/>
-                  <Component id="jTFNombreLab" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTFPais" max="32767" attributes="0"/>
-                  <Component id="jTFDomicilio" pref="177" max="32767" attributes="0"/>
-                  <Component id="jTFMarca" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -84,7 +91,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jBCargarLab" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="37" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,7 +160,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Marca"/>
+        <Property name="text" type="java.lang.String" value="Marca de vacuna"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCuit">
