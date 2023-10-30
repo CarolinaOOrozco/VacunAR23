@@ -116,6 +116,7 @@ private Connection con;
              modelo.addRow(new Object[]{l.getNomLaboratorio(),l.getCuit(),l.getDomComercial(),l.marca()});
             
         }
+        jBListar.setVisible(false);
     }//GEN-LAST:event_jBListarActionPerformed
 
 

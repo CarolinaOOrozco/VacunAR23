@@ -121,14 +121,14 @@ inicializarWaypoint();
             .addGroup(jXMapLayout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jXMapLayout.setVerticalGroup(
             jXMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jXMapLayout.createSequentialGroup()
-                .addContainerGap(466, Short.MAX_VALUE)
+                .addContainerGap(467, Short.MAX_VALUE)
                 .addGroup(jXMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -151,6 +151,30 @@ inicializarWaypoint();
         jLTelefono.setText("Telefono");
 
         jLEmail.setText("Email");
+
+        jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNombreKeyTyped(evt);
+            }
+        });
+
+        jTApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTApellidoKeyTyped(evt);
+            }
+        });
+
+        jTDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTDNIKeyTyped(evt);
+            }
+        });
+
+        jTTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTTelefonoKeyTyped(evt);
+            }
+        });
 
         jBSolicitar.setFont(new java.awt.Font("Zekton", 1, 14)); // NOI18N
         jBSolicitar.setText("Solicitar");
@@ -352,6 +376,40 @@ inicializarWaypoint();
         botones();
         //jBConfirmar.setEnabled(false);
     }//GEN-LAST:event_jBConfirmarActionPerformed
+
+    private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
+    int key = evt.getKeyChar();
+    
+boolean mayusculas =  key>= 65 && key<= 90 ;    
+
+boolean minusculas =  key>=97 && key<=122 ;
+
+if(!mayusculas && !minusculas){evt.consume();}
+    }//GEN-LAST:event_jTNombreKeyTyped
+
+    private void jTApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTApellidoKeyTyped
+        int key = evt.getKeyChar();
+    
+boolean mayusculas =  key>= 65 && key<= 90 ;    
+
+boolean minusculas =  key>=97 && key<=122 ;
+
+if(!mayusculas && !minusculas){evt.consume();}
+    }//GEN-LAST:event_jTApellidoKeyTyped
+
+    private void jTDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDNIKeyTyped
+  int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+         if(!numeros){evt.consume();}
+  
+    }//GEN-LAST:event_jTDNIKeyTyped
+
+    private void jTTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTelefonoKeyTyped
+  int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+         if(!numeros){evt.consume();}
+  
+    }//GEN-LAST:event_jTTelefonoKeyTyped
 
     private void init(){TileFactoryInfo tfi = new OSMTileFactoryInfo();      
     DefaultTileFactory tf = new DefaultTileFactory(tfi);
