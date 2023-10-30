@@ -28,7 +28,7 @@ public class CiudadanoData {
     }
     public void guardarCiudadano(Ciudadano ciudadano){
         
-    String insert = "INSERT INTO Ciudadano(dni,nombreCompleto,email,celular,patologia,ambitoTrabajo) "
+    String insert = "INSERT INTO ciudadano(dni,nombreCompleto,email,celular,patologia,ambitoTrabajo) "
                               + "VALUES(?,?,?,?,?,?) ";
                               
         try {
@@ -108,7 +108,7 @@ public class CiudadanoData {
     
       public List listarCiudadano(){
           
-           String sql="SELECT * FROM Ciudadano WHERE dni=?"; 
+           String sql="SELECT * FROM ciudadano WHERE dni=?"; 
          
     try{
         PreparedStatement ps=con.prepareStatement(sql);

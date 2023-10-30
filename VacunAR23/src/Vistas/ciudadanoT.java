@@ -176,6 +176,12 @@ inicializarWaypoint();
             }
         });
 
+        jTEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTEmailKeyTyped(evt);
+            }
+        });
+
         jBSolicitar.setFont(new java.awt.Font("Zekton", 1, 14)); // NOI18N
         jBSolicitar.setText("Solicitar");
         jBSolicitar.addActionListener(new java.awt.event.ActionListener() {
@@ -410,6 +416,19 @@ if(!mayusculas && !minusculas){evt.consume();}
          if(!numeros){evt.consume();}
   
     }//GEN-LAST:event_jTTelefonoKeyTyped
+
+    private void jTEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTEmailKeyTyped
+       int key = evt.getKeyChar();
+    
+
+
+boolean minusculas =  key>=97 && key<=122;
+  boolean numeros = key >= 48 && key <= 57;
+  boolean arroba =key == 64;
+  boolean punto = key==46;
+
+if(!minusculas&&!numeros&&!arroba&&!punto){evt.consume();}
+    }//GEN-LAST:event_jTEmailKeyTyped
 
     private void init(){TileFactoryInfo tfi = new OSMTileFactoryInfo();      
     DefaultTileFactory tf = new DefaultTileFactory(tfi);

@@ -40,7 +40,7 @@ public class CitaVacunacionData {
   
      public void nuevaCita(CitaVacunacion c){  
          
-         String sql = "INSERT INTO citaVacunacion(dni, codRefuerzo, fechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES (?,?,?,?,?,?,?)";
+         String sql = "INSERT INTO citavacunacion(dni, codRefuerzo, fechaHoraCita, centroVacunacion, fechaHoraColoca, dosis,cancelar) VALUES (?,?,?,?,?,?,?)";
          
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -73,7 +73,7 @@ public class CitaVacunacionData {
             if(fecha.isBefore(LocalDateTime.now())){
                 JOptionPane.showMessageDialog(null, "La cita no puede cancelarse porque ya expiró");
             }else{
-                String sql = "UPDATE citaVacunacion set cancelar = 1 Where dni = ?";
+                String sql = "UPDATE citavacunacion set cancelar = 1 Where dni = ?";
             
         try {
             PreparedStatement ps =con.prepareStatement(sql);
@@ -91,7 +91,7 @@ public class CitaVacunacionData {
         
         public ArrayList todasLasCitas(){
             ArrayList<CitaVacunacion>citas=new ArrayList();
-            String sql="SELECT * FROM citaVacunacion";
+            String sql="SELECT * FROM citavacunacion";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ResultSet rs=ps.executeQuery();
@@ -123,7 +123,7 @@ public class CitaVacunacionData {
         
         public void citaVacunacionConcretada(int codCita,LocalDateTime fechaHora,Vacuna v){
            //Timestamp fechaHoy=Timestamp.valueOf(LocalDateTime.now());
-           String sql="UPDATE citaVacunacion SET fechaHoraColoca=?,dosis=? WHERE codCita=?";
+           String sql="UPDATE citavacunacion SET fechaHoraColoca=?,dosis=? WHERE codCita=?";
            try{
                PreparedStatement ps=con.prepareStatement(sql);
                ps.setTimestamp(1, Timestamp.valueOf(fechaHora));
@@ -164,7 +164,7 @@ public class CitaVacunacionData {
             Timestamp inicioDia=Timestamp.valueOf(LocalDateTime.of(fechaHoy.getYear(), fechaHoy.getMonth(), fechaHoy.getDayOfMonth(), 00, 00, 00));
             Timestamp finalDia=Timestamp.valueOf(LocalDateTime.of(fechaHoy.getYear(), fechaHoy.getMonth(), fechaHoy.getDayOfMonth(), 23, 59, 59));
             
-            String sql="SELECT * FROM citaVacunacion WHERE centroVacunacion=? AND fechaHoraCita BETWEEN ? AND ? ORDER BY fechaHoraCita";
+            String sql="SELECT * FROM citavacunacion WHERE centroVacunacion=? AND fechaHoraCita BETWEEN ? AND ? ORDER BY fechaHoraCita";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ps.setString(1,centroDeVacunacion);
@@ -334,7 +334,7 @@ public List citasCanceladasPorMes(int mesDelAnio){
         
         public ArrayList citasPorPersona(int dni){
             ArrayList <CitaVacunacion> cantidadCitas=new ArrayList();
-            String sql="SELECT * FROM citaVacunacion WHERE dni=?";
+            String sql="SELECT * FROM citavacunacion WHERE dni=?";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ps.setInt(1, dni);
