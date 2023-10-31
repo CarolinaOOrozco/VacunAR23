@@ -50,7 +50,6 @@ public class MenuAgenteSanitario extends javax.swing.JInternalFrame {
         jMNuevoLab = new javax.swing.JMenuItem();
 
         setClosable(true);
-        setMaximizable(true);
         setResizable(true);
 
         javax.swing.GroupLayout escritorioASanitarioLayout = new javax.swing.GroupLayout(escritorioASanitario);
