@@ -24,7 +24,8 @@ public class CitaVacunacionData {
     private Connection con;
     private CitaVacunacion cita;
     private int mes;
-    private ArrayList<CitaVacunacion>lista;
+    private List<CitaVacunacion>lista;
+    private ArrayList<CitaVacunacion> totalCitas;
     private CiudadanoData cd;
     private VacunaData vd;
     private ArrayList <LocalDateTime> turnos = new ArrayList();
@@ -36,6 +37,7 @@ public class CitaVacunacionData {
         lista = new ArrayList<>();
         turnos.addAll(cargarTurnos());
         vd=new VacunaData();
+        totalCitas=todasLasCitas();
   }
   
      public void nuevaCita(CitaVacunacion c){  
@@ -64,7 +66,7 @@ public class CitaVacunacionData {
      
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al acceder a la base de datos");
+            JOptionPane.showMessageDialog(null,"Error al acceder a la base de datos"+ex.getMessage());
         }
      }
    
@@ -91,7 +93,7 @@ public class CitaVacunacionData {
         
         public ArrayList todasLasCitas(){
             ArrayList<CitaVacunacion>citas=new ArrayList();
-            String sql="SELECT * FROM citavacunacion";
+            String sql="SELECT * FROM citavacunacion ORDER BY centroVacunacion";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ResultSet rs=ps.executeQuery();
@@ -182,7 +184,12 @@ public class CitaVacunacionData {
                     cv.setCiudadano(c);
                     cv.setCentroVacunacion(rs.getString("centroVacunacion"));
                     cv.setVacuna(v);
-                    cv.setFechaHoraColoca(rs.getTimestamp("fechaHoraColoca").toLocalDateTime());
+                    if(rs.getTimestamp("fechaHoraColoca")==null){
+                        cv.setFechaHoraColoca(null);
+                    }else{
+                        cv.setFechaHoraColoca(rs.getTimestamp("fechaHoraColoca").toLocalDateTime());
+                    }
+                    
                     cv.setCancelar(rs.getBoolean("cancelar"));
                     citasDiarias.add(cv);
                 }
@@ -194,21 +201,13 @@ public class CitaVacunacionData {
         
 
 
-        public List citasVencidasPorMes(int mesDelAnio){  
+        public List citasVencidasPorMes(int mesDelAnio){
         lista.removeAll(lista);
-        ArrayList<CitaVacunacion>citas=todasLasCitas();
-        for(CitaVacunacion cv:citas){
-            if(cv.getFechaHoraCita().getMonthValue()!=mesDelAnio){
-                citas.remove(cv);
-            }
-        }
-        for(CitaVacunacion cv:citas){
-            if(cv.getFechaHoraColoca()==null&&cv.getCancelar()==false){
+            for(CitaVacunacion cv:totalCitas){
+            if(cv.getFechaHoraCita().getMonthValue()==mesDelAnio&&cv.getFechaHoraColoca()==null&&cv.getCancelar()==false&&cv.getVacuna().getNroSerieDosis()==0&&cv.getFechaHoraCita().toLocalDate().isBefore(LocalDate.now())){
                 lista.add(cv);
             }
         }
-   
-            
             return lista;
         }    
 
@@ -217,44 +216,31 @@ public class CitaVacunacionData {
         
         public List citasCumplidasPorMes(int mesDelAnio){
         lista.removeAll(lista);
-        ArrayList<CitaVacunacion>citas=todasLasCitas();
-        for(CitaVacunacion cv:citas){
-            if(cv.getFechaHoraCita().getMonthValue()!=mesDelAnio){
-                citas.remove(cv);
-            }
-        }
-        for(CitaVacunacion cv:citas){
-            if(cv.getFechaHoraColoca()!=null&&cv.getCancelar()==false){
+        for(CitaVacunacion cv:totalCitas){
+            if(cv.getFechaHoraCita().getMonthValue()==mesDelAnio&&cv.getCancelar()==false&&cv.getVacuna().getNroSerieDosis()!=0&&cv.getFechaHoraColoca()!=null){
                 lista.add(cv);
             }
         }
-   
-     
          return lista;
-        }
+    }
         
         
-public List citasCanceladasPorMes(int mesDelAnio){            
-    lista.removeAll(lista);
-        ArrayList<CitaVacunacion>citas=todasLasCitas();
-        for(CitaVacunacion cv:citas){
-            if(cv.getFechaHoraCita().getMonthValue()!=mesDelAnio){
-                citas.remove(cv);
-            }
-        }
-        for(CitaVacunacion cv:citas){
-            if(cv.getCancelar()==true){
-                lista.add(cv);
-            }
-        }     
- 
-         return lista;   
-}
+    public List citasCanceladasPorMes(int mesDelAnio){            
+        lista.removeAll(lista);
+            ArrayList<CitaVacunacion>citas=todasLasCitas();
+            for(CitaVacunacion cv:totalCitas){
+                if(cv.getFechaHoraCita().getMonthValue()==mesDelAnio&&cv.getCancelar()==true){
+                    lista.add(cv);
+                }
+            }    
+
+        return lista;   
+    }
 
         
         public ArrayList citasPorPersona(int dni){
             ArrayList <CitaVacunacion> cantidadCitas=new ArrayList();
-            String sql="SELECT * FROM citavacunacion WHERE dni=?";
+            String sql="SELECT * FROM citavacunacion WHERE dni=? ORDER BY fechaHoraCita";
             try{
                 PreparedStatement ps=con.prepareStatement(sql);
                 ps.setInt(1, dni);
@@ -364,6 +350,7 @@ public List citasCanceladasPorMes(int mesDelAnio){
         
         return turnoAsignado;
     }
+    
     
 
         

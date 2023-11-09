@@ -3,7 +3,9 @@ package Vistas;
 
 import AccesoDatos.*;
 import entidades.*;
+import java.time.LocalDate;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,10 +14,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListarCitas extends javax.swing.JInternalFrame {
 
+    private int mes;
+    private int anio;
     DefaultTableModel modelo=new DefaultTableModel();
     public ListarCitas() {
         initComponents();
         cargarCabecera();
+        mes=0;
+        anio=0;
     }
 
     /**
@@ -31,14 +37,14 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jMes = new com.toedter.calendar.JMonthChooser();
         jRBConcretadas = new javax.swing.JRadioButton();
         jRBVencidas = new javax.swing.JRadioButton();
         jRBCanceladas = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
         jYCAnio = new com.toedter.calendar.JYearChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTablaCitas = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        jMes = new com.toedter.calendar.JMonthChooser();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(800, 400));
@@ -60,6 +66,12 @@ public class ListarCitas extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Citas canceladas");
 
+        jMes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jMesPropertyChange(evt);
+            }
+        });
+
         jRBConcretadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRBConcretadasActionPerformed(evt);
@@ -78,6 +90,16 @@ public class ListarCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Seleccione año");
+
+        jYCAnio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jYCAnioPropertyChange(evt);
+            }
+        });
+
         jTablaCitas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTablaCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,10 +113,6 @@ public class ListarCitas extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane2.setViewportView(jTablaCitas);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Seleccione año");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,49 +174,71 @@ public class ListarCitas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRBConcretadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBConcretadasActionPerformed
-        jRBVencidas.setSelected(false);
+        if(mes==0||anio==0){
+            JOptionPane.showMessageDialog(this, "Seleccione mes y año");
+        }else{
+           jRBVencidas.setSelected(false);
         jRBCanceladas.setSelected(false);
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasCumplidasPorMes(jMes.getMonth());
+        List <CitaVacunacion> citasConcretadas=cvd.citasCumplidasPorMes(mes);
+
         for(CitaVacunacion cv:citasConcretadas){
-            if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
+            if(cv.getFechaHoraCita().getYear()==anio){
                modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()}); 
-            }
-            
+            } 
         }
+        
+        }
+        
     }//GEN-LAST:event_jRBConcretadasActionPerformed
 
     private void jRBVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBVencidasActionPerformed
+        if(mes==0||anio==0){
+            JOptionPane.showMessageDialog(this, "Seleccione mes y año");
+        }else{
         jRBCanceladas.setSelected(false);
         jRBConcretadas.setSelected(false);
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        List <CitaVacunacion> citasVencidas=new ArrayList();
-        citasVencidas=cvd.citasVencidasPorMes(jMes.getMonth());
+        List <CitaVacunacion> citasVencidas=cvd.citasVencidasPorMes(mes);
+        
+        
         for(CitaVacunacion cv:citasVencidas){
-            if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
-                modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
-            }
+          if(cv.getFechaHoraCita().getYear()==anio){
+            modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
+          }
             
+        
         }
+        } 
     }//GEN-LAST:event_jRBVencidasActionPerformed
 
     private void jRBCanceladasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBCanceladasActionPerformed
+        if(mes==0||anio==0){
+            JOptionPane.showMessageDialog(this, "Seleccione mes y año");
+        }else{
         jRBVencidas.setSelected(false);
         jRBConcretadas.setSelected(false);
         borrarFilas();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        List <CitaVacunacion> citasConcretadas=new ArrayList();
-        citasConcretadas=cvd.citasCanceladasPorMes(jMes.getMonth());
-        for(CitaVacunacion cv:citasConcretadas){
-            if(cv.getFechaHoraCita().getYear()==jYCAnio.getYear()){
+        List <CitaVacunacion> citasCanceladas=cvd.citasCanceladasPorMes(mes);
+        for(CitaVacunacion cv:citasCanceladas){
+            if(cv.getFechaHoraCita().getYear()==anio){
                 modelo.addRow(new Object[]{cv.getCodigoCita(),cv.getCiudadano().getDni(),cv.getCodRefuerzo(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getFechaHoraColoca(),cv.getVacuna().getNroSerieDosis(),cv.getCancelar()});
             }
-            
+        }
+          
         }
     }//GEN-LAST:event_jRBCanceladasActionPerformed
+
+    private void jMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jMesPropertyChange
+        mes=jMes.getMonth()+1;
+    }//GEN-LAST:event_jMesPropertyChange
+
+    private void jYCAnioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jYCAnioPropertyChange
+        anio=jYCAnio.getYear();
+    }//GEN-LAST:event_jYCAnioPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

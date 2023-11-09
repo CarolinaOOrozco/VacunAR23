@@ -4,6 +4,7 @@ package Vistas;
 import AccesoDatos.*;
 import entidades.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -109,15 +110,17 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
         List<CitaVacunacion> citasTotales=new ArrayList();
         VacunaData vd=new VacunaData();
         for(int i=1;i<13;i++){
-            List<CitaVacunacion> citasXMes=new ArrayList();
-            citasXMes=cvd.citasCumplidasPorMes(i);
+            List<CitaVacunacion> citasXMes=cvd.citasCumplidasPorMes(i);
             citasTotales.addAll(citasXMes);
         }
 
         
         for(CitaVacunacion c:citasTotales){
             Vacuna v=vd.buscarVacuna(c.getVacuna().getNroSerieDosis());
-            modelo.addRow(new Object[]{v.getMarca(),c.getVacuna().getNroSerieDosis(),c.getCiudadano().getDni()});
+            if(c.getCentroVacunacion().equalsIgnoreCase(centro)){
+                modelo.addRow(new Object[]{v.getMarca(),c.getVacuna().getNroSerieDosis(),c.getCiudadano().getDni()});
+            }
+            
         }
     }//GEN-LAST:event_jComboBoxActionPerformed
 
@@ -148,6 +151,6 @@ public class ListadoVacunasPorCentro extends javax.swing.JInternalFrame {
         jComboBox.addItem("Hospital del Oeste Dr. Atilio Luchini");
         jComboBox.addItem("Hospital del Sur");
         jComboBox.addItem("Hospital Ramón Carrillo");
-        jComboBox.addItem("Policlínico");
+        jComboBox.addItem("Policlinico");
     }
 }

@@ -10,8 +10,7 @@ import entidades.*;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,7 +21,11 @@ import javax.swing.table.DefaultTableModel;
 public class ConfirmarCitas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo =new DefaultTableModel();
-    ArrayList <CitaVacunacion> citasVencidasAyer=new ArrayList();
+    private List <CitaVacunacion> citasVencidasMes;
+    private List<CitaVacunacion> citasVencidas;
+    private CitaVacunacionData cvd;
+    private List<CitaVacunacion> citasPorCentro;
+    private String centroVacunatorio;
     
     public boolean inCellEditable(int fila,int columna){
         if(columna<=4){
@@ -35,9 +38,14 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
      */
     public ConfirmarCitas() {
         initComponents();
+        centroVacunatorio=null;
+        citasPorCentro=new ArrayList();
+        cvd=new CitaVacunacionData();
+        //citasVencidasMes=cvd.citasVencidasPorMes(LocalDate.now().getMonthValue());
+        //citasVencidas=cargarCitasVencidas();
         cargarCabecera();
         cargarComboBox();
-        jBReasignarCitasVencidas.setVisible(false);
+        //jBReasignarCitasVencidas.setVisible(false);
     }
 
     /**
@@ -98,7 +106,6 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         jBConfirmarCita.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jBConfirmarCita.setForeground(new java.awt.Color(255, 255, 255));
         jBConfirmarCita.setText("Confimar como concretada");
-        jBConfirmarCita.setEnabled(false);
         jBConfirmarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBConfirmarCitaActionPerformed(evt);
@@ -122,6 +129,9 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(69, 69, 69)
@@ -130,11 +140,8 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
                                 .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLCitasVencidas, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 54, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                                .addComponent(jLCitasVencidas, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 54, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -162,7 +169,7 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addComponent(jBConfirmarCita)
                 .addGap(1, 1, 1)
                 .addComponent(jBReasignarCitasVencidas)
@@ -175,59 +182,82 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTablaCitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaCitasMouseClicked
-        if(jTablaCitas.getValueAt(jTablaCitas.getSelectedRow(), 6).equals(null)){
-            jBConfirmarCita.setEnabled(true);
-        }
+        //if(jTablaCitas.getValueAt(jTablaCitas.getSelectedRow(), 6).equals(null)){
+            
+        //}
+        jBConfirmarCita.setEnabled(true);
     }//GEN-LAST:event_jTablaCitasMouseClicked
 
     private void jBConfirmarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarCitaActionPerformed
+        
         int fila=jTablaCitas.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(this, "Seleccione una cita");
+            return;
+        }else if(!jTablaCitas.getValueAt(fila, 5).equals(0)){
+            JOptionPane.showMessageDialog(this, "La cita seleccionada ya fue concretada");
+            return;
+        }
         VacunaData vd=new VacunaData();
         Vacuna v=(Vacuna)vd.vacunasDisponibles().get(0);
         CitaVacunacionData cvd=new CitaVacunacionData();
-        if((int)jTablaCitas.getValueAt(fila, 6)==1){
-            CiudadanoData cd=new CiudadanoData();
+        CiudadanoData cd=new CiudadanoData();
+        jTablaCitas.setValueAt(v.getNroSerieDosis(), fila,5);
+        Integer codigo=(Integer)jTablaCitas.getValueAt(fila, 4);
+        LocalDateTime fechaHora=(LocalDateTime)jTablaCitas.getValueAt(fila, 2);
+        cvd.citaVacunacionConcretada(codigo,fechaHora, v);
+        vd.marcarComoAplicada(v.getNroSerieDosis());
+        if(jTablaCitas.getValueAt(fila, 6).equals(1)){
+            
             Ciudadano c=cd.buscarPorDni((int)jTablaCitas.getValueAt(fila, 1));
             LocalDateTime t=cvd.turnoPara4semanas();
             String centroV=(String)jComboBox.getSelectedItem();
             CitaVacunacion cv=new CitaVacunacion(c,2,t,centroV,false);
             cvd.nuevaCita(cv);
-        }else if((int)jTablaCitas.getValueAt(fila, 6)==2){
-            CiudadanoData cd=new CiudadanoData();
+        }else if(jTablaCitas.getValueAt(fila, 6).equals(2)){
+            
             Ciudadano c=cd.buscarPorDni((int)jTablaCitas.getValueAt(fila, 1));
             LocalDateTime t=cvd.turnoPara4semanas();
             String centroV=(String)jComboBox.getSelectedItem();
             CitaVacunacion cv=new CitaVacunacion(c,3,t,centroV,false);
             cvd.nuevaCita(cv);
         }
-        jTablaCitas.setValueAt(v.getNroSerieDosis(), fila,5);
-        Integer codigo=(Integer)jTablaCitas.getValueAt(fila, 4);
-        LocalDateTime fechaHora=(LocalDateTime)jTablaCitas.getValueAt(fila, 2);
-        cvd.citaVacunacionConcretada(codigo,fechaHora, v);
-        vd.marcarComoAplicada(v.getNroSerieDosis());
-        jBConfirmarCita.setEnabled(false);
+        //jBConfirmarCita.setEnabled(false);
     }//GEN-LAST:event_jBConfirmarCitaActionPerformed
 
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
         borrarFilas();
-        String centroVacunacion=(String)jComboBox.getSelectedItem();
+        centroVacunatorio=(String)jComboBox.getSelectedItem();
+        citasVencidasMes=cvd.citasVencidasPorMes(LocalDate.now().getMonthValue());
+        citasVencidas=cargarCitasVencidas();
         CitaVacunacionData cvd=new CitaVacunacionData();
-        ArrayList <CitaVacunacion> vacunacionesHoy=cvd.vacunacionesDiarias(centroVacunacion,LocalDate.now());
+        ArrayList <CitaVacunacion> vacunacionesHoy=cvd.vacunacionesDiarias(centroVacunatorio,LocalDate.now());
         for(CitaVacunacion cv:vacunacionesHoy){
             modelo.addRow(new Object[]{cv.getCiudadano().getNombreCompleto(),cv.getCiudadano().getDni(),cv.getFechaHoraCita(),cv.getCentroVacunacion(),cv.getCodigoCita(),cv.getVacuna().getNroSerieDosis(),cv.getCodRefuerzo()});
         }
+        
+        filtrarVencidas();
     }//GEN-LAST:event_jComboBoxActionPerformed
 
     private void jBReasignarCitasVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReasignarCitasVencidasActionPerformed
-        CitaVacunacionData cvd=new CitaVacunacionData();
-        for(CitaVacunacion cv:citasVencidasAyer){
-            CitaVacunacion citaNueva=cv;
+        //CitaVacunacionData cvd=new CitaVacunacionData();
+        LocalDateTime turno;
+        for(CitaVacunacion cv:citasPorCentro){
             if(cv.getCiudadano().getPatologia().equalsIgnoreCase("NINGUNO")||cv.getCiudadano().getAmbitoTrabajo().equalsIgnoreCase("OTRO")){
-                cv.setFechaHoraCita(cvd.turnoPara4semanas().minusDays(1));
+                turno=(cvd.turnoPara4semanas().minusDays(1));
             }else{
-                cv.setFechaHoraCita(cvd.turnoPara2semanas().minusDays(1));
+                turno=(cvd.turnoPara2semanas().minusDays(1));
             }
+            CitaVacunacion c=new CitaVacunacion(cv.getCiudadano(),cv.getCodRefuerzo(),turno,cv.getCentroVacunacion(),false);
+            cvd.nuevaCita(c);
+            citasVencidas.remove(c);
         }
+        jBReasignarCitasVencidas.setEnabled(false);
+        Color color=new Color(0,153,51);
+        jLCitasVencidas.setForeground(color);
+        jLCitasVencidas.setText("No hay citas pendientes a reasignar del día de ayer");
+        jLCitasVencidas.setVisible(true);
+        citasPorCentro=new ArrayList();
     }//GEN-LAST:event_jBReasignarCitasVencidasActionPerformed
 
 
@@ -265,39 +295,61 @@ public class ConfirmarCitas extends javax.swing.JInternalFrame {
         jComboBox.addItem("Hospital del Oeste Dr. Atilio Luchini");
         jComboBox.addItem("Hospital del Sur");
         jComboBox.addItem("Hospital Ramón Carrillo");
-        jComboBox.addItem("Policlínico");
+        jComboBox.addItem("Policlinico");
     }
     
-    public void cargarCitasVencidas(){
-        CitaVacunacionData cvd=new CitaVacunacionData();
-        citasVencidasAyer.addAll(cvd.citasVencidasPorMes(LocalDateTime.now().getMonthValue()));
-        for(CitaVacunacion cv:citasVencidasAyer){
-            if(cv.getFechaHoraCita().toLocalDate()!=LocalDate.now().minusDays(1)||cv.getCentroVacunacion().equalsIgnoreCase((String)jComboBox.getSelectedItem())){
-                citasVencidasAyer.remove(cv);
+    public List cargarCitasVencidas(){
+        List <CitaVacunacion> citas=new ArrayList();
+        
+        for(CitaVacunacion cv:citasVencidasMes){
+            if(cv.getFechaHoraCita().toLocalDate().equals(LocalDate.now().minusDays(1))){
+               citas.add(cv);
+            }  
+        }
+        //JOptionPane.showMessageDialog(this, "citas "+citas.size());
+        List<CitaVacunacion>copiaCitasVencidas=new ArrayList();
+        for(CitaVacunacion cv:citas){
+            ArrayList<CitaVacunacion>citasPorPersona=cvd.citasPorPersona(cv.getCiudadano().getDni());
+            int i=citasPorPersona.size()-1;
+            CitaVacunacion ultimaCita=citasPorPersona.get(i);
+            if(cv.getFechaHoraCita().equals(ultimaCita.getFechaHoraCita())){
+                
+                copiaCitasVencidas.add(cv);
             }
+                
+        }
+            //JOptionPane.showMessageDialog(this, "copiaCitasVencidas "+copiaCitasVencidas.size());
+            //citas=citasVencidas;
+        //JOptionPane.showMessageDialog(this, "citasVencidasTotales "+copiaCitasVencidas.size());
+        return copiaCitasVencidas;
+    }
+    
+    public void filtrarVencidas(){
+        List <CitaVacunacion>cpc=new ArrayList();
+        for(CitaVacunacion cv:citasVencidas){
+            
+            if(cv.getCentroVacunacion().equalsIgnoreCase(centroVacunatorio)){
+                cpc.add(cv);
+            }
+            
+            citasPorCentro=cpc;
         }
         
-        
-        for(CitaVacunacion cv:citasVencidasAyer){
-            ArrayList<CitaVacunacion>citas=cvd.citasPorPersona(cv.getCiudadano().getDni());
-            LocalDate a=LocalDate.now().plusDays(13);
-            LocalDate b=LocalDate.now().plusDays(14);
-            LocalDate c=LocalDate.now().plusDays(15);
-            LocalDate d=LocalDate.now().plusDays(27);
-            LocalDate e=LocalDate.now().plusDays(28);
-            LocalDate f=LocalDate.now().plusDays(29);
-            LocalDate fecha=citas.get(citas.size()-1).getFechaHoraCita().toLocalDate();
-            if(fecha.equals(a)||fecha.equals(b)||fecha.equals(c)||fecha.equals(d)||fecha.equals(e)||fecha.equals(f)){
-                jBReasignarCitasVencidas.setEnabled(false);
-                Color color=new Color(51,255,51);
-                jLCitasVencidas.setForeground(color);
-                jLCitasVencidas.setText("No hay citas pendientes a reasignar del día de ayer");
-                break;
-            }else{
-                Color color=new Color(255,0,51);
-                jLCitasVencidas.setForeground(color);
-                jLCitasVencidas.setText("Hay citas vencidas pendientes a reasignar del día de ayer");
-            }
+        if(citasPorCentro.isEmpty()){
+            jBReasignarCitasVencidas.setEnabled(false);
+            Color color=new Color(0,153,51);
+            jLCitasVencidas.setForeground(color);
+            jLCitasVencidas.setText("No hay citas pendientes a reasignar del día de ayer");
+            jLCitasVencidas.setVisible(true);
+        }else{
+            jBReasignarCitasVencidas.setEnabled(true);
+            Color color=new Color(255,0,51);
+            jLCitasVencidas.setForeground(color);
+            jLCitasVencidas.setText("Hay citas vencidas pendientes a reasignar del día de ayer");
+            jLCitasVencidas.setVisible(true);
+
+            
         }
+       
     }
 }
