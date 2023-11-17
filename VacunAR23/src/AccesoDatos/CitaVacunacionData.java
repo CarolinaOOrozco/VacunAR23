@@ -70,16 +70,17 @@ public class CitaVacunacionData {
         }
      }
    
-        public void cancelarCitaPorDni(LocalDateTime fecha,int dni){
+        public void cancelarCitaPorDni(LocalDateTime fecha,int dni,int codCita){
         
             if(fecha.isBefore(LocalDateTime.now())){
                 JOptionPane.showMessageDialog(null, "La cita no puede cancelarse porque ya expiró");
             }else{
-                String sql = "UPDATE citavacunacion set cancelar = 1 Where dni = ?";
+                String sql = "UPDATE citavacunacion set cancelar = 1 Where dni = ? AND codCita=?";
             
         try {
             PreparedStatement ps =con.prepareStatement(sql);
             ps.setInt(1, dni);
+            ps.setInt(2, codCita);
             int resultado  =ps.executeUpdate();
             if(resultado == 1){
             JOptionPane.showMessageDialog(null, "Cita cancelada exitosamente");

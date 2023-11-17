@@ -224,12 +224,17 @@ public class ConsultarCitas extends javax.swing.JInternalFrame {
         ArrayList <CitaVacunacion> citas = new ArrayList();
         CitaVacunacionData cvd= new CitaVacunacionData();
         citas=cvd.citasPorPersona(Integer.parseInt(jTDNI.getText()));
+        int dni=Integer.parseInt(jTDNI.getText());
         if(citas.get(jTablaCitas.getSelectedRow()).getCancelar()==true){
             JOptionPane.showMessageDialog(this, "La cita ya fué cancelada");
         }else{
+            CitaVacunacion citaACancelar=citas.get(jTablaCitas.getSelectedRow());
            int codCita=citas.get(jTablaCitas.getSelectedRow()).getCodigoCita();
             LocalDateTime fecha=citas.get(jTablaCitas.getSelectedRow()).getFechaHoraCita();
-            cvd.cancelarCitaPorDni(fecha,codCita); 
+            cvd.cancelarCitaPorDni(fecha,dni,codCita);
+            CitaVacunacion c=new CitaVacunacion(citaACancelar.getCiudadano(),citaACancelar.getCodRefuerzo(),cvd.turnoPara4semanas(),citaACancelar.getCentroVacunacion(),false);
+            
+            cvd.nuevaCita(c);
         }
         
     }//GEN-LAST:event_jBCancelarActionPerformed
